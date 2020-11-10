@@ -1,0 +1,106 @@
+*{
+    font-size: 15px;
+}
+
+/* LOGIN AND REGISTRATION PANEL */
+
+.img-container{
+    display: none;
+}
+
+.login-container{
+    width: 100vw;
+    background: transparent url(../img/mobile-bg.jpg) 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+.logo{
+    color: white;
+}
+
+.login-text{
+    color: white;
+    font-size: 1.2rem;
+    width: 75%;
+}
+
+.input-rectangle{
+    background: none;
+    box-shadow: none;
+}
+
+input{
+    height: 7vh;
+    width: 80vw;
+    border-radius: 18px;
+    margin: 1.5vh;
+}
+
+button{
+    height: 7vh;
+    width: 35vw;
+}
+
+form p{
+    color: white;
+    margin-top: 7vh;
+}
+
+.sign-in{
+    margin-top: 3vh;
+}
+
+/* MAIN PAGE */
+
+
+.img-main-container{
+    width: 85%;
+    grid-template-columns: 5% 70vw 1fr;
+    height: 45%;
+}
+section{
+    width: 85%;
+}
+
+header{
+    justify-content: center;
+}
+
+.nav-desktop{
+    display: none;
+}
+header > p{
+   display: none;
+}
+nav{
+    align-items: flex-start;
+}
+.nav-mobile{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-mobile i{
+    font-size: 1.7em;
+    margin-left: 1.7em;
+}
+
+.nav-mobile a {
+    margin-right: 1.7em;
+    background: #295F42 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 8px #00000029;
+    border-radius: 3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 0.6em 0.9em;
+}
+
+.img-text p{
+    font-size: 0.8em;
+
+}
