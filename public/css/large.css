@@ -1,30 +1,72 @@
+/* LOGIN AND REGISTRATION PANEL */
+.img-container {
+    background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 39vw;
+}
+
+.login-container {
+    width: 63vw;
+}
+
+.logo {
+    color: #000000;
+}
+
+.input-rectangle {
+
+    background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
+    box-shadow: 0px 6px 6px #00000029;
+    border-radius: 18px;
+    background-size: cover;
+}
+
+.login-register input {
+
+    height: 5vh;
+    width: 16vw;
+    margin: 1vh;
+    border-radius: 7px;
+}
+
+.login-register button {
+    height: 5vh;
+    width: 7vw;
+}
+
 /* MAIN PAGE */
-.nav-mobile{
+.nav-mobile {
     display: none;
 }
 
-.logo-mobile{
+.logo-mobile {
     display: none;
 }
 
-.img-main-container{
+.img-main-container {
     grid-template-columns: 10% 60vh 1fr;
     grid-template-rows: 8% 7% 40% 1fr;
     width: 64%;
 }
 
-.logo-main{
+.logo-main {
     font: normal normal normal 2.1em Bahnschrift;
     color: #000000;
     align-self: center;
     margin-left: 1em;
 }
-.nav-desktop{
+
+.nav-desktop {
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
 }
+
 .nav-desktop ul {
     display: flex;
     justify-content: space-around;
@@ -32,12 +74,12 @@
     flex-grow: 1;
 }
 
-.nav-desktop li{
+.nav-desktop li {
     list-style: none;
     display: inline-block;
 }
 
-.nav-desktop li a{
+.nav-desktop li a {
     text-transform: uppercase;
     text-decoration: none;
     color: #9b9898;
@@ -46,7 +88,7 @@
     transition: color .5s;
 }
 
-.nav-desktop li:last-child{
+.nav-desktop li:last-child {
     background: #295F42 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 8px #00000029;
     padding: 0.8vw 1vh;
@@ -54,18 +96,122 @@
 
 
 }
-.nav-desktop li:last-child a{
+
+.nav-desktop li:last-child a {
     color: white;
     padding: 0.8em 1.1em 0.8em 1.1em;
 
 }
 
-.nav-desktop li:last-child a:hover{
+.nav-desktop li:last-child a:hover {
     color: #9b9898;
 
 }
 
 
-.nav-desktop li a:hover{
+.nav-desktop li a:hover {
     color: #295F42;
+}
+
+
+/* MY PLANTS */
+.nav-bottom-mobile {
+    display: none;
+}
+
+.my-plants-container header {
+    display: flex;
+    grid-column: 2/3;
+    grid-row: 1/ 2;
+}
+
+.my-plants-container {
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: 10%;
+}
+
+.my-plants-container nav {
+    background-size: 200vh;
+    grid-column: 1/2;
+    grid-row: 1/ span 2;
+    text-align: center;
+}
+
+.my-plants-logo {
+    font: normal normal normal 3vw Bahnschrift;
+    color: #295F42;
+    justify-self: center;
+    margin-bottom: 20vh;
+    margin-top: 0.2em;
+}
+
+.my-plants-container a>i {
+    color: #295F42;
+    font-size: 2.55vw;
+    display: inline-block;
+    margin-top: 10vh;
+    transition: transform .4s;
+}
+
+.my-plants-container a>i:hover {
+
+    transform: rotate(180deg);
+}
+
+.my-plants-container main {
+    grid-column: 2/3;
+}
+
+.my-plants {
+    font-size: 2em;
+}
+
+.square {
+    width: 48vh;
+    height: 48vh;
+}
+
+.plant-square {
+    width: 15vw;
+    height: 15vw;
+}
+
+.square .watering {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-top: 1em;
+    margin-bottom: 1.2em;
+}
+
+.square .watering small {
+    margin-left: 1em;
+    color: #295F42;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 0.5em 0.7em;
+    border-radius: 14px;
+}
+
+.square .button {
+    background: #295F42 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 8px #00000029;
+    padding: 0.9vw 1vh;
+    border-radius: 3em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+}
+
+.desc {
+    font-weight: 500;
+    color: #295F42;
+    padding-top: 1em;
+}
+
+.desc:hover {
+    font-weight: 600;
+}
+
+main .fa-cog {
+    display: none;
 }

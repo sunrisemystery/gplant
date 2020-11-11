@@ -4,8 +4,15 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
 }
-html{
+
+html {
     overflow-x: hidden;
+    scroll-behavior: smooth;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
 }
 
 body {
@@ -16,27 +23,16 @@ body {
 
 /* LOGIN AND REGISTRATION PANEL */
 
-.img-container {
-    background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 100vh;
-    width: 39vw;
-
-}
-
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 63vw;
 }
 
 .logo {
-
     font: normal normal normal 4rem/10rem Bahnschrift;
-    color: #000000;
+    color: white;
 }
 
 .login-text {
@@ -54,38 +50,27 @@ body {
     align-items: center;
     height: 40%;
     width: 50%;
-    background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
-    background-color: rgba(255, 255, 255, 0.5);
-    background-blend-mode: lighten;
-    box-shadow: 0px 6px 6px #00000029;
-    border-radius: 18px;
-    background-size: cover;
+
 }
 
-form {
+.login-register form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 4vh;
-    /* bylo 30px */
 }
 
-input {
+.login-register input {
     -webkit-appearance: none;
     border: 0;
-    height: 5vh;
-    width: 16vw;
-    margin: 1vh; /* bylo 8px */
-    padding: 2.5vh; /* bylo 15px*/
+    padding: 2.5vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 8px #00000029;
-    border-radius: 7px;
     opacity: 0.92;
-
 }
 
-input:focus {
+.login-register input:focus {
     outline: none;
 }
 
@@ -93,9 +78,7 @@ input:focus {
     padding-left: 10px;
 }
 
-button {
-    height: 5vh;
-    width: 7vw;
+.login-register button {
     background: #123422 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 8px #00000029;
     border: 1px solid #123422;
@@ -106,7 +89,7 @@ button {
     transition: color .8s;
 }
 
-button:hover {
+.login-register button:hover {
     color: black;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: white;
@@ -123,14 +106,15 @@ button:hover {
 }
 
 /* MAIN PAGE */
-.main-container{
+
+.main-container {
     display: flex;
     width: 100vw;
     height: 100vh;
     flex-direction: column;
 }
 
-header {
+.main-container header {
     background-color: white;
     display: flex;
     position: fixed;
@@ -140,7 +124,7 @@ header {
 }
 
 
-nav{
+.main-container nav {
     display: flex;
     width: 100%;
     height: 100%;
@@ -148,7 +132,7 @@ nav{
 }
 
 
-main {
+.main-container main {
     margin-top: auto;
     display: flex;
     align-self: flex-end;
@@ -160,11 +144,13 @@ main {
 
 
 }
-.img-main-container{
+
+.img-main-container {
     display: grid;
     height: 50%;
 }
-.main-img{
+
+.main-img {
     grid-column: 1 / 4;
     grid-row: 2 /5;
     background: transparent url(../img/main-img-2.jpg) no-repeat padding-box;
@@ -172,7 +158,8 @@ main {
     box-shadow: 0px 6px 6px #00000029;
     border-radius: 18px;
 }
-.img-text{
+
+.img-text {
     grid-column: 2 /3;
     grid-row: 2/ 4;
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -181,24 +168,85 @@ main {
     overflow: hidden;
 }
 
-.img-text p{
+.img-text p {
     margin: 2em 2.5em;
     font-weight: 600;
     font-size: 1.1em;
     line-height: 1.45em;
 
-       
+
 }
-section{
+
+.main-container section {
     margin-top: 4em;
     width: 64%;
     align-self: center;
     margin-bottom: 4em;
 }
-section p{
+
+.main-container section p {
     line-height: 1.5em;
     text-align: justify;
 }
 
+/* MY PLANTS */
+
+.my-plants-container {
+    display: grid;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
 
+.my-plants-container main {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/3;
+    margin: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.info {
+    margin-bottom: 1em;
+}
+
+.my-plants {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: end;
+    font-weight: 700;
+    margin-left: 2em;
+}
+
+.square {
+    text-align: center;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    width: 85vw;
+    align-self: center;
+    justify-self: center;
+    justify-items: center;
+    gap: 1.7em;
+}
+
+.plant-square {
+    box-shadow: 0px 6px 6px #00000029;
+    border-radius: 18px;
+    background: transparent url('../img/cactus.jpg') 0% 0% no-repeat padding-box;
+    background-size: 100%;
+    margin: auto;
+}
+
+.square .plant-name {
+    color: #295F42;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}

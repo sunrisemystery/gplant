@@ -1,88 +1,86 @@
-*{
+* {
     font-size: 15px;
 }
 
 /* LOGIN AND REGISTRATION PANEL */
 
-.img-container{
+.img-container {
     display: none;
 }
 
-.login-container{
+.login-container {
     width: 100vw;
     background: transparent url(../img/mobile-bg.jpg) 0% 0% no-repeat padding-box;
     background-size: cover;
 }
 
-.logo{
-    color: white;
-}
 
-.login-text{
+.login-text {
     color: white;
     font-size: 1.2rem;
     width: 75%;
 }
 
-.input-rectangle{
-    background: none;
-    box-shadow: none;
-}
 
-input{
+.login-register input {
     height: 7vh;
     width: 80vw;
     border-radius: 18px;
     margin: 1.5vh;
 }
 
-button{
+.login-register button {
     height: 7vh;
     width: 35vw;
 }
 
-form p{
+.login-register form p {
     color: white;
     margin-top: 7vh;
 }
 
-.sign-in{
+.sign-in {
     margin-top: 3vh;
 }
 
 /* MAIN PAGE */
 
 
-.img-main-container{
+.img-main-container {
     width: 85%;
     grid-template-columns: 5% 70vw 1fr;
     height: 45%;
 }
-section{
+
+.main-container section {
     width: 85%;
 }
 
-header{
+.main-container header {
     justify-content: center;
 }
 
-.nav-desktop{
+.nav-desktop {
     display: none;
 }
-header > p{
-   display: none;
+
+.main-container header>p {
+    display: none;
 }
-nav{
+
+.main-container nav {
     align-items: flex-start;
 }
-.nav-mobile{
+
+.nav-mobile {
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
     justify-content: space-between;
 }
-.nav-mobile i{
+
+.nav-mobile i {
     font-size: 1.7em;
     margin-left: 1.7em;
 }
@@ -100,7 +98,20 @@ nav{
     padding: 0.6em 0.9em;
 }
 
-.img-text p{
-    font-size: 0.8em;
+.img-text p {
+    font-size: 1em;
 
+}
+
+@media screen and (max-width: 231px) {
+    .img-text p {
+        font-size: 0.8em;
+    }
+}
+
+.logo-mobile {
+    grid-column: 2/3;
+    text-align: left;
+    font: normal normal normal 1.9rem Bahnschrift;
+    color: #000000;
 }
