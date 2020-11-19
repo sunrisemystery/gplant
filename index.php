@@ -10,6 +10,8 @@ Router::get('login', 'DefaultController');
 Router::get('register', 'DefaultController');
 Router::get('myPlants', 'DefaultController');
 
+Router::post('login', 'SecurityController');
+
 Router::run($path);
 
 ?>
