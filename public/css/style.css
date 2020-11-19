@@ -153,7 +153,7 @@ body {
 .main-img {
     grid-column: 1 / 4;
     grid-row: 2 /5;
-    background: transparent url(../img/main-img-2.jpg) no-repeat padding-box;
+    background: transparent url('../img/main-img-2.jpg') no-repeat padding-box;
     background-size: cover;
     box-shadow: 0px 6px 6px #00000029;
     border-radius: 18px;

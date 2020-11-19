@@ -10,7 +10,7 @@
 
 .login-container {
     width: 100vw;
-    background: transparent url(../img/mobile-bg.jpg) 0% 0% no-repeat padding-box;
+    background: transparent url('../img/mobile-bg.jpg') 0% 0% no-repeat padding-box;
     background-size: cover;
 }
 
