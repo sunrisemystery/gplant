@@ -7,9 +7,9 @@
     <title>Discover</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" media="screen and (max-width:750px)" href="../css/medium.css">
-    <link rel="stylesheet" media="screen and (min-width:750px)" href="../css/large.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" media="screen and (max-width:750px)" href="public/css/medium.css">
+    <link rel="stylesheet" media="screen and (min-width:750px)" href="public/css/large.css">
 </head>
 
 <body class="display-container">

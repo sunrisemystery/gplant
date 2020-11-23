@@ -130,6 +130,7 @@
     grid-template-rows: 10%;
 }
 
+
 .my-plants-container nav {
     background-size: 200vh;
     grid-column: 1/2;
@@ -215,6 +216,7 @@
 main .fa-cog {
     display: none;
 }
+
 
 /* PLANT */
 .settings-back {

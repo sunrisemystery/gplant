@@ -23,4 +23,12 @@ class DefaultController extends AppController {
 
         $this->render('my-plants');
     }
+    public function plant(){
+
+        $this->render('plant');
+    }
+    public function discover(){
+
+        $this->render('discover');
+    }
 }
