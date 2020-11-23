@@ -250,3 +250,191 @@ body {
     margin-top: 0.5em;
     font-size: 1.2em;
 }
+
+.water-info {
+    display: none;
+}
+
+/* PLANT */
+
+.plant-desc {
+    position: flex;
+    margin-left: 2em;
+    width: 100%;
+    height: 15vh;
+
+}
+
+.name-plant {
+    margin-top: 0.7em;
+    font-weight: 800;
+    font-size: 2em;
+
+}
+
+.plant-type {
+    margin-top: 0.5em;
+    font-weight: 700;
+}
+
+.plant-wrapper {
+    display: grid;
+    width: 100%;
+    height: 40vh;
+
+}
+
+.plant-img {
+
+    background: transparent url('../img/monstera.jpg') 0% 0% no-repeat padding-box;
+    background-size: 100%;
+    border-radius: 1.2em;
+    box-shadow: 0px 3px 6px #00000029;
+
+
+}
+
+.watering-plant {
+    grid-row: 2 / 3;
+    font-size: 1.2em;
+    font-weight: 700;
+    align-self: center;
+    justify-self: center;
+
+}
+
+
+.plant-wrapper .timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #295F42;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 1.2em;
+    width: 35%;
+    height: 80%;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+
+}
+
+.button-plant {
+    justify-self: center;
+    align-self: center;
+    background: #295F42 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 8px #00000029;
+    border: none;
+    border-radius: 3em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    height: 6vh;
+    width: 12vw;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.plant-section {
+    margin-top: 0.8em;
+    margin-left: 2em;
+    margin-right: 9vw;
+
+}
+
+.plant-section h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.plant-section p {
+    margin-top: 1em;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    text-align: justify;
+}
+
+/* DISCOVER */
+
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+    align-self: center;
+    min-height: 7vh;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 1em;
+}
+
+.search-bar .fa-search {
+    margin-left: 0.6em;
+    font-size: 1.5em;
+    color: #295F42;
+    opacity: 0.82;
+
+}
+
+.search-bar p {
+    opacity: 0.4;
+    font-weight: 700;
+    margin-left: 0.8em;
+    font-size: 0.8em;
+}
+
+.display-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+
+.display-container main {
+    margin-top: auto;
+    display: flex;
+    align-self: flex-end;
+    width: 100vw;
+    height: 90vh;
+    flex-direction: column;
+    align-items: center;
+
+
+
+}
+
+.discover-list {
+    margin-top: 1em;
+    height: 100%;
+}
+
+.plant-record {
+    display: grid;
+    grid-template-columns: 12vh 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 15vh;
+    border-bottom: solid #295F42 0.1em;
+    margin-top: 1em;
+}
+
+.record-img {
+    margin: 0.5em 0 0.5em 0;
+    grid-column: 1/2;
+    background: transparent url('../img/record-img.jpg') 0% 0% no-repeat padding-box;
+    background-size: 100%;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 18px;
+}
+
+.record-text {
+    overflow: hidden;
+    grid-column: 2/3;
+    margin: 0.5em 0 0 1em;
+
+}

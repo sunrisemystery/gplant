@@ -118,33 +118,35 @@
 
 /* MY PLANTS */
 
-.my-plants-container{
-    grid-template-rows: 1fr 10vh; 
+.my-plants-container {
+    grid-template-rows: 1fr 10vh;
     grid-template-columns: 1fr;
     justify-items: stretch;
 }
 
-.my-plants-container main{
+.my-plants-container main {
     grid-row: 1/2;
     grid-column: 1/2;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.info{
+.info {
     display: flex;
     justify-self: flex-start;
     width: 100vw;
     justify-content: space-between;
 }
-.grid-wrapper{
-    grid-template-columns: repeat(2,1fr);
+
+.grid-wrapper {
+    grid-template-columns: repeat(2, 1fr);
 }
-.my-plants-container nav{
+
+.my-plants-container nav {
     display: none;
 }
 
-.nav-bottom-mobile{
+.nav-bottom-mobile {
     display: flex;
     justify-content: space-evenly;
     flex-grow: 1;
@@ -152,7 +154,6 @@
     grid-row: 2/3;
     width: 100vw;
     height: 12vh;
-    background-color: tomato;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px -3px 3px #00000029;
     border-radius: 4em 4em 0px 0px;
@@ -160,7 +161,8 @@
     overflow: hidden;
     bottom: 0;
 }
-.nav-bottom-mobile a{
+
+.nav-bottom-mobile a {
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -169,31 +171,148 @@
     font-size: 1em;
     font-weight: 600;
 }
-.my-plants{
+
+.my-plants {
     font-size: 2.3em;
     margin-top: 1em;
 }
-.fa-cog{
+
+.info .fa-cog {
     margin: 0.5em 1em;
     font-size: 2em;
     align-self: flex-start;
     justify-self: flex-end;
 }
 
-.nav-bottom-mobile a i{
+.nav-bottom-mobile a i {
     font-size: 1.9em;
 }
-.button{
-    display:none
+
+.button {
+    display: none
 }
-.watering{
+
+.watering {
     display: none;
 }
-.square{
-    width:30vw;
+
+.square {
+    width: 30vw;
     height: 35vh;
 }
-.plant-square{
-    width: 26vw;
-    height: 26vw;
+
+.plant-square {
+    display: flex;
+    width: 25vh;
+    height: 25vh;
+}
+
+.water-info {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5vh;
+    margin-left: 1vw;
+    background-color: white;
+    width: 15vh;
+    height: 5vh;
+    border-radius: 5em;
+}
+
+.water-info p {
+    color: #295F42;
+    font-weight: 700;
+    margin-left: 1.5vw;
+}
+
+.fa-tint {
+    color: #295F42;
+    margin-left: 0.8vw;
+}
+
+/* PLANT */
+
+.settings-back {
+    display: flex;
+    width: 100%;
+    height: 8vh;
+    flex-wrap: nowrap;
+    margin-left: 2em;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.settings-back .fa-chevron-left {
+    font-size: 2.5em;
+}
+
+.settings-back .fa-cog {
+    font-size: 2.3em;
+    margin-right: 2em;
+
+}
+
+.plant-wrapper {
+
+    height: 40vh;
+    grid-template-columns: 28vw auto 9vw;
+    grid-template-rows: 5vh 6vh 6vh auto 12vh;
+}
+
+.plant-img {
+    grid-column: 2 /3;
+    grid-row: 1/ -1;
+
+}
+
+.watering-plant {
+    grid-row: 2 / 3;
+
+}
+
+.plant-wrapper .timer {
+
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+
+
+}
+
+.button-plant {
+    grid-row: 4 /5;
+
+}
+
+/* DISCOVER */
+.display-container {
+    display: grid;
+    justify-items: stretch;
+}
+
+.display-container .logo-main {
+    display: none;
+}
+
+.img-discover-container {
+    display: none;
+}
+
+.display-container main {
+    margin: 0;
+    height: 100%;
+
+}
+
+.display-container nav {
+    display: none;
+}
+
+.search-bar {
+    width: 60vw;
+
+}
+
+.discover-list {
+    width: 90%;
+    display: grid;
+    margin-bottom: 7em;
 }
