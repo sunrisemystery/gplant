@@ -18,13 +18,20 @@
     <div class="login-container">
         <p class="logo">gplant</p>
         <p class="login-text">Taking care of plants is our priority. Join us today to give your plants better life.</p>
+        <div class="messages">
+            <?php if(isset($messages)){
+                foreach ($messages as $message)
+                echo $message;
+            }
+            ?>
+        </div>
         <div class="input-rectangle">
-            <form action="none">
+            <form action="login" method="post">
                 <input type="text" name="login" placeholder="login">
                 <input type="password" name="password" placeholder="password">
                 <button class="sign-in">SIGN IN</button>
                 <p>Don't have account?</p>
-                <button class="sign-up">SIGN UP</button>
+                <button type="submit" class="sign-up">SIGN UP</button>
             </form>
         </div>
     </div>
