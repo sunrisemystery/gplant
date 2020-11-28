@@ -21,175 +21,116 @@ body {
     display: flex;
 }
 
-/* LOGIN AND REGISTRATION PANEL */
+@media screen and (min-width:750px) {
 
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
+    .logo-mobile{
+        display: none;
+    }
+    .nav-desktop {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
 
-.logo {
-    font: normal normal normal 4rem/10rem Bahnschrift;
-    color: white;
-}
+    .nav-desktop ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-grow: 1;
+    }
 
-.login-text {
-    font-weight: 600;
-    text-align: center;
-    font-size: 1.5rem;
-    width: 49%;
-    margin: 0 0 5vh 0;
-}
+    .nav-desktop li {
+        list-style: none;
+        display: inline-block;
+    }
 
-.input-rectangle {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 40%;
-    width: 50%;
+    .nav-desktop li a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #9b9898;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color .5s;
+    }
 
-}
+    .nav-desktop li:last-child {
+        background: #295F42 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 8px #00000029;
+        padding: 0.8vw 1vh;
+        border-radius: 3em;
 
-.login-register form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4vh;
-}
 
-.login-register input {
-    -webkit-appearance: none;
-    border: 0;
-    padding: 2.5vh;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
-    opacity: 0.92;
-}
+    }
 
-.login-register input:focus {
-    outline: none;
-}
+    .nav-desktop li:last-child a {
+        color: white;
+        padding: 0.8em 1.1em 0.8em 1.1em;
 
-::placeholder {
-    padding-left: 10px;
-}
+    }
 
-.login-register button {
-    background: #123422 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
-    border: 1px solid #123422;
-    border-radius: 20px;
-    opacity: 1;
-    color: white;
-    font-weight: 600;
-    transition: color .8s;
-}
+    .nav-desktop li:last-child a:hover {
+        color: #9b9898;
 
-.login-register button:hover {
-    color: black;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: white;
-    cursor: pointer;
+    }
+
+
+    .nav-desktop li a:hover {
+        color: #295F42;
+    }
+
+    .nav-bottom-mobile {
+        display: none;
+    }
+
+    .logo-main {
+        font: normal normal normal 2.1em Bahnschrift;
+        color: #000000;
+        align-self: center;
+        margin-left: 1em;
+    }
 
 }
 
-.sign-in {
-    margin-bottom: 3vh;
+@media screen and (max-width:750px) {
+
+    .nav-bottom-mobile {
+        display: flex;
+        justify-content: space-evenly;
+        flex-grow: 1;
+        grid-column: 1/2;
+        grid-row: 2/3;
+        width: 100vw;
+        height: 12vh;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px -3px 3px #00000029;
+        border-radius: 4em 4em 0px 0px;
+        position: fixed;
+        overflow: hidden;
+        bottom: 0;
+    }
+
+    .nav-bottom-mobile a {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        color: #295F42;
+        font-size: 1em;
+        font-weight: 600;
+    }
+
+    .nav-bottom-mobile a i {
+        font-size: 1.9em;
+    }
+
+    .nav-desktop {
+        display: none;
+
+    }
 }
 
-.sign-up {
-    margin-top: 1vh;
-}
 
-/* MAIN PAGE */
-
-.main-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    flex-direction: column;
-}
-
-.main-container header {
-    background-color: white;
-    display: flex;
-    position: fixed;
-    align-self: flex-start;
-    width: 100vw;
-    height: 10vh;
-}
-
-
-.main-container nav {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
-}
-
-
-.main-container main {
-    margin-top: auto;
-    display: flex;
-    align-self: flex-end;
-    width: 100vw;
-    height: 90vh;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-
-
-}
-
-.img-main-container {
-    display: grid;
-    height: 50%;
-}
-
-.main-img {
-    grid-column: 1 / 4;
-    grid-row: 2 /5;
-    background: transparent url('../img/main-img-2.jpg') no-repeat padding-box;
-    background-size: cover;
-    box-shadow: 0px 6px 6px #00000029;
-    border-radius: 18px;
-}
-
-.img-text {
-    grid-column: 2 /3;
-    grid-row: 2/ 4;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 5px 3px 6px #00000029;
-    border-radius: 18px;
-    overflow: hidden;
-}
-
-.img-text p {
-    margin: 2em 2.5em;
-    font-weight: 600;
-    font-size: 1.1em;
-    line-height: 1.45em;
-
-
-}
-
-.main-container section {
-    margin-top: 4em;
-    width: 64%;
-    align-self: center;
-    margin-bottom: 4em;
-}
-
-.main-container section p {
-    line-height: 1.5em;
-    text-align: justify;
-}
-
-/* MY PLANTS */
 
 .my-plants-container {
     display: grid;
@@ -208,233 +149,59 @@ body {
     justify-content: flex-start;
 }
 
-.info {
-    margin-bottom: 1em;
-}
 
-.my-plants {
-    grid-column: 1/4;
-    grid-row: 1/2;
-    justify-self: start;
-    align-self: end;
-    font-weight: 700;
-    margin-left: 2em;
-}
-
-.square {
-    text-align: center;
-}
-
-.grid-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
-    width: 85vw;
-    align-self: center;
-    justify-self: center;
-    justify-items: center;
-    gap: 1.7em;
-}
-
-.plant-square {
-    box-shadow: 0px 6px 6px #00000029;
-    border-radius: 18px;
-    background: transparent url('../img/cactus.jpg') 0% 0% no-repeat padding-box;
-    background-size: 100%;
-    margin: auto;
-}
-
-.square .plant-name {
-    color: #295F42;
-    font-weight: 700;
-    text-align: center;
-    margin-top: 0.5em;
-    font-size: 1.2em;
-}
-
-.water-info{
-    display: none;
-}
-
-/* PLANT */
-
-.plant-desc {
-    position: flex;
-    margin-left: 2em;
-    width: 100%;
-    height: 15vh;
-
-}
-
-.name-plant {
-    margin-top: 0.7em;
-    font-weight: 800;
-    font-size: 2em;
-
-}
-
-.plant-type {
-    margin-top: 0.5em;
-    font-weight: 700;
-}
-
-.plant-wrapper {
-    display: grid;
-    width: 100%;
-    height: 40vh;
-
-}
-
-.plant-img {
-
-    background: transparent url('../img/monstera.jpg') 0% 0% no-repeat padding-box;
-    background-size: 100%;
-    border-radius: 1.2em;
-    box-shadow: 0px 3px 6px #00000029;
-
-
-}
-
-.watering-plant {
-    grid-row: 2 / 3;
-    font-size: 1.2em;
-    font-weight: 700;
-    align-self: center;
-    justify-self: center;
-
-}
-
-
-.plant-wrapper .timer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #295F42;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 1.2em;
-    width: 35%;
-    height: 80%;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-
-}
-
-.button-plant {
-    justify-self: center;
-    align-self: center;
-    background: #295F42 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
-    border: none;
-    border-radius: 3em;
-    font-size: 0.8em;
-    font-weight: 600;
-    color: white;
-    text-align: center;
-    height: 6vh;
-    width: 12vw;
-}
-
-.button:hover {
-    cursor: pointer;
-}
-
-.plant-section {
-    margin-top: 0.8em;
-    margin-left: 2em;
-    margin-right: 9vw;
-
-}
-
-.plant-section h1 {
-    margin: 0;
-    font-size: 2em;
-}
-
-.plant-section p {
-    margin-top: 1em;
-    font-size: 1.2em;
-    line-height: 1.5em;
-    text-align: justify;
-}
-
-/* DISCOVER */
-
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 1em;
-    align-self: center;
-    min-height: 7vh;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 1em;
-}
-
-.search-bar .fa-search {
-    margin-left: 0.6em;
-    font-size: 1.5em;
-    color: #295F42;
-    opacity: 0.82;
-
-}
-
-.search-bar p {
-    opacity: 0.4;
-    font-weight: 700;
-    margin-left: 0.8em;
-    font-size: 0.8em;
-}
-
-.display-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    flex-direction: column;
-}
-
-
-
-.display-container main {
-    margin-top: auto;
-    display: flex;
-    align-self: flex-end;
-    width: 100vw;
-    height: 90vh;
-    flex-direction: column;
-    align-items: center;
-
-
-
-}
-
-.discover-list {
-    margin-top: 1em;
-    height: 100%;
-}
-
-.plant-record {
-    display: grid;
-    grid-template-columns: 12vh 1fr;
-    grid-template-rows: 1fr;
-    width: 100%;
-    height: 15vh;
-    border-bottom: solid #295F42 0.1em;
-    margin-top: 1em;
-}
-
-.record-img {
-    margin: 0.5em 0 0.5em 0;
-    grid-column: 1/2;
-    background: transparent url('../img/record-img.jpg') 0% 0% no-repeat padding-box;
-    background-size: 100%;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 18px;
-}
-
-.record-text {
-    overflow: hidden;
-    grid-column: 2/3;
-    margin: 0.5em 0 0 1em;
-
+@media screen and (min-width:850px){
+    .nav-bottom-mobile {
+        display: none;
+    }
+    
+    .my-plants-container header {
+        display: flex;
+        grid-column: 2/3;
+        grid-row: 1/ 2;
+    }
+    
+    .my-plants-container {
+        grid-template-columns: 10% 1fr;
+        grid-template-rows: 10%;
+    }
+    
+    
+    .my-plants-container nav {
+        background-size: 200vh;
+        grid-column: 1/2;
+        grid-row: 1/ span 2;
+        text-align: center;
+    }
+    
+    .my-plants-logo {
+        font: normal normal normal 3vw Bahnschrift;
+        color: #295F42;
+        justify-self: center;
+        margin-bottom: 20vh;
+        margin-top: 0.2em;
+    }
+    
+    .my-plants-container a>i {
+        color: #295F42;
+        font-size: 2.55vw;
+        display: inline-block;
+        margin-top: 10vh;
+        transition: transform .4s;
+    }
+    
+    .my-plants-container a>i:hover {
+    
+        transform: rotate(180deg);
+    }
+    
+    .my-plants-container main {
+        grid-column: 2/3;
+    }
+    
+    
+    main .fa-cog {
+        display: none;
+    }
+    
 }

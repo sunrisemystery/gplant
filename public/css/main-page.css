@@ -1,0 +1,441 @@
+.main-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.main-container header {
+    background-color: white;
+    display: flex;
+    position: fixed;
+    align-self: flex-start;
+    width: 100vw;
+    height: 10vh;
+}
+
+
+.main-container nav {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+
+.main-container main {
+    margin-top: auto;
+    display: flex;
+    align-self: flex-end;
+    width: 100vw;
+    height: 90vh;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+
+}
+
+.img-main-container {
+    display: grid;
+    height: 50%;
+}
+
+.main-img {
+    grid-column: 1 / 4;
+    grid-row: 2 /5;
+    background: transparent url('../img/main-img-2.jpg') no-repeat padding-box;
+    background-size: cover;
+    box-shadow: 0px 6px 6px #00000029;
+    border-radius: 18px;
+}
+
+.img-text {
+    grid-column: 2 /3;
+    grid-row: 2/ 4;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 5px 3px 6px #00000029;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.img-text p {
+    margin: 2em 2.5em;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.45em;
+
+
+}
+
+.main-container section {
+    margin-top: 4em;
+    width: 64%;
+    align-self: center;
+    margin-bottom: 4em;
+}
+
+.main-container section p {
+    line-height: 1.5em;
+    text-align: justify;
+}
+
+/* MY PLANTS */
+
+.my-plants-container {
+    display: grid;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+.my-plants-container main {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/3;
+    margin: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.info {
+    margin-bottom: 1em;
+}
+
+.my-plants {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: end;
+    font-weight: 700;
+    margin-left: 2em;
+}
+
+.square {
+    text-align: center;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    width: 85vw;
+    align-self: center;
+    justify-self: center;
+    justify-items: center;
+    gap: 1.7em;
+}
+
+.plant-square {
+    box-shadow: 0px 6px 6px #00000029;
+    border-radius: 18px;
+    background: transparent url('../img/cactus.jpg') 0% 0% no-repeat padding-box;
+    background-size: 100%;
+    margin: auto;
+}
+
+.square .plant-name {
+    color: #295F42;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
+.water-info{
+    display: none;
+}
+
+@media screen and (min-width:750px){
+    .nav-mobile {
+        display: none;
+    }
+    
+    .logo-mobile {
+        display: none;
+    }
+    
+    .img-main-container {
+        grid-template-columns: 10% 60vh 1fr;
+        grid-template-rows: 8% 7% 40% 1fr;
+        width: 64%;
+    }
+    
+    .logo-main {
+        font: normal normal normal 2.1em Bahnschrift;
+        color: #000000;
+        align-self: center;
+        margin-left: 1em;
+    }
+    
+    .nav-desktop {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+    
+    .nav-desktop ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-grow: 1;
+    }
+    
+    .nav-desktop li {
+        list-style: none;
+        display: inline-block;
+    }
+    
+    .nav-desktop li a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #9b9898;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color .5s;
+    }
+    
+    .nav-desktop li:last-child {
+        background: #295F42 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 8px #00000029;
+        padding: 0.8vw 1vh;
+        border-radius: 3em;
+    
+    
+    }
+    
+    .nav-desktop li:last-child a {
+        color: white;
+        padding: 0.8em 1.1em 0.8em 1.1em;
+    
+    }
+    
+    .nav-desktop li:last-child a:hover {
+        color: #9b9898;
+    
+    }
+    
+    
+    .nav-desktop li a:hover {
+        color: #295F42;
+    }
+    
+}
+
+@media screen and (max-width:750px) and (min-width:415px){
+    .img-main-container {
+    width: 85%;
+    grid-template-columns: 10% 50vw 1fr;
+    grid-template-rows: 13% 7% 40% 1fr;
+
+}
+
+.main-container section {
+    width: 85%;
+}
+
+.main-container header {
+    justify-content: center;
+}
+
+.nav-desktop {
+    display: none;
+}
+
+.main-container header>p {
+    display: none;
+}
+
+.main-container nav {
+    align-items: flex-start;
+}
+
+.nav-mobile {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-mobile i {
+    font-size: 1.7em;
+    margin-left: 1.7em;
+}
+
+.nav-mobile a {
+    margin-right: 1.7em;
+    background: #295F42 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 8px #00000029;
+    border-radius: 3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 0.6em 0.9em;
+}
+
+.img-text p {
+    font-size: 1em;
+}
+
+@media screen and (max-width: 476px) {
+    .img-text p {
+        font-size: 0.9em;
+    }
+}
+
+.logo-mobile {
+    grid-column: 2/3;
+    text-align: left;
+    font: normal normal normal 2rem Bahnschrift;
+    color: #000000;
+}
+
+}
+
+@media screen and (max-width:750px) and (min-width:415px){
+    .img-main-container {
+        width: 85%;
+        grid-template-columns: 10% 50vw 1fr;
+        grid-template-rows: 13% 7% 40% 1fr;
+    
+    }
+    
+    .main-container section {
+        width: 85%;
+    }
+    
+    .main-container header {
+        justify-content: center;
+    }
+    
+    /* .nav-desktop {
+        display: none;
+    } */
+    
+    .main-container header>p {
+        display: none;
+    }
+    
+    .main-container nav {
+        align-items: flex-start;
+    }
+    
+    /* .nav-mobile {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .nav-mobile i {
+        font-size: 1.7em;
+        margin-left: 1.7em;
+    }
+    
+    .nav-mobile a {
+        margin-right: 1.7em;
+        background: #295F42 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 8px #00000029;
+        border-radius: 3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1em;
+        padding: 0.6em 0.9em;
+    } */
+    
+    .img-text p {
+        font-size: 1em;
+    }
+    
+    @media screen and (max-width: 476px) {
+        .img-text p {
+            font-size: 0.9em;
+        }
+    }
+    
+    .logo-mobile {
+        grid-column: 2/3;
+        text-align: left;
+        font: normal normal normal 2rem Bahnschrift;
+        color: #000000;
+    }
+}
+
+@media screen and (max-width:415px){
+    .img-main-container {
+        width: 85%;
+        grid-template-columns: 5% 70vw 1fr;
+        height: 45%;
+    }
+    
+    .main-container section {
+        width: 85%;
+    }
+    
+    .main-container header {
+        justify-content: center;
+    }
+    
+    .nav-desktop {
+        display: none;
+    }
+    
+    .main-container header>p {
+        display: none;
+    }
+    
+    .main-container nav {
+        align-items: flex-start;
+    }
+    
+    .nav-mobile {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .nav-mobile i {
+        font-size: 1.7em;
+        margin-left: 1.7em;
+    }
+    
+    .nav-mobile a {
+        margin-right: 1.7em;
+        background: #295F42 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 8px #00000029;
+        border-radius: 3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1em;
+        padding: 0.6em 0.9em;
+    }
+    
+    .img-text p {
+        font-size: 1em;
+    
+    }
+    
+    @media screen and (max-width: 231px) {
+        .img-text p {
+            font-size: 0.8em;
+        }
+    }
+    
+    .logo-mobile {
+        grid-column: 2/3;
+        text-align: left;
+        font: normal normal normal 1.9rem Bahnschrift;
+        color: #000000;
+    }
+}
