@@ -1,5 +1,4 @@
 .plant-desc {
-    position: flex;
     margin-left: 2em;
     width: 100%;
     height: 15vh;
@@ -10,7 +9,6 @@
     margin-top: 0.7em;
     font-weight: 800;
     font-size: 2em;
-
 }
 
 .plant-type {
@@ -22,17 +20,13 @@
     display: grid;
     width: 100%;
     height: 40vh;
-
 }
 
 .plant-img {
-
-    background: transparent url('../img/monstera.jpg') 0% 0% no-repeat padding-box;
+    background: transparent url('../img/monstera.jpg') 0 0 no-repeat padding-box;
     background-size: 100%;
     border-radius: 1.2em;
-    box-shadow: 0px 3px 6px #00000029;
-
-
+    box-shadow: 0 3px 6px #00000029;
 }
 
 .watering-plant {
@@ -50,8 +44,8 @@
     align-items: center;
     justify-content: center;
     color: #295F42;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    box-shadow: 0 3px 6px #00000029;
     border-radius: 1.2em;
     width: 35%;
     height: 80%;
@@ -64,8 +58,8 @@
 .button-plant {
     justify-self: center;
     align-self: center;
-    background: #295F42 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
+    background: #295F42 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
     border: none;
     border-radius: 3em;
     font-size: 0.8em;
@@ -84,7 +78,6 @@
     margin-top: 0.8em;
     margin-left: 2em;
     margin-right: 9vw;
-
 }
 
 .plant-section h1 {
@@ -99,14 +92,13 @@
     text-align: justify;
 }
 
-@media screen and (min-width:850px) {
+@media screen and (min-width: 850px) {
 
     .settings-back {
         display: none;
     }
 
     .plant-wrapper {
-
         height: 40vh;
         grid-template-columns: 28vw auto 9vw;
         grid-template-rows: 5vh 6vh 6vh auto 12vh;
@@ -115,25 +107,19 @@
     .plant-img {
         grid-column: 2 /3;
         grid-row: 1/ -1;
-
     }
 
     .watering-plant {
         grid-row: 2 / 3;
-
     }
 
     .plant-wrapper .timer {
-
         grid-row: 3 / 4;
         grid-column: 1 / 2;
-
-
     }
 
     .button-plant {
         grid-row: 4 /5;
-
     }
 
     .desc {
@@ -141,15 +127,14 @@
         color: #295F42;
         padding-top: 1em;
     }
-    
+
     .desc:hover {
         font-weight: 600;
     }
 
-
 }
 
-@media screen and (max-width:850px) and (min-width:690px) {
+@media screen and (max-width: 850px) and (min-width: 690px) {
     .my-plants-container {
         grid-template-rows: 1fr 10vh;
         grid-template-columns: 1fr;
@@ -193,27 +178,20 @@
     .plant-img {
         grid-column: 2 /3;
         grid-row: 1/ -1;
-
     }
 
     .watering-plant {
         grid-row: 2 / 3;
-
     }
 
     .plant-wrapper .timer {
-
         grid-row: 3 / 4;
         grid-column: 1 / 2;
-
-
     }
 
     .button-plant {
         grid-row: 4 /5;
-
     }
-
 
 
     .my-plants-container nav {
@@ -252,7 +230,7 @@
 
 }
 
-@media screen and (max-width:690px) {
+@media screen and (max-width: 690px) {
 
     .settings-back {
         display: flex;
@@ -320,10 +298,9 @@
         grid-row: 2/3;
         width: 100vw;
         height: 12vh;
-        background-color: tomato;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        box-shadow: 0px -3px 3px #00000029;
-        border-radius: 4em 4em 0px 0px;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 -3px 3px #00000029;
+        border-radius: 4em 4em 0 0;
         position: fixed;
         overflow: hidden;
         bottom: 0;

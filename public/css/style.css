@@ -21,11 +21,12 @@ body {
     display: flex;
 }
 
-@media screen and (min-width:750px) {
+@media screen and (min-width: 750px) {
 
-    .logo-mobile{
+    .logo-mobile {
         display: none;
     }
+
     .nav-desktop {
         display: flex;
         width: 100%;
@@ -55,12 +56,10 @@ body {
     }
 
     .nav-desktop li:last-child {
-        background: #295F42 0% 0% no-repeat padding-box;
-        box-shadow: 0px 8px 8px #00000029;
+        background: #295F42 0 0 no-repeat padding-box;
+        box-shadow: 0 8px 8px #00000029;
         padding: 0.8vw 1vh;
         border-radius: 3em;
-
-
     }
 
     .nav-desktop li:last-child a {
@@ -92,7 +91,7 @@ body {
 
 }
 
-@media screen and (max-width:750px) {
+@media screen and (max-width: 750px) {
 
     .nav-bottom-mobile {
         display: flex;
@@ -102,9 +101,9 @@ body {
         grid-row: 2/3;
         width: 100vw;
         height: 12vh;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        box-shadow: 0px -3px 3px #00000029;
-        border-radius: 4em 4em 0px 0px;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 -3px 3px #00000029;
+        border-radius: 4em 4em 0 0;
         position: fixed;
         overflow: hidden;
         bottom: 0;
@@ -131,7 +130,6 @@ body {
 }
 
 
-
 .my-plants-container {
     display: grid;
     width: 100vw;
@@ -150,30 +148,30 @@ body {
 }
 
 
-@media screen and (min-width:850px){
+@media screen and (min-width: 850px) {
     .nav-bottom-mobile {
         display: none;
     }
-    
+
     .my-plants-container header {
         display: flex;
         grid-column: 2/3;
         grid-row: 1/ 2;
     }
-    
+
     .my-plants-container {
         grid-template-columns: 10% 1fr;
         grid-template-rows: 10%;
     }
-    
-    
+
+
     .my-plants-container nav {
         background-size: 200vh;
         grid-column: 1/2;
         grid-row: 1/ span 2;
         text-align: center;
     }
-    
+
     .my-plants-logo {
         font: normal normal normal 3vw Bahnschrift;
         color: #295F42;
@@ -181,27 +179,27 @@ body {
         margin-bottom: 20vh;
         margin-top: 0.2em;
     }
-    
-    .my-plants-container a>i {
+
+    .my-plants-container a > i {
         color: #295F42;
         font-size: 2.55vw;
         display: inline-block;
         margin-top: 10vh;
         transition: transform .4s;
     }
-    
-    .my-plants-container a>i:hover {
-    
+
+    .my-plants-container a > i:hover {
+
         transform: rotate(180deg);
     }
-    
+
     .my-plants-container main {
         grid-column: 2/3;
     }
-    
-    
+
+
     main .fa-cog {
         display: none;
     }
-    
+
 }

@@ -9,7 +9,7 @@ class User
     private $surname;
 
 
-    public function __construct(string $email, string $password, string $name, string $surname)
+    public function __construct($email, $password, $name, $surname)
     {
         $this->email = $email;
         $this->password = $password;
@@ -63,6 +63,11 @@ class User
     {
         $this->surname = $surname;
     }
+
+
+
+
+
 
 
 }

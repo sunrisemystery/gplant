@@ -40,8 +40,8 @@
     -webkit-appearance: none;
     border: 0;
     padding: 2.5vh;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
     opacity: 0.92;
 }
 
@@ -54,8 +54,8 @@
 }
 
 .login-register button {
-    background: #123422 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 8px #00000029;
+    background: #123422 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
     border: 1px solid #123422;
     border-radius: 20px;
     opacity: 1;
@@ -66,10 +66,9 @@
 
 .login-register button:hover {
     color: black;
-    background: #ffffff 0% 0% no-repeat padding-box;
+    background: #ffffff 0 0 no-repeat padding-box;
     border: white;
     cursor: pointer;
-
 }
 
 .sign-in {
@@ -80,126 +79,122 @@
     margin-top: 1vh;
 }
 
-@media screen and (min-width:850px){
+@media screen and (min-width: 850px) {
     .img-container {
-        background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
         background-size: cover;
-        background-attachment: fixed;
+        background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') no-repeat fixed 0 0;
         height: 100vh;
         width: 39vw;
     }
-    
+
     .login-container {
         width: 63vw;
     }
-    
+
     .logo {
         color: #000000;
     }
-    
+
     .input-rectangle {
-    
-        background: transparent url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') 0% 0% no-repeat padding-box;
-        background-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.5) url('../img/ren-ran-bBiuSdck8tU-unsplash89.jpg') no-repeat 0 0;
         background-blend-mode: lighten;
-        box-shadow: 0px 6px 6px #00000029;
+        box-shadow: 0 6px 6px #00000029;
         border-radius: 18px;
         background-size: cover;
     }
-    
+
     .login-register input {
-    
         height: 5vh;
         width: 16vw;
         margin: 1vh;
         border-radius: 7px;
     }
-    
+
     .login-register button {
         height: 5vh;
         width: 7vw;
     }
 }
 
-@media screen and (max-width:850px) and (min-width:415px){
+@media screen and (max-width: 850px) and (min-width: 415px) {
     .img-container {
         display: none;
     }
-    
+
     .login-container {
         width: 100vw;
-        background: transparent url('../img/mobile-bg.jpg') 0% 0% no-repeat padding-box;
+        background: transparent url('../img/mobile-bg.jpg') 0 0 no-repeat padding-box;
         background-size: cover;
     }
-    
+
     .login-text {
         color: white;
         font-size: 1.2rem;
         margin-bottom: 12vh;
     }
-    
-    
+
+
     .login-register input {
         height: 7vh;
         width: 50vw;
         border-radius: 18px;
         margin: 1.5vh;
     }
-    
+
     .login-register button {
         height: 7vh;
         width: 20vw;
     }
-    
+
     .login-register form p {
         color: white;
         margin-top: 7vh;
-    
+
     }
-    
+
     .sign-in {
         margin-top: 3vh;
     }
-    
+
 }
 
-@media screen and (max-width:415px){
+@media screen and (max-width: 415px) {
 
     .img-container {
         display: none;
     }
-    
+
     .login-container {
         width: 100vw;
-        background: transparent url('../img/mobile-bg.jpg') 0% 0% no-repeat padding-box;
+        background: transparent url('../img/mobile-bg.jpg') 0 0 no-repeat padding-box;
         background-size: cover;
     }
-    
-    
+
+
     .login-text {
         color: white;
         font-size: 1.2rem;
         width: 75%;
     }
-    
-    
+
+
     .login-register input {
         height: 7vh;
         width: 80vw;
         border-radius: 18px;
         margin: 1.5vh;
     }
-    
+
     .login-register button {
         height: 7vh;
         width: 35vw;
     }
-    
+
     .login-register form p {
         color: white;
         margin-top: 7vh;
     }
-    
+
     .sign-in {
         margin-top: 3vh;
     }

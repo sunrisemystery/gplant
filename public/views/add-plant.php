@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover</title>
+    <title>Add Plant</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/add-plant.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/add-plant.css">
 </head>
 
 <body class="add-plant-container">
@@ -36,6 +36,11 @@
     <main class="add-plant-main">
         <section class="form-section">
             <form class="add-plant-form" action="addPlant"  method="POST" ENCTYPE="multipart/form-data">
+                <?php if(isset($messages)){
+                    foreach ($messages as $message)
+                        echo $message;
+                }
+                ?>
                 <div class="form-img">
                     <label class="label-img" for="file-input">
                         <i class="far fa-images"></i>
