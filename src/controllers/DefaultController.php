@@ -31,4 +31,5 @@ class DefaultController extends AppController {
 
         $this->render('discover');
     }
+
 }

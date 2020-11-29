@@ -11,6 +11,7 @@ Router::get('register', 'DefaultController');
 Router::get('myPlants', 'DefaultController');
 Router::get('plant', 'DefaultController');
 Router::get('discover', 'DefaultController');
+Router::post('addPlant', 'PlantController');
 Router::post('login', 'SecurityController');
 
 Router::run($path);

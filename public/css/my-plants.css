@@ -1,0 +1,332 @@
+
+.info {
+    margin-bottom: 1em;
+}
+
+.my-plants {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: end;
+    font-weight: 700;
+    margin-left: 2em;
+}
+
+.square {
+    text-align: center;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    width: 85vw;
+    align-self: center;
+    justify-self: center;
+    justify-items: center;
+    gap: 1.7em;
+}
+
+.plant-square {
+    position: relative;
+    box-shadow: 0 6px 6px #00000029;
+    border-radius: 18px;
+    background-size: 100%;
+    margin: auto;
+    z-index: -1;
+}
+
+.img-plant {
+    max-width: 100%;
+    border-radius: 18px;
+}
+
+.square .plant-name {
+    color: #295F42;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
+.water-info {
+    display: none;
+}
+
+.nav-bottom-mobile {
+    display: flex;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    width: 100vw;
+    height: 12vh;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px -3px 3px #00000029;
+    border-radius: 4em 4em 0px 0px;
+    position: fixed;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.nav-bottom-mobile a {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    color: #295F42;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 850px) {
+
+    .nav-bottom-mobile {
+        display: none;
+    }
+
+    .my-plants {
+        font-size: 2em;
+    }
+
+    .square {
+        width: 48vh;
+        height: 48vh;
+    }
+
+    .plant-square {
+        width: 15vw;
+        height: 15vw;
+        overflow: hidden;
+    }
+
+    .square .watering {
+        font-size: 1.1em;
+        font-weight: 700;
+        margin-top: 1em;
+        margin-bottom: 1.2em;
+    }
+
+    .square .watering small {
+        margin-left: 1em;
+        color: #295F42;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 3px 6px #00000029;
+        padding: 0.5em 0.7em;
+        border-radius: 14px;
+    }
+
+    .square .button {
+        background: #295F42 0 0 no-repeat padding-box;
+        box-shadow: 0 8px 8px #00000029;
+        padding: 0.9vw 1vh;
+        border-radius: 3em;
+        font-size: 0.8em;
+        font-weight: 600;
+        color: white;
+    }
+
+    .desc {
+        font-weight: 500;
+        color: #295F42;
+        padding-top: 1em;
+    }
+
+    .desc:hover {
+        font-weight: 600;
+    }
+
+
+}
+
+@media screen and (max-width: 850px) and (min-width: 536px) {
+
+    .my-plants-container {
+        grid-template-rows: 1fr 10vh;
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+    }
+
+    .my-plants-container main {
+        grid-row: 1/2;
+        grid-column: 1/2;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .info {
+        display: flex;
+        justify-self: flex-start;
+        width: 100vw;
+        justify-content: space-between;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .my-plants-container nav {
+        display: none;
+    }
+
+
+    .my-plants {
+        font-size: 2.3em;
+        margin-top: 1em;
+    }
+
+    .info .fa-cog {
+        margin: 0.5em 1em;
+        font-size: 2em;
+        align-self: flex-start;
+        justify-self: flex-end;
+    }
+
+    .nav-bottom-mobile a i {
+        font-size: 1.9em;
+    }
+
+    .button {
+        display: none
+    }
+
+    .watering {
+        display: none;
+    }
+
+    .square {
+        width: 30vw;
+        height: 35vh;
+    }
+
+    .plant-square {
+        display: flex;
+        width: 25vh;
+        height: 25vh;
+    }
+
+    .water-info {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        margin-top: 1.5vh;
+        margin-left: 1vw;
+        background-color: white;
+        width: 15vh;
+        height: 5vh;
+        border-radius: 5em;
+    }
+
+    .water-info p {
+        color: #295F42;
+        font-weight: 700;
+        margin-left: 1.5vw;
+    }
+
+    .fa-tint {
+        color: #295F42;
+        margin-left: 0.8vw;
+    }
+}
+
+@media screen and (max-width: 536px) {
+    .my-plants-container {
+        grid-template-rows: 1fr 10vh;
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+    }
+
+    .my-plants-container main {
+        grid-row: 1/2;
+        grid-column: 1/2;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .info {
+        display: flex;
+        justify-self: flex-start;
+        width: 100vw;
+        justify-content: space-between;
+
+    }
+
+    .grid-wrapper {
+        margin-top: 5vh;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1vh 1vh;
+    }
+
+    .my-plants-container nav {
+        display: none;
+    }
+
+    .my-plants {
+        font-size: 2.3em;
+        margin-top: 1em;
+        margin-left: 0.6em;
+    }
+
+    .fa-cog {
+        margin: 0.5em 1em;
+        font-size: 2.5em;
+        align-self: flex-start;
+        justify-self: flex-end;
+    }
+
+    .nav-bottom-mobile a i {
+        font-size: 1.9em;
+    }
+
+    .button {
+        display: none
+    }
+
+    .watering {
+        display: none;
+    }
+
+    .square {
+        width: 30vw;
+        height: 33vh;
+    }
+
+    @media screen and (max-width: 436px) {
+        .square {
+            width: 34vw;
+            height: 28vh;
+        }
+    }
+    .plant-square {
+        display: flex;
+        width: 32vw;
+        height: 32vw;
+    }
+
+    .water-info {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        margin-top: 1.5vh;
+        margin-left: 1vw;
+        background-color: white;
+        width: 20vw;
+        height: 5vh;
+        border-radius: 5em;
+    }
+
+
+    .water-info p {
+        color: #295F42;
+        font-weight: 700;
+        margin-left: 1.5vw;
+        font-size: 0.9em;
+    }
+
+    .fa-tint {
+        color: #295F42;
+        margin-left: 0.8vw;
+    }
+}
+
+
+

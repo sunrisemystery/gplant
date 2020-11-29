@@ -8,9 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
-    <link rel="stylesheet" media="screen and (max-width:536px)" href="public/css/small.css">
-    <link rel="stylesheet" media="screen and (max-width:850px) and (min-width:536px)" href="public/css/medium.css">
-    <link rel="stylesheet" media="screen and (min-width:850px)" href="public/css/large.css">
+    <link rel="stylesheet" href="public/css/my-plants.css">
 </head>
 
 <body class="my-plants-container">
@@ -51,6 +49,23 @@
             <div class="square">
                 <a href="#" class="click-plant">
                     <div class="plant-square">
+
+                        <img class="img-plant" src="public/uploads/<?= $plant->getImage() ?>">
+                        <div class="water-info">
+                            <i class="fas fa-tint"></i>
+                            <p>11 days</p>
+                        </div>
+
+                    </div>
+                    <p class="plant-name"><?= $plant->getName() ?></p>
+                </a>
+                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>
+                <a class="button" href="#">WATER NOW</a>
+            </div>
+            <div class="square">
+                <a href="#" class="click-plant">
+                    <div class="plant-square">
+                        <img class="img-plant" src="public/img/cactus.jpg">
                         <div class="water-info">
                             <i class="fas fa-tint"></i>
                             <p>11 days</p>
@@ -64,19 +79,22 @@
             <div class="square">
                 <a href="#" class="click-plant">
                     <div class="plant-square">
+                        <img class="img-plant" src="public/img/cactus.jpg">
+                         <div class="water-info">
+                        <i class="fas fa-tint"></i>
+                        <p>11 days</p>
+                    </div></div>
+                    <p class="plant-name">John</p>
+                </a>
+                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>
+                <a class="button" href="#">WATER NOW</a>
+            </div>
+            <div class="square">
+                <a href="#" class="click-plant">
+                    <div class="plant-square">
+                        <img class="img-plant" src="public/img/cactus.jpg">
                         <div class="water-info">
-                            <i class="fas fa-tint"></i>
-                            <p>11 days</p>
-                        </div>
-                    </div>
-                    <p class="plant-name">John</p>
-                </a>
-                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>
-                <a class="button" href="#">WATER NOW</a>
-            </div>
-            <div class="square">
-                <a href="#" class="click-plant">
-                    <div class="plant-square"><div class="water-info">
+
                         <i class="fas fa-tint"></i>
                         <p>11 days</p>
                     </div></div>
@@ -87,18 +105,10 @@
             </div>
             <div class="square">
                 <a href="#" class="click-plant">
-                    <div class="plant-square"><div class="water-info">
-                        <i class="fas fa-tint"></i>
-                        <p>11 days</p>
-                    </div></div>
-                    <p class="plant-name">John</p>
-                </a>
-                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>
-                <a class="button" href="#">WATER NOW</a>
-            </div>
-            <div class="square">
-                <a href="#" class="click-plant">
-                    <div class="plant-square"><div class="water-info">
+                    <div class="plant-square">
+                        <img class="img-plant" src="public/img/cactus.jpg">
+                        <div class="water-info">
+
                         <i class="fas fa-tint"></i>
                         <p>11 days</p>
                     </div></div>

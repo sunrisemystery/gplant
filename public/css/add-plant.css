@@ -1,0 +1,196 @@
+.add-plant-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.add-plant-main {
+    height: 90vh;
+    width: 100vw;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-section {
+    width: 80%;
+    height: 100%;
+    align-self: center;
+}
+
+.add-plant-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+    width: 40%;
+    box-shadow: 0 3px 6px #00000029;
+    border-radius: 18px;
+}
+
+.fa-images {
+    font-size: 9em;
+    color: #295F42;
+    opacity: 0.9;
+}
+
+.label-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+.label-img p {
+    font-weight: 600;
+    color: #295F42;
+    opacity: 0.9;
+}
+
+input[type="file"] {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding-left: 5vh;
+    box-sizing: border-box;
+    display: none;
+}
+
+input[type="text"] {
+    border: 0;
+    padding: 2.5vh;
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
+    opacity: 0.92;
+    height: 6vh;
+    width: 17vw;
+    border-radius: 9px;
+    margin: 1vh 1vh 2vh;
+    font-size: 1em;
+}
+
+button {
+    margin-top: 7vh;
+    background: #123422 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
+    border: 1px solid #123422;
+    border-radius: 20px;
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+    transition: color .8s;
+    width: 8vw;
+    height: 6vh;
+}
+
+.form-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60%;
+    width: 50%;
+}
+
+
+@media screen and (min-width: 750px) {
+    .add-plant-container header {
+        background-color: white;
+        overflow: hidden;
+        display: flex;
+        align-self: flex-start;
+        width: 100vw;
+        height: 10vh;
+    }
+
+    .add-plant-container nav {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: space-evenly;
+    }
+
+    .label-img:hover {
+        cursor: pointer;
+    }
+
+    .form-text {
+        box-shadow: 0 3px 6px #00000029;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.5) url("../img/ren-ran-bBiuSdck8tU-unsplash89.jpg") no-repeat 0 0;
+        background-blend-mode: lighten;
+        background-size: cover;
+    }
+
+
+}
+
+@media screen and (max-width: 750px) {
+    .add-plant-container {
+        background: transparent url(../img/mobile-bg.jpg) 0 0 no-repeat padding-box;
+        background-size: cover;
+    }
+
+    .add-plant-form {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .form-section {
+        width: 90%;
+    }
+
+    .logo-main {
+        display: none;
+    }
+
+    .add-plant-main {
+        height: 100vh;
+    }
+
+    .form-img {
+        width: 80%;
+        height: 30%;
+        background-color: white;
+        opacity: 0.92;
+    }
+
+    .fa-images {
+        font-size: 6em;
+    }
+
+    .form-text {
+        width: 90%;
+        height: 40%;
+    }
+
+    input[type="text"] {
+        height: 8vh;
+        width: 60vw;
+    }
+
+    button {
+        width: 30vw;
+        height: 8vh;
+        margin-top: 1em;
+
+    }
+
+    .nav-bottom-mobile {
+        opacity: 0.92;
+    }
+
+}
