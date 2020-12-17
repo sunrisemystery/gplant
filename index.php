@@ -8,7 +8,7 @@ $path = parse_url( $path, PHP_URL_PATH);
 Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('register', 'DefaultController');
-Router::get('myPlants', 'DefaultController');
+Router::get('myPlants', 'PlantController');
 Router::get('plant', 'DefaultController');
 Router::get('discover', 'DefaultController');
 Router::post('addPlant', 'PlantController');

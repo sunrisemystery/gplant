@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Plant.php';
+require_once __DIR__.'/../repository/PlantRepository.php';
 
 class PlantController extends AppController
 {
@@ -9,18 +10,33 @@ class PlantController extends AppController
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private $messages = [];
+    private $plantRepository;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->plantRepository = new PlantRepository();
+    }
+
+    public function myPlants()
+    {
+        $plants = $this->plantRepository->getPlants();
+        $this->render('my-plants',['plants' => $plants]);
+    }
     public function addPlant(){
         //'file' is a name of input given in add-plant.php form
         if($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])){
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
-            $plant = new Plant($_POST['name'],$_POST['type'],$_FILES['file']['name']);
+            $plant = new Plant($_POST['name'], $_FILES['file']['name']);
+            $this->plantRepository->addPlant($plant);
 
-            return $this->render('my-plants',['messages'=>$this->messages, 'plant'=>$plant]);
+            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
         }
 
-        $this->render('add-plant',['messages'=>$this->messages]);
+         return $this->render('add-plant',['messages'=>$this->messages]);
 
     }
 

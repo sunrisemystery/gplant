@@ -33,12 +33,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 4vh;
 }
 
 .login-register input {
     -webkit-appearance: none;
-    border: 0;
+    border: none;
     padding: 2.5vh;
     background: #FFFFFF 0 0 no-repeat padding-box;
     box-shadow: 0 8px 8px #00000029;
@@ -77,6 +76,10 @@
 
 .sign-up {
     margin-top: 1vh;
+}
+
+.login-register .no-valid {
+    border: 3px solid red;
 }
 
 @media screen and (min-width: 850px) {
@@ -200,3 +203,4 @@
     }
 
 }
+

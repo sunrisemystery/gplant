@@ -4,18 +4,30 @@
 class Plant
 {
     private $name;
-    private $type;
+    private $last_watered;
     private $image;
+    private $type;
 
-
-    public function __construct($name, $type, $image)
+    public function __construct($name,  $image)
     {
         $this->name = $name;
-        $this->type = $type;
         $this->image = $image;
     }
 
 
+
+    public function countDays() {
+        $currentString = date("Y-m-d");
+        $current = date_create($currentString);
+        var_dump($current);
+        $last = date_create($this->last_watered);
+        var_dump($last);
+        $seconds = $current - $last;
+        $days = date_diff($last,$current);
+        $days = $days->format('%a day(s)');
+        return $days;
+
+    }
     public function getName(): string
     {
         return $this->name;
@@ -27,19 +39,6 @@ class Plant
         $this->name = $name;
     }
 
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-
-    public function setType(string $type)
-    {
-        $this->type = $type;
-    }
-
-
     public function getImage(): string
     {
         return $this->image;
@@ -50,6 +49,18 @@ class Plant
     {
         $this->image = $image;
     }
+
+
+    public function getLastWatered()
+    {
+        return $this->last_watered;
+    }
+
+    public function setLastWatered($last_watered): void
+    {
+        $this->last_watered = $last_watered;
+    }
+
 
 
 

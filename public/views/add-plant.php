@@ -51,7 +51,26 @@
                 </div>
                 <div class="form-text">
                     <input type="text" name="name" placeholder="name">
-                    <input type="text" name="type" placeholder="type">
+<!--                    <input type="text" name="type" placeholder="type">-->
+                    <select name="selectType">
+                        <option value=""> select </option>
+                        <?php
+                        $database = new Database();
+                        $statement = $database->connect()->prepare('
+                            SELECT id, type FROM public.plants' );
+                        $statement->execute();
+                        $row_list = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($row_list as $val){
+
+                        ?>
+                        <option value=<?php echo $val["id"]; ?>>
+                            <?php echo $val["type"]; ?>
+                        </option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+
                     <button type="submit">ADD</button>
 
                 </div>
