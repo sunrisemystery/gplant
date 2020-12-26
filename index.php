@@ -9,10 +9,12 @@ Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('register', 'DefaultController');
 Router::get('myPlants', 'PlantController');
-Router::get('plant', 'DefaultController');
+Router::get('plant', 'PlantController');
 Router::get('discover', 'DefaultController');
 Router::post('addPlant', 'PlantController');
+Router::post('myPlants', 'PlantController');
 Router::post('login', 'SecurityController');
+Router::post('register', 'UserController');
 
 Router::run($path);
 

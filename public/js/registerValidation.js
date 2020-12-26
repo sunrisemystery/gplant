@@ -34,3 +34,6 @@ emailInput.addEventListener('keyup', validateEmail);
 
 confirmPasswordInput.addEventListener('keyup', validatePassword);
 
+
+
+

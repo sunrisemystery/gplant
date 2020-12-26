@@ -61,64 +61,21 @@
                     <p class="plant-name"><?= $plant->getName() ?></p>
                 </a>
                 <p class="watering">Watering day <small><i class="fas fa-clock"> <?= $plant->countDays() ?></i></small></p>
-                <a class="button" href="#">WATER NOW</a>
+<!--                <a class="button" href="#">WATER NOW</a>-->
+                <?php
+                if(isset($_POST['water-now-button'])){
+                    session_start();
+                    $plant->setLastWatered(date('Y-m-d'));
+                    $_SESSION['plant_id'] = $plant->getId();
+                }
+                ?>
+                <form method="post" action="myPlants" >
+                    <input type="submit" name="water-now-button" class="button" value="WATER NOW"/>
+                </form>
+
             </div>
             <?php endforeach; ?>
-<!--            <div class="square">-->
-<!--                <a href="#" class="click-plant">-->
-<!--                    <div class="plant-square">-->
-<!--                        <img class="img-plant" src="public/img/cactus.jpg">-->
-<!--                        <div class="water-info">-->
-<!--                            <i class="fas fa-tint"></i>-->
-<!--                            <p>11 days</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p class="plant-name">John</p>-->
-<!--                </a>-->
-<!--                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>-->
-<!--                <a class="button" href="#">WATER NOW</a>-->
-<!--            </div>-->
-<!--            <div class="square">-->
-<!--                <a href="#" class="click-plant">-->
-<!--                    <div class="plant-square">-->
-<!--                        <img class="img-plant" src="public/img/cactus.jpg">-->
-<!--                         <div class="water-info">-->
-<!--                        <i class="fas fa-tint"></i>-->
-<!--                        <p>11 days</p>-->
-<!--                    </div></div>-->
-<!--                    <p class="plant-name">John</p>-->
-<!--                </a>-->
-<!--                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>-->
-<!--                <a class="button" href="#">WATER NOW</a>-->
-<!--            </div>-->
-<!--            <div class="square">-->
-<!--                <a href="#" class="click-plant">-->
-<!--                    <div class="plant-square">-->
-<!--                        <img class="img-plant" src="public/img/cactus.jpg">-->
-<!--                        <div class="water-info">-->
-<!---->
-<!--                        <i class="fas fa-tint"></i>-->
-<!--                        <p>11 days</p>-->
-<!--                    </div></div>-->
-<!--                    <p class="plant-name">John</p>-->
-<!--                </a>-->
-<!--                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>-->
-<!--                <a class="button" href="#">WATER NOW</a>-->
-<!--            </div>-->
-<!--            <div class="square">-->
-<!--                <a href="#" class="click-plant">-->
-<!--                    <div class="plant-square">-->
-<!--                        <img class="img-plant" src="public/img/cactus.jpg">-->
-<!--                        <div class="water-info">-->
-<!---->
-<!--                        <i class="fas fa-tint"></i>-->
-<!--                        <p>11 days</p>-->
-<!--                    </div></div>-->
-<!--                    <p class="plant-name">John</p>-->
-<!--                </a>-->
-<!--                <p class="watering">Watering day <small><i class="fas fa-clock"> 11 days</i></small></p>-->
-<!--                <a class="button" href="#">WATER NOW</a>-->
-<!--            </div>-->
+
         </div>
     </main>
 </body>

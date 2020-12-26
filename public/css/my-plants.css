@@ -123,6 +123,12 @@
         font-size: 0.8em;
         font-weight: 600;
         color: white;
+        border-style: none;
+        margin-bottom: 1vw;
+    }
+    .square .button:hover{
+        cursor: pointer;
+        color: #9b9898;
     }
 
     .desc {

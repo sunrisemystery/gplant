@@ -14,18 +14,18 @@ class PlantRepository extends Repository
         if($plant == false){
             return null; //niewolno tak - exception szeba w security kontrolerze
         }
+
         return new Plant($plant['name'],$plant['image']);
     }
 
     public function addPlant(Plant $plant): void{
 
         $statement = $this->database->connect()->prepare('
-        INSERT INTO public.plants_user( user_id, plant_id, name, last_watered, image)
-        VALUES (?, ?, ?, ?, ?) ');
+        INSERT INTO public.plants_user( user_id, plant_id, name, image)
+        VALUES (?, ?, ?, ?) ');
         //odczytac id za pomocą sesji
-        $user_id = 1;
-        $plant_id = 1;
-        $statement->execute([$user_id, $plant_id, $plant->getName(), $plant->getLastWatered(), $plant->getImage()]);
+        $user_id = 2;
+        $statement->execute([$user_id, $plant->getType(), $plant->getName(), $plant->getImage()]);
 
     }
     public function getPlants(): array
@@ -36,14 +36,39 @@ class PlantRepository extends Repository
         $statement->execute();
         $plants = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($plants as $plant){
-
-            $result[] = new Plant(
-                $plant['name'],
-                $plant['image']
-            );
+            $plantObj = new Plant($plant['name'],$plant['image']);
+            $plantObj->setId($plant['id']);
+            $plantObj->setLastWatered($plant['last_watered']);
+            $result[] = $plantObj;
         }
 
         return $result;
+    }
+    public function getTypes(): array{
+        $statement = $this->database->connect()->prepare('
+                            SELECT id, type FROM public.plants' );
+        $statement->execute();
+        $row_list = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $row_list;
+    }
+
+    public function getImageFromGeneralPlants($id){
+        $statement = $this->database->connect()->prepare('
+        SELECT image FROM public.plants WHERE id = :id
+        ');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $image = $statement->fetch(PDO::PARAM_STR);
+        return $image["image"];
+    }
+    public function changeLastWatered($id, $date){
+        $statement = $this->database->connect()->prepare('
+        UPDATE public.plants_user SET last_watered = :date WHERE id = :id
+        ');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->execute();
+
     }
 
 }

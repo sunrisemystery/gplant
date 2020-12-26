@@ -82,6 +82,18 @@ input[type="text"] {
     font-size: 1em;
 }
 
+.select-class {
+    padding:10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 10px;
+    background: darkgrey;
+    color: white;
+    outline: none;
+}
+
+
 button {
     margin-top: 7vh;
     background: #123422 0 0 no-repeat padding-box;

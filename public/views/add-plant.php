@@ -35,12 +35,7 @@
     </header>
     <main class="add-plant-main">
         <section class="form-section">
-            <form class="add-plant-form" action="addPlant"  method="POST" ENCTYPE="multipart/form-data">
-                <?php if(isset($messages)){
-                    foreach ($messages as $message)
-                        echo $message;
-                }
-                ?>
+            <form class="add-plant-form" action="addPlant" method="POST" ENCTYPE="multipart/form-data">
                 <div class="form-img">
                     <label class="label-img" for="file-input">
                         <i class="far fa-images"></i>
@@ -50,17 +45,17 @@
                     
                 </div>
                 <div class="form-text">
+                    <?php if(isset($messages)){
+                        foreach ($messages as $message)
+                            echo $message;
+                    }
+                    ?>
                     <input type="text" name="name" placeholder="name">
 <!--                    <input type="text" name="type" placeholder="type">-->
-                    <select name="selectType">
+                    <select name="selectType" class="select-class" >
                         <option value=""> select </option>
                         <?php
-                        $database = new Database();
-                        $statement = $database->connect()->prepare('
-                            SELECT id, type FROM public.plants' );
-                        $statement->execute();
-                        $row_list = $statement->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($row_list as $val){
+                        foreach($rowList as $val){
 
                         ?>
                         <option value=<?php echo $val["id"]; ?>>

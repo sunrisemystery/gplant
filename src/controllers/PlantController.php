@@ -21,8 +21,24 @@ class PlantController extends AppController
 
     public function myPlants()
     {
+        $id = null;
+        if ($this->isPost()) {
+            session_start();
+            $id = $_SESSION['plant_id'];
+            var_dump($id);
+            $this->plantRepository->changeLastWatered($id, date("Y-m-d"));
+            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+        }
+
         $plants = $this->plantRepository->getPlants();
-        $this->render('my-plants',['plants' => $plants]);
+        $this->render('my-plants', ['plants' => $plants]);
+
+    }
+
+    public function plant()
+    {
+
+        $this->render('plant');
     }
     public function addPlant(){
         //'file' is a name of input given in add-plant.php form
@@ -31,13 +47,30 @@ class PlantController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
             $plant = new Plant($_POST['name'], $_FILES['file']['name']);
+            $plant->setType(intval($_POST['selectType']));
+            $this->plantRepository->addPlant($plant);
+
+
+            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
+        }
+        elseif($this->isPost() && strlen($_POST['name'])===0 ){
+            $this->messages[] = 'Please fill the name field';
+            return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
+        }
+        elseif ($this->isPost() && strlen($_POST['selectType'])===0 ){
+            $this->messages[] = 'Please select type of plant';
+            return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
+        }
+        elseif ($this->isPost() && strlen($_POST['name'])!=0 && strlen($_POST['selectType'])!=0 && is_uploaded_file($_FILES['file']['tmp_name'])==false ){
+            $image = $this->plantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
+            $plant = new Plant($_POST['name'], $image);
+            $plant->setType(intval($_POST['selectType']));
             $this->plantRepository->addPlant($plant);
 
             return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
         }
 
-         return $this->render('add-plant',['messages'=>$this->messages]);
-
+         return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
     }
 
     private function validate(array $file): bool{
@@ -53,4 +86,19 @@ class PlantController extends AppController
         }
         return true;
     }
+    public function types(){
+
+        return $this->render('add-plant',['rowList'=>$this->plantRepository->getTypes()]);
+
+    }
+    public function waterNow(){
+        $id = null;
+        if($this->isPost()){
+            $id = $_GET['plant_id'];
+            $this->plantRepository->changeLastWatered($id,date("Y-m-d"));
+            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
+
+        }
+    }
+
 }

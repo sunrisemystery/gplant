@@ -3,6 +3,7 @@
 
 class Plant
 {
+    private $id;
     private $name;
     private $last_watered;
     private $image;
@@ -19,15 +20,26 @@ class Plant
     public function countDays() {
         $currentString = date("Y-m-d");
         $current = date_create($currentString);
-        var_dump($current);
         $last = date_create($this->last_watered);
-        var_dump($last);
         $seconds = $current - $last;
         $days = date_diff($last,$current);
         $days = $days->format('%a day(s)');
         return $days;
 
     }
+
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -60,6 +72,19 @@ class Plant
     {
         $this->last_watered = $last_watered;
     }
+
+
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
 
 
 

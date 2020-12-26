@@ -20,7 +20,7 @@
 
 .input-rectangle {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 40%;
@@ -193,7 +193,7 @@
         width: 35vw;
     }
 
-    .login-register form p {
+    .login-register p {
         color: white;
         margin-top: 7vh;
     }
