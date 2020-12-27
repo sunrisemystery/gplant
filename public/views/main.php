@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/main-page.css">
+    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
 
 </head>
 
@@ -23,10 +24,11 @@
             </div>
             <div class="nav-desktop">
                 <ul>
-                    <li><a href="#">home</a></li>
-                    <li><a href="#">discover</a></li>
+                    <li><a id="home">home</a></li>
+                    <li><a id="discover">discover</a></li>
                     <li><a href="#">contact</a></li>
-                    <li><a href="public/views/login.html">sign in</a></li>
+                    <li><a id="signButton">sign in</a></li>
+<!--                    <li> <button id="signButton">SIGN IN</button></li>-->
                 </ul>
             </div>
         </nav>

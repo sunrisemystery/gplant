@@ -1,6 +1,6 @@
 
 .info {
-    margin-bottom: 1em;
+    /*margin-bottom: 1em;*/
 }
 
 .my-plants {
@@ -10,6 +10,26 @@
     align-self: end;
     font-weight: 700;
     margin-left: 2em;
+}
+
+.inline {
+    display: inline-block;
+    height: 30vh;
+    width: 16vw;
+
+}
+
+.link-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1em;
+    /*font-family: serif;*/
+}
+
+.link-button:focus {
+    outline: none;
 }
 
 .square {
@@ -24,15 +44,26 @@
     justify-self: center;
     justify-items: center;
     gap: 1.7em;
+    margin-top: 2em;
+
 }
 
+.grid-wrapper .message {
+    font-size: 3em;
+    font-weight: 700;
+
+}
+
+
 .plant-square {
+    display: inline-block;
     position: relative;
     box-shadow: 0 6px 6px #00000029;
     border-radius: 18px;
     background-size: 100%;
     margin: auto;
     z-index: -1;
+
 }
 
 .img-plant {
@@ -102,7 +133,7 @@
     .square .watering {
         font-size: 1.1em;
         font-weight: 700;
-        margin-top: 1em;
+        margin-top: 3vw;
         margin-bottom: 1.2em;
     }
 
@@ -123,6 +154,13 @@
         font-size: 0.8em;
         font-weight: 600;
         color: white;
+        border-style: none;
+        margin-bottom: 1vw;
+    }
+
+    .square .button:hover {
+        cursor: pointer;
+        color: #9b9898;
     }
 
     .desc {

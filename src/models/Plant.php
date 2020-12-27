@@ -3,18 +3,42 @@
 
 class Plant
 {
+    private $id;
     private $name;
-    private $type;
+    private $last_watered;
     private $image;
+    private $type;
 
-
-    public function __construct($name, $type, $image)
+    public function __construct($name, $image)
     {
         $this->name = $name;
-        $this->type = $type;
         $this->image = $image;
     }
 
+
+    public function countDays()
+    {
+        $currentString = date("Y-m-d");
+        $current = date_create($currentString);
+        $last = date_create($this->last_watered);
+        $seconds = $current - $last;
+        $days = date_diff($last, $current);
+        $days = $days->format('%a day(s)');
+        return $days;
+
+    }
+
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     public function getName(): string
     {
@@ -22,23 +46,10 @@ class Plant
     }
 
 
-    public function setName( string $name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
-
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-
-    public function setType(string $type)
-    {
-        $this->type = $type;
-    }
-
 
     public function getImage(): string
     {
@@ -46,14 +57,33 @@ class Plant
     }
 
 
-    public function setImage( string $image)
+    public function setImage(string $image)
     {
         $this->image = $image;
     }
 
 
+    public function getLastWatered()
+    {
+        return $this->last_watered;
+    }
+
+    public function setLastWatered($last_watered): void
+    {
+        $this->last_watered = $last_watered;
+    }
 
 
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
 
 
 }

@@ -82,6 +82,26 @@ input[type="text"] {
     font-size: 1em;
 }
 
+.select-class {
+    padding: 1vh;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 10px;
+    background: white;
+    opacity: 0.92;
+    box-shadow: 0 8px 8px #00000029;
+    height: 6vh;
+    width: 17vw;
+    color: grey;
+    outline: none;
+
+}
+
+
 button {
     margin-top: 7vh;
     background: #123422 0 0 no-repeat padding-box;
@@ -94,6 +114,10 @@ button {
     transition: color .8s;
     width: 8vw;
     height: 6vh;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .form-text {
@@ -178,6 +202,11 @@ button {
     }
 
     input[type="text"] {
+        height: 8vh;
+        width: 60vw;
+    }
+
+    .select-class {
         height: 8vh;
         width: 60vw;
     }

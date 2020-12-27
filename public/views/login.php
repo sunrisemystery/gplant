@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/login-and-register.css">
+    <script type="text/javascript" src="./public/js/login.js" defer></script>
 </head>
 
 <body class="login-register">
@@ -25,12 +26,12 @@
         </div>
         <div class="input-rectangle">
             <form action="login" method="post">
-                <input type="text" name="login" placeholder="login">
+                <input type="text" name="email" placeholder="email">
                 <input type="password" name="password" placeholder="password">
                 <button class="sign-in">SIGN IN</button>
-                <p>Don't have account?</p>
-                <button type="submit" class="sign-up">SIGN UP</button>
             </form>
+            <p>Don't have account?</p>
+            <button id="signUpButton" class="sign-up">SIGN UP</button>
         </div>
     </div>
 

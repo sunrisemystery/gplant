@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/add-plant.css">
+    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
 </head>
 
 <body class="add-plant-container">
@@ -18,47 +19,60 @@
 
             <div class="nav-desktop">
                 <ul>
-                    <li><a href="#">home</a></li>
-                    <li><a href="#">discover</a></li>
+                    <li><a id="home">home</a></li>
+                    <li><a id="discover">discover</a></li>
                     <li><a href="#">contact</a></li>
-                    <li><a href="public/views/login.html">sign in</a></li>
+                    <li><a id="signButton"">sign out</a></li>
                 </ul>
             </div>
         </nav>
         <div class="nav-bottom-mobile">
 
-            <a href="#"><i class="fas fa-seedling"></i>My Plants</a>
-            <a href="#"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a href="#"><i class="fas fa-university"></i>Discover</a>
+            <a id="myPlants"><i class="fas fa-seedling"></i>My Plants</a>
+            <a><i class="fas fa-plus-circle"></i>Add Plant</a>
+            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
         </div>
     </header>
     <main class="add-plant-main">
         <section class="form-section">
-            <form class="add-plant-form" action="addPlant"  method="POST" ENCTYPE="multipart/form-data">
-                <?php if(isset($messages)){
-                    foreach ($messages as $message)
-                        echo $message;
-                }
-                ?>
+            <form class="add-plant-form" action="addPlant" method="POST" ENCTYPE="multipart/form-data">
                 <div class="form-img">
                     <label class="label-img" for="file-input">
                         <i class="far fa-images"></i>
                         <p>PRESS TO CHOOSE A FILE</p>
                     </label>
                     <input id="file-input" name="file" type="file">
-                    
+
                 </div>
                 <div class="form-text">
+                    <?php if(isset($messages)){
+                        foreach ($messages as $message)
+                            echo $message;
+                    }
+                    ?>
                     <input type="text" name="name" placeholder="name">
-                    <input type="text" name="type" placeholder="type">
+                    <select name="selectType" class="select-class" >
+                        <option value=""> select </option>
+                        <?php
+                        foreach($rowList as $val){
+
+                        ?>
+                        <option value=<?php echo $val["id"]; ?>>
+                            <?php echo $val["type"]; ?>
+                        </option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+
                     <button type="submit">ADD</button>
 
                 </div>
 
             </form>
         </section>
-       
+
     </main>
 </body>
 

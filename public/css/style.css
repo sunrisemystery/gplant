@@ -70,12 +70,14 @@ body {
 
     .nav-desktop li:last-child a:hover {
         color: #9b9898;
+        cursor: pointer;
 
     }
 
 
     .nav-desktop li a:hover {
         color: #295F42;
+        cursor: pointer;
     }
 
     .nav-bottom-mobile {
@@ -189,8 +191,12 @@ body {
     }
 
     .my-plants-container a > i:hover {
-
+        cursor: pointer;
         transform: rotate(180deg);
+    }
+
+    .my-plants-container a:hover {
+        cursor: pointer;
     }
 
     .my-plants-container main {
@@ -201,5 +207,6 @@ body {
     main .fa-cog {
         display: none;
     }
+
 
 }

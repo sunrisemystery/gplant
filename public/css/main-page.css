@@ -142,11 +142,13 @@
 
     .nav-desktop li:last-child a:hover {
         color: #9b9898;
+        cursor: pointer;
 
     }
 
     .nav-desktop li a:hover {
         color: #295F42;
+        cursor: pointer;
     }
 
 }
