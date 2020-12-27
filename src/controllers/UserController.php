@@ -1,7 +1,7 @@
 <?php
 require_once 'AppController.php';
-require_once __DIR__.'/../models/User.php';
-require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../repository/UserRepository.php';
 
 class UserController extends AppController
 {
@@ -14,28 +14,35 @@ class UserController extends AppController
         $this->userRepository = new UserRepository();
     }
 
-    public function register(){
+
+    public function register()
+    {
         $error = false;
-        $array = [ 'email',
+        $array = ['email',
             'login',
             'password',
             'password-confirm'];
-        if($this->isPost()){
-            foreach ($array as $value){
-                if(empty($_POST[$value])){
+        if ($this->isPost()) {
+            foreach ($array as $value) {
+                if (empty($_POST[$value])) {
                     $error = true;
                 }
 
             }
             if ($error) {
-                $this->messages[] =  "All fields are required.";
-            }
-            else{
-                $user = new User($_POST['email'],$_POST['login'],$_POST['password']);
+                $this->messages[] = "All fields are required.";
+            } else {
+                $user = new User($_POST['email'], $_POST['login'], $_POST['password']);
                 $this->userRepository->addUser($user);
-                return $this->render('my-plants');
+                session_start();
+                $_SESSION['email'] = $user->getEmail();
+                $_SESSION['login'] = $user->getLogin();
+                $id = $this->userRepository->getIdByEmail($user->getEmail());
+                $_SESSION['id'] = $id['id'];
+                $this->messages[] = "Add your first plant here!";
+                return $this->render('my-plants', ['messages' => $this->messages]);
             }
-            return $this->render('register',['messages'=>$this->messages]);
+            return $this->render('register', ['messages' => $this->messages]);
 
         }
         return $this->render('register');

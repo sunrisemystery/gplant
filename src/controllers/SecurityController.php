@@ -1,33 +1,43 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../models/User.php';
-require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../repository/UserRepository.php';
 
 class SecurityController extends AppController
 {
-    public function login(){
+    public function login()
+    {
         $userRepository = new UserRepository();
 
-
-        if(!$this->isPost()){
+        if (!$this->isPost()) {
+            session_start();
+            if (isset($_SESSION['id'])) {
+                session_destroy();
+            }
             return $this->render('login');
         }
 
-        $email = $_POST["login"];
+        $email = $_POST["email"];
         $password = $_POST["password"];
 
         $user = $userRepository->getUser($email);
-        if(!$user){
-            return $this->render('login',['messages' => ['User with this login doesnt exist!']]);
+        if (!$user) {
+            return $this->render('login', ['messages' => ['User with this email doesnt exist!']]);
         }
 
-        if($user->getEmail()!==$email){
-            return $this->render('login',['messages' => ['User with this login doesnt exist!']]);
+        if ($user->getEmail() !== $email) {
+            return $this->render('login', ['messages' => ['User with this email doesnt exist!']]);
         }
-        if($user->getPassword()!==$password){
-            return $this->render('login',['messages' => ['Incorrect password']]);
+        if ($user->getPassword() !== $password) {
+            return $this->render('login', ['messages' => ['Incorrect password']]);
         }
+
+        session_start();
+        $_SESSION['email'] = $user->getEmail();
+        $_SESSION['login'] = $user->getLogin();
+        $id = $userRepository->getIdByEmail($user->getEmail());
+        $_SESSION['id'] = $id['id'];
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/myPlants");

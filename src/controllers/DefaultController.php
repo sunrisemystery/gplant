@@ -18,20 +18,6 @@ class DefaultController extends AppController
     }
 
 
-    public function register()
-    {
-
-        $this->render('register');
-    }
-
-//    public function myPlants()
-//    {
-//
-//        $this->render('my-plants');
-//    }
-
-
-
     public function discover()
     {
 

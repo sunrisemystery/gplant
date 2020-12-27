@@ -1,8 +1,8 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../models/Plant.php';
-require_once __DIR__.'/../repository/PlantRepository.php';
+require_once __DIR__ . '/../models/Plant.php';
+require_once __DIR__ . '/../repository/PlantRepository.php';
 
 class PlantController extends AppController
 {
@@ -21,84 +21,108 @@ class PlantController extends AppController
 
     public function myPlants()
     {
+        session_start();
         $id = null;
         if ($this->isPost()) {
-            session_start();
-            $id = $_SESSION['plant_id'];
-            var_dump($id);
-            $this->plantRepository->changeLastWatered($id, date("Y-m-d"));
-            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+            if (isset($_POST['water-now-button'])) {
+                $id = $_POST['water-now-button'];
+                $this->plantRepository->changeLastWatered($id, date("Y-m-d"));
+                return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+            } elseif (isset($_POST['delete-plant'])) {
+                $id = $_POST['delete-plant'];
+                $this->plantRepository->deletePlantById($id);
+
+                return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+
+
+            }
+        }
+
+        if (!isset($_SESSION['id'])) {
+            $this->messages[] = "You are not logged in. Please log in.";
+            return $this->render('login', ['messages' => $this->messages]);
         }
 
         $plants = $this->plantRepository->getPlants();
+        if (count($plants) === 0) {
+            $this->messages[] = "Add your first plant here!";
+            return $this->render('my-plants', ['plants' => $plants, 'messages' => $this->messages]);
+        }
         $this->render('my-plants', ['plants' => $plants]);
 
     }
 
+
     public function plant()
     {
+        session_start();
+        if ($this->isPost()) {
+            $id = $_POST['plant-id'];
+            $plant = $this->plantRepository->getPlantById($id);
+            $type = $this->plantRepository->getTypeByUserPlantId($id);
+            return $this->render('plant', ['plant' => $plant, 'type' => $type]);
 
-        $this->render('plant');
+        }
+
     }
-    public function addPlant(){
+
+    public function addPlant()
+    {
         //'file' is a name of input given in add-plant.php form
-        if($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])){
+        if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file($_FILES['file']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
+                dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']);
 
             $plant = new Plant($_POST['name'], $_FILES['file']['name']);
             $plant->setType(intval($_POST['selectType']));
             $this->plantRepository->addPlant($plant);
 
 
-            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
-        }
-        elseif($this->isPost() && strlen($_POST['name'])===0 ){
+            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+        } elseif ($this->isPost() && strlen($_POST['name']) === 0) {
             $this->messages[] = 'Please fill the name field';
-            return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
-        }
-        elseif ($this->isPost() && strlen($_POST['selectType'])===0 ){
+            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
+        } elseif ($this->isPost() && strlen($_POST['selectType']) === 0) {
             $this->messages[] = 'Please select type of plant';
-            return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
-        }
-        elseif ($this->isPost() && strlen($_POST['name'])!=0 && strlen($_POST['selectType'])!=0 && is_uploaded_file($_FILES['file']['tmp_name'])==false ){
+            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
+        } elseif ($this->isPost() && strlen($_POST['name']) != 0 && strlen($_POST['selectType']) != 0 && is_uploaded_file($_FILES['file']['tmp_name']) == false) {
             $image = $this->plantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
             $plant = new Plant($_POST['name'], $image);
             $plant->setType(intval($_POST['selectType']));
             $this->plantRepository->addPlant($plant);
 
-            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
+            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+        }
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            $this->messages[] = "You are not logged in. Please log in.";
+            return $this->render('login', ['messages' => $this->messages]);
         }
 
-         return $this->render('add-plant',['messages'=>$this->messages, 'rowList'=>$this->plantRepository->getTypes()]);
+        return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
     }
 
-    private function validate(array $file): bool{
-        if ($file['size'] > self::MAX_FILE_SIZE){
+    private function validate(array $file): bool
+    {
+        if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->messages[] = 'File is too large for destination file system';
             return false;
 
         }
-        if (!isset($file['type']) || !in_array($file['type'],self::SUPPORTED_TYPES) ){
+        if (!isset($file['type']) || !in_array($file['type'], self::SUPPORTED_TYPES)) {
             $this->messages[] = 'File type is not supported';
             return false;
 
         }
         return true;
     }
-    public function types(){
 
-        return $this->render('add-plant',['rowList'=>$this->plantRepository->getTypes()]);
+//    public function types()
+//    {
+//
+//        return $this->render('add-plant', ['rowList' => $this->plantRepository->getTypes()]);
+//
+//    }
 
-    }
-    public function waterNow(){
-        $id = null;
-        if($this->isPost()){
-            $id = $_GET['plant_id'];
-            $this->plantRepository->changeLastWatered($id,date("Y-m-d"));
-            return $this->render('my-plants',['messages'=>$this->messages, 'plants'=>$this->plantRepository->getPlants()]);
-
-        }
-    }
 
 }

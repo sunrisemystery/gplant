@@ -9,20 +9,20 @@ class Plant
     private $image;
     private $type;
 
-    public function __construct($name,  $image)
+    public function __construct($name, $image)
     {
         $this->name = $name;
         $this->image = $image;
     }
 
 
-
-    public function countDays() {
+    public function countDays()
+    {
         $currentString = date("Y-m-d");
         $current = date_create($currentString);
         $last = date_create($this->last_watered);
         $seconds = $current - $last;
-        $days = date_diff($last,$current);
+        $days = date_diff($last, $current);
         $days = $days->format('%a day(s)');
         return $days;
 
@@ -46,7 +46,7 @@ class Plant
     }
 
 
-    public function setName( string $name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -57,7 +57,7 @@ class Plant
     }
 
 
-    public function setImage( string $image)
+    public function setImage(string $image)
     {
         $this->image = $image;
     }
@@ -84,12 +84,6 @@ class Plant
     {
         $this->type = $type;
     }
-
-
-
-
-
-
 
 
 }

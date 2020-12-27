@@ -26,7 +26,7 @@
         </div>
         <div class="input-rectangle">
             <form action="login" method="post">
-                <input type="text" name="login" placeholder="login">
+                <input type="text" name="email" placeholder="email">
                 <input type="password" name="password" placeholder="password">
                 <button class="sign-in">SIGN IN</button>
             </form>

@@ -9,29 +9,30 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/my-plants.css">
+    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
 </head>
 
 <body class="my-plants-container">
     <header>
         <div class="nav-desktop">
             <ul>
-                <li><a href="#">home</a></li>
-                <li><a href="#">discover</a></li>
+                <li><a id="home">home</a></li>
+                <li><a id="discover">discover</a></li>
                 <li><a href="#">contact</a></li>
-                <li><a href="public/views/login.php">sign out</a></li>
+                <li><a id="signButton">sign out</a></li>
             </ul>
         </div>
         <div class="nav-bottom-mobile">
 
             <a href="#"><i class="fas fa-seedling"></i>My Plants</a>
-            <a href="#"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a href="#"><i class="fas fa-university"></i>Discover</a>
+            <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
+            <a id="discover"><i class="fas fa-university"></i>Discover</a>
 
         </div>
     </header>
     <nav>
         <p class="my-plants-logo">gplant</p>
-        <a href="" class="add-plant">
+        <a id="addNewPlant" class="add-plant">
             <i class="fas fa-plus-circle"></i>
             <p class="desc">Add New Plant</p>
         </a>
@@ -46,9 +47,14 @@
             <i class="fas fa-cog"></i>
         </div>
         <div class="grid-wrapper">
-            <?php foreach ($plants as $plant): ?>
+            <?php
+            if(isset($plants) && count($plants)>0){
+            foreach ($plants as $plant): ?>
             <div class="square">
-                <a href="#" class="click-plant">
+<!--                <a href="#" class="click-plant" id="--><?//= $plant->getId(); ?><!--">-->
+                <form method="post" action="plant" class="inline">
+                    <input type="hidden" name="extra_submit_param" value="<?= $plant->getId(); ?>">
+                    <button type="submit" name="plant-id" value="<?= $plant->getId(); ?>" class="link-button">
                     <div class="plant-square">
 
                         <img class="img-plant" src="public/uploads/<?= $plant->getImage() ?>">
@@ -59,22 +65,30 @@
 
                     </div>
                     <p class="plant-name"><?= $plant->getName() ?></p>
-                </a>
+                    </button>
+                </form>
+
                 <p class="watering">Watering day <small><i class="fas fa-clock"> <?= $plant->countDays() ?></i></small></p>
-<!--                <a class="button" href="#">WATER NOW</a>-->
-                <?php
-                if(isset($_POST['water-now-button'])){
-                    session_start();
-                    $plant->setLastWatered(date('Y-m-d'));
-                    $_SESSION['plant_id'] = $plant->getId();
-                }
-                ?>
+
+
                 <form method="post" action="myPlants" >
-                    <input type="submit" name="water-now-button" class="button" value="WATER NOW"/>
+                    <button type="submit" name="water-now-button" class="button" value="<?= $plant->getId(); ?>">WATER NOW</button>
                 </form>
 
             </div>
-            <?php endforeach; ?>
+            <?php endforeach;
+            }
+            elseif(isset($messages) || count($plants)===0)
+                {
+                    ?>
+            <p class="message">
+                <?php
+                    foreach ($messages as $message)
+                        echo $message;
+
+            }?>
+            </p>
+
 
         </div>
     </main>
