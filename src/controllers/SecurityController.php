@@ -9,7 +9,7 @@ class SecurityController extends AppController
     public function login()
     {
         $userRepository = new UserRepository();
-
+        session_start();
         if (!$this->isPost()) {
             session_start();
             if (isset($_SESSION['id'])) {
@@ -33,9 +33,10 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Incorrect password']]);
         }
 
-        session_start();
+//        session_start();
         $_SESSION['email'] = $user->getEmail();
         $_SESSION['login'] = $user->getLogin();
+        $_SESSION['name'] = $user->getName();
         $id = $userRepository->getIdByEmail($user->getEmail());
         $_SESSION['id'] = $id['id'];
 

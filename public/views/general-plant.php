@@ -19,7 +19,11 @@
                 <li><a id="home">home</a></li>
                 <li><a id="discover">discover</a></li>
                 <li><a id="myPlants">my plants</a></li>
+                <?php if($isSession){ ?>
                 <li><a id="signButton">sign out</a></li>
+                <?php }else{ ?>
+                <li><a id="signButton">sign in</a></li>
+                <?php }; ?>
             </ul>
         </div>
         <div class="nav-bottom-mobile">
@@ -32,44 +36,42 @@
     </header>
     <nav>
         <p class="my-plants-logo">gplant</p>
+        <?php if($isSession){ ?>
         <a id="addNewPlant" class="add-plant">
             <i class="fas fa-plus-circle"></i>
             <p class="desc">Add New Plant</p>
         </a>
-        <a id="settings" class="settings">
+        <?php }; ?>
+        <a href="" class="settings">
             <i class="fas fa-cog"></i>
             <p class="desc">Settings</p>
         </a>
     </nav>
     <main>
         <div class="settings-back">
-            <i class="fas fa-chevron-left"></i>
+            <a id="mobileBack">
+            <i  class="fas fa-chevron-left"></i>
+            </a>
             <i class="fas fa-cog"></i>
         </div>
         <div class="plant-desc">
-            <p class="name-plant"><?= $plant->getName() ?></p>
-            <p class="plant-type"><?= $data['type'] ?></p>
+            <p class="name-plant"><?= $plant['type'] ?></p>
         </div>
-        <div class="plant-wrapper">
+        <div class="general-plant-wrapper">
 
             <div class="plant-img">
-            <img class="img-wrapper" src="public/uploads/<?= $plant->getImage() ?>">
+            <img class="img-wrapper" src="public/uploads/<?= $plant['image'] ?>">
             </div>
-            <p class="watering-plant">Last watered </p>
-            <div class="timer"><i class="fas fa-clock"> <?= $plant->countDays() ?></i></div>
-            <button class="button-plant">WATER NOW</button>
+
         </div>
         <section class="plant-section">
-            <h1>Water</h1>
-            <p><?= $data['water_description'] ?></p>
+            <h1>Description</h1>
+            <p><?= $plant['main_description'] ?></p>
+            <h1 class="water">Water</h1>
+            <p><?= $plant['water_description'] ?></p>
         </section>
-        <form method="post" action="myPlants" class="delete-form">
-        <button type="submit" name="delete-plant"  class="delete-plant" onclick="deleteConfirm(<?= $plant->getId() ?>)" id="deleteButton">DELETE PLANT</button>
-        </form>
+
     </main>
-
-
-
 </body>
 
 </html>

@@ -5,6 +5,14 @@ if (signButton != null) {
     });
 }
 
+let signButtonMobile = document.getElementById('signButtonMobile');
+if (signButtonMobile != null) {
+    signButtonMobile.addEventListener('click', function () {
+        document.location.href = 'login';
+    });
+}
+
+
 let discover = document.getElementById('discover');
 if (discover != null) {
     discover.addEventListener('click', function () {
@@ -52,6 +60,12 @@ if (myPlantsMobile != null) {
         document.location.href = 'myPlants';
     });
 }
+let userSettings = document.getElementById('settings');
+if (userSettings != null) {
+    userSettings.addEventListener('click', function () {
+        document.location.href = 'updateProfile';
+    });
+}
 
 function deleteConfirm(id) {
     let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
@@ -64,5 +78,13 @@ function deleteConfirm(id) {
         val.setAttribute("value", "-1");
 
     }
+
+}
+
+let mobileBack = document.getElementById('mobileBack');
+if (mobileBack != null) {
+    mobileBack.addEventListener('click', function () {
+        document.location.href = 'discover';
+    });
 }
 

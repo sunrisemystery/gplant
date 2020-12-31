@@ -21,6 +21,19 @@ class PlantRepository extends Repository
         return $plantObj;
     }
 
+    public function getGeneralPlantById(int $id): ?array
+    {
+        $statement = $this->database->connect()->prepare('
+        SELECT * FROM public.plants WHERE id = :id');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $plant = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($plant == false) {
+            return null; //niewolno tak - exception szeba w security kontrolerze
+        }
+        return $plant;
+    }
+
     public function addPlant(Plant $plant): void
     {
         session_start();
@@ -31,6 +44,7 @@ class PlantRepository extends Repository
 
     }
 
+
     public function getPlants(): array
     {
         if (session_status() != PHP_SESSION_ACTIVE) {
@@ -38,7 +52,7 @@ class PlantRepository extends Repository
         }
         $result = [];
         $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.plants_user WHERE user_id = :user_id');
+        SELECT * FROM public.plants_user WHERE user_id = :user_id ORDER BY name');
         $statement->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
         $statement->execute();
         $plants = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +69,7 @@ class PlantRepository extends Repository
     public function getTypes(): array
     {
         $statement = $this->database->connect()->prepare('
-                            SELECT id, type FROM public.plants');
+                            SELECT id, type FROM public.plants ORDER BY type');
         $statement->execute();
         $row_list = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $row_list;
@@ -63,16 +77,21 @@ class PlantRepository extends Repository
 
     public function getTypeByUserPlantId($id): array
     {
-        $statement = $this->database->connect()->prepare('
-                            SELECT plant_id from public.plants_user WHERE id = :id');
+//        $statement = $this->database->connect()->prepare('
+//                            SELECT plant_id from public.plants_user WHERE id = :id');
+//        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+//        $statement->execute();
+//        $plant_id = $statement->fetch(PDO::FETCH_ASSOC);
+//        $statement2 = $this->database->connect()->prepare('
+//                            SELECT type from public.plants WHERE id = :id');
+//        $statement2->bindParam(':id', $plant_id['plant_id'], PDO::PARAM_INT);
+//        $statement2->execute();
+//        $type = $statement2->fetch(PDO::FETCH_ASSOC);
+
+        $statement = $this->database->connect()->prepare('SELECT type, water_description FROM public.users_plants_view WHERE id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        $plant_id = $statement->fetch(PDO::FETCH_ASSOC);
-        $statement2 = $this->database->connect()->prepare('
-                            SELECT type from public.plants WHERE id = :id');
-        $statement2->bindParam(':id', $plant_id['plant_id'], PDO::PARAM_INT);
-        $statement2->execute();
-        $type = $statement2->fetch(PDO::FETCH_ASSOC);
+        $type = $statement->fetch(PDO::FETCH_ASSOC);
         return $type;
     }
 
@@ -105,6 +124,29 @@ class PlantRepository extends Repository
         ');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
+    }
+
+    public function discoverPlants()
+    {
+        $statement = $this->database->connect()->prepare('
+        SELECT * FROM public.plants ORDER BY type
+        ');
+        $statement->execute();
+        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $plantsList;
+    }
+
+    public function getGeneralPlantsByString($string)
+    {
+        $searchString = strtolower($string . '%');
+        $statement = $this->database->connect()->prepare('
+        SELECT * FROM public.plants WHERE lower(type) like :string
+        ');
+        $statement->bindParam(':string', $searchString, PDO::PARAM_STR);
+        $statement->execute();
+        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $plantsList;
+
     }
 
 }

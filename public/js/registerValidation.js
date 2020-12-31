@@ -9,13 +9,15 @@ function isEmail(email) {
 function arePasswordsSame(password, confirmedPassword) {
     return password === confirmedPassword;
 }
-function validateEmail(){
+
+function validateEmail() {
     setTimeout(function () {
             markValidation(emailInput, isEmail(emailInput.value));
         }
         , 1000);
 }
-function validatePassword(){
+
+function validatePassword() {
     setTimeout(function () {
             const condition = arePasswordsSame(
                 confirmPasswordInput.previousElementSibling.value,
@@ -25,14 +27,18 @@ function validatePassword(){
         }
         , 1000);
 }
+
 function markValidation(element, condition) {
     !condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
 }
 
-emailInput.addEventListener('keyup', validateEmail);
+if (emailInput != null) {
+    emailInput.addEventListener('keyup', validateEmail);
+}
 
-
-confirmPasswordInput.addEventListener('keyup', validatePassword);
+if (confirmPasswordInput != null) {
+    confirmPasswordInput.addEventListener('keyup', validatePassword);
+}
 
 
 
