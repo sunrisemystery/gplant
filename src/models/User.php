@@ -6,6 +6,7 @@ class User
     private $email;
     private $login;
     private $password;
+    private $name;
     private $id;
 
     public function __construct($email, $login, $password)
@@ -55,6 +56,16 @@ class User
     public function setLogin($login): void
     {
         $this->login = $login;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
     }
 
 

@@ -23,6 +23,32 @@
     font-size: 0.8em;
 }
 
+.inline {
+    display: inline-block;
+    height: 16vh;
+
+}
+.search-input{
+    margin-left: 1em;
+    appearance: none;
+    font-size: 1.1em;
+    border: none;
+    outline: none;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1em;
+    /*font-family: serif;*/
+}
+
+.link-button:focus {
+    outline: none;
+}
+
 .display-container {
     display: flex;
     width: 100vw;
@@ -57,22 +83,32 @@
 }
 
 .record-img {
+    display: inline-block;
     margin: 0.5em 0 0.5em 0;
     grid-column: 1/2;
-    background: transparent url('../img/record-img.jpg') 0 0 no-repeat padding-box;
-    background-size: 100%;
     box-shadow: 0 3px 6px #00000029;
     border-radius: 18px;
+    width: 12vh;
+    height: 12vh;
+    overflow: hidden;
+}
+.plant-img{
+    max-width: 14vh;
+    transform: translate(0,-20%);
 }
 
 .record-text {
     overflow: hidden;
+    display: inline-block;
     grid-column: 2/3;
     margin: 0.5em 0 0 1em;
+    text-align: left;
 
 }
 
 @media screen and (min-width: 750px) {
+
+
     .display-container header {
         background-color: white;
         position: fixed;
@@ -140,13 +176,28 @@
 }
 
 @media screen and (max-width: 750px) {
+    header{
+        height: 10vh;
+    }
     .display-container {
         display: grid;
+        grid-template-rows: 10vh 1fr;
         justify-items: stretch;
     }
+    .nav-bottom-mobile a:nth-child(1){
+        color: #9b9898;
+    }
+    .nav-bottom-mobile a:nth-child(2){
+        color: #9b9898;
+    }
+
 
     .display-container .logo-main {
-        display: none;
+        /*display: none;*/
+        font: normal normal normal 2.3em Bahnschrift;
+        color: #000000;
+        margin-left: 1em;
+        margin-top: 0.5em;
     }
 
     .img-discover-container {
@@ -171,6 +222,11 @@
         width: 90%;
         display: grid;
         margin-bottom: 7em;
+    }
+}
+@media screen and (max-width: 650px) {
+    .record-text{
+        height: 90%;
     }
 }
 

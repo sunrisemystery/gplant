@@ -1,3 +1,4 @@
+
 .plant-desc {
     margin-left: 2em;
     width: 100%;
@@ -20,6 +21,15 @@
     display: grid;
     width: 100%;
     height: 40vh;
+}
+
+.general-plant-wrapper {
+    display: grid;
+    width: 100%;
+    height: 40vh;
+}
+.water{
+    margin-top: 3em;
 }
 
 .img-wrapper {
@@ -101,14 +111,14 @@
 }
 
 .plant-section {
-    margin-top: 0.8em;
-    margin-left: 2em;
-    margin-right: 9vw;
+    margin: 0.8em 9vw 1em 2em;
 }
 
 .plant-section h1 {
-    margin: 0;
     font-size: 2em;
+}
+.water{
+    margin-top: 1.5em;
 }
 
 .plant-section p {
@@ -127,6 +137,12 @@
     .plant-wrapper {
         height: 40vh;
         grid-template-columns: 28vw auto 9vw;
+        grid-template-rows: 5vh 6vh 6vh auto 12vh;
+    }
+
+    .general-plant-wrapper {
+        height: 40vh;
+        grid-template-columns: 20vw auto 20vw;
         grid-template-rows: 5vh 6vh 6vh auto 12vh;
     }
 
@@ -167,6 +183,9 @@
         justify-items: stretch;
     }
 
+    .delete-plant {
+        width: 14vw;
+    }
     .my-plants-container main {
         grid-row: 1/2;
         grid-column: 1/2;
@@ -198,6 +217,13 @@
 
         height: 40vh;
         grid-template-columns: 28vw auto 9vw;
+        grid-template-rows: 5vh 6vh 6vh auto 12vh;
+    }
+
+    .general-plant-wrapper {
+
+        height: 40vh;
+        grid-template-columns: 10vw auto 9vw;
         grid-template-rows: 5vh 6vh 6vh auto 12vh;
     }
 
@@ -267,6 +293,11 @@
         justify-content: space-between;
         align-items: flex-end;
     }
+.plant-section{
+    margin-top: 6em;
+    margin-bottom: 6em;
+}
+
 
     .settings-back .fa-chevron-left {
         font-size: 2.5em;
@@ -283,6 +314,12 @@
         height: 50vh;
         grid-template-columns: 9vw auto 9vw;
         grid-template-rows: auto 5vh 7vh 9vh;
+    }
+
+    .general-plant-wrapper {
+        height: 40vh;
+        grid-template-columns: 9vw auto 9vw;
+        grid-template-rows: 5vh 6vh 6vh auto 12vh;
     }
 
     .plant-img {
@@ -313,7 +350,7 @@
     }
 
     .delete-plant {
-        width: 35%;
+        width: 20vw;
         margin-bottom: 7em;
     }
 

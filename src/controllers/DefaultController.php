@@ -8,7 +8,7 @@ class DefaultController extends AppController
     public function index()
     {
 
-        $this->render('main');
+        $this->render('main', ['isSession' => Utility::checkSession()]);
     }
 
     public function login()
@@ -17,11 +17,5 @@ class DefaultController extends AppController
         $this->render('login');
     }
 
-
-    public function discover()
-    {
-
-        $this->render('discover');
-    }
 
 }

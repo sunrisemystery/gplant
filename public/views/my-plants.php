@@ -24,9 +24,9 @@
         </div>
         <div class="nav-bottom-mobile">
 
-            <a href="#"><i class="fas fa-seedling"></i>My Plants</a>
+            <a><i class="fas fa-seedling"></i>My Plants</a>
             <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discover"><i class="fas fa-university"></i>Discover</a>
+            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
         </div>
     </header>
@@ -36,7 +36,7 @@
             <i class="fas fa-plus-circle"></i>
             <p class="desc">Add New Plant</p>
         </a>
-        <a href="" class="settings">
+        <a id="settings" class="settings">
             <i class="fas fa-cog"></i>
             <p class="desc">Settings</p>
         </a>
@@ -53,7 +53,6 @@
             <div class="square">
 <!--                <a href="#" class="click-plant" id="--><?//= $plant->getId(); ?><!--">-->
                 <form method="post" action="plant" class="inline">
-                    <input type="hidden" name="extra_submit_param" value="<?= $plant->getId(); ?>">
                     <button type="submit" name="plant-id" value="<?= $plant->getId(); ?>" class="link-button">
                     <div class="plant-square">
 
@@ -68,7 +67,7 @@
                     </button>
                 </form>
 
-                <p class="watering">Watering day <small><i class="fas fa-clock"> <?= $plant->countDays() ?></i></small></p>
+                <p class="watering">Last watered <small><i class="fas fa-clock"> <?= $plant->countDays() ?></i></small></p>
 
 
                 <form method="post" action="myPlants" >

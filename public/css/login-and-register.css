@@ -120,8 +120,19 @@
 }
 
 @media screen and (max-width: 850px) and (min-width: 415px) {
+
+    p{
+        color: #FFFFFF;
+    }
+    .input-rectangle{
+        height: 50%;
+    }
     .img-container {
         display: none;
+    }
+    .messages{
+        color: #FFFFFF;
+        font-size: 1.5em;
     }
 
     .login-container {
@@ -158,13 +169,23 @@
     .sign-in {
         margin-top: 3vh;
     }
-
+    .sign-up {
+        margin-top: 3vh;
+    }
 }
 
 @media screen and (max-width: 415px) {
 
     .img-container {
         display: none;
+    }
+    .input-rectangle{
+        height: 50%;
+    }
+    .messages{
+        color: #FFFFFF;
+        font-size: 1em;
+        margin-bottom: 1em;
     }
 
     .login-container {
@@ -195,7 +216,7 @@
 
     .login-register p {
         color: white;
-        margin-top: 7vh;
+        margin-top: 4vh;
     }
 
     .sign-in {

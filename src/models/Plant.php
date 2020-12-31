@@ -20,11 +20,25 @@ class Plant
     {
         $currentString = date("Y-m-d");
         $current = date_create($currentString);
-        $last = date_create($this->last_watered);
-        $seconds = $current - $last;
-        $days = date_diff($last, $current);
-        $days = $days->format('%a day(s)');
-        return $days;
+        if ($this->last_watered != null) {
+            $last = date_create($this->last_watered);
+            $seconds = $current - $last;
+            $days = date_diff($last, $current);
+            $number = intval($days->format('%a'));
+
+            if ($number === 0) {
+                $val = 'today';
+            } elseif ($number === 1) {
+                $val = 'yesterday';
+            } else {
+                $val = $days->format('%a days ago');
+            }
+        } else {
+            $val = 'not provided';
+        }
+
+
+        return $val;
 
     }
 

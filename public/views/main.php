@@ -19,16 +19,24 @@
         <nav>
             <div class="nav-mobile">
                 <i class="fas fa-bars"></i>
-                <a href="">SIGN IN</a>
+                <?php if($isSession){ ?>
+                <a id="signButtonMobile">SIGN OUT</a>
+                <?php }else{ ?>
+                <a id="signButtonMobile">SIGN IN</a>
+                <?php }; ?>
 
             </div>
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
                     <li><a id="discover">discover</a></li>
-                    <li><a href="#">contact</a></li>
-                    <li><a id="signButton">sign in</a></li>
-<!--                    <li> <button id="signButton">SIGN IN</button></li>-->
+                    <?php if($isSession){ ?>
+                        <li><a id="myPlants">my plants</a></li>
+                        <li><a id="signButton">sign out</a></li>
+                    <?php }else{ ?>
+                        <li><a href="#">contact</a></li>
+                        <li><a id="signButton">sign in</a></li>
+                    <?php }; ?>
                 </ul>
             </div>
         </nav>

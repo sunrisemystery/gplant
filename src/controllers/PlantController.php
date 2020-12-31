@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/Plant.php';
 require_once __DIR__ . '/../repository/PlantRepository.php';
+require_once __DIR__ . '/../utilities/Utility.php';
 
 class PlantController extends AppController
 {
@@ -59,16 +60,34 @@ class PlantController extends AppController
         if ($this->isPost()) {
             $id = $_POST['plant-id'];
             $plant = $this->plantRepository->getPlantById($id);
-            $type = $this->plantRepository->getTypeByUserPlantId($id);
-            return $this->render('plant', ['plant' => $plant, 'type' => $type]);
+            $data = $this->plantRepository->getTypeByUserPlantId($id);
+            return $this->render('plant', ['plant' => $plant, 'data' => $data]);
 
         }
 
+
+    }
+
+    public function generalPlant()
+    {
+        if ($this->isPost()) {
+            $id = $_POST['general-plant-id'];
+            $plant = $this->plantRepository->getGeneralPlantById($id);
+            return $this->render('general-plant', ['plant' => $plant, 'isSession' => Utility::checkSession()]);
+        }
+    }
+
+    public function discover()
+    {
+        if ($this->isPost()) {
+            return $this->render('discover', ['plantsList' => $this->plantRepository->getGeneralPlantsByString($_POST['search']), 'isSession' => Utility::checkSession()]);
+
+        }
+        return $this->render('discover', ['plantsList' => $this->plantRepository->discoverPlants(), 'isSession' => Utility::checkSession()]);
     }
 
     public function addPlant()
     {
-        //'file' is a name of input given in add-plant.php form
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']);
@@ -116,13 +135,6 @@ class PlantController extends AppController
         }
         return true;
     }
-
-//    public function types()
-//    {
-//
-//        return $this->render('add-plant', ['rowList' => $this->plantRepository->getTypes()]);
-//
-//    }
 
 
 }
