@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/discover.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/search.js" defer></script>
 </head>
 
 <body class="display-container">
@@ -46,19 +47,17 @@
                 <p>Discover new plants, read more informations about your favourites. Everything at one place.</p>
             </div>
         </div>
-        <form action="discover" method="post">
         <div class="search-bar">
             <i class="fas fa-search"></i>
             <input  class="search-input" type="text" name="search" placeholder="SEARCH">
         </div>
-        </form>
         <div class="discover-list">
             <?php foreach ($plantsList as $plant): ?>
             <form method="post" action="generalPlant" class="inline">
                 <button type="submit" name="general-plant-id" value="<?= $plant['id'] ?>" class="link-button">
         <div class="plant-record">
             <div class="record-img">
-            <img class="plant-img" src="public/uploads/<?= $plant['image'] ?>">
+            <img class="plant-img" alt="<?= $plant['image'] ?>" src="public/uploads/<?= $plant['image'] ?>">
             </div>
             <div class="record-text">
                 <strong><?= $plant['type']; ?></strong>
@@ -73,5 +72,21 @@
 
     </main>
 </body>
+
+<template id="plant-template">
+    <form method="post" action="generalPlant" class="inline">
+        <button type="submit" name="general-plant-id" value="" class="link-button">
+            <div class="plant-record">
+                <div class="record-img">
+                    <img class="plant-img" alt="" src="">
+                </div>
+                <div class="record-text">
+                    <strong>type</strong>
+                    <p>description</p>
+                </div>
+            </div>
+        </button>
+    </form>
+</template>
 
 </html>

@@ -42,7 +42,7 @@
             <p class="desc">Add New Plant</p>
         </a>
         <?php }; ?>
-        <a href="" class="settings">
+        <a id="userSettings" class="settings">
             <i class="fas fa-cog"></i>
             <p class="desc">Settings</p>
         </a>

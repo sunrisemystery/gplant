@@ -26,7 +26,7 @@
 
             <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
             <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discover"><i class="fas fa-university"></i>Discover</a>
+            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
         </div>
     </header>
@@ -42,7 +42,7 @@
         </a>
     </nav>
     <main>
-        <div class="settings-back">
+        <div class="settings-back" id="myplantsBack">
             <i class="fas fa-chevron-left"></i>
             <i class="fas fa-cog"></i>
         </div>
@@ -57,15 +57,22 @@
             </div>
             <p class="watering-plant">Last watered </p>
             <div class="timer"><i class="fas fa-clock"> <?= $plant->countDays() ?></i></div>
-            <button class="button-plant">WATER NOW</button>
+<!--            <button class="button-plant">WATER NOW</button>-->
+            <form method="post" class="water-form" action="plant" >
+                <button type="submit" name="water-now-button" class="button-plant" value="<?= $plant->getId(); ?>">WATER NOW</button>
+            </form>
         </div>
         <section class="plant-section">
             <h1>Water</h1>
             <p><?= $data['water_description'] ?></p>
         </section>
+        <form method="post" action="editPlant" class="update-form">
+            <button type="submit" name="update-plant" value="<?= $plant->getId(); ?>"  class="update-plant"  id="updateButton">EDIT PLANT</button>
+        </form>
         <form method="post" action="myPlants" class="delete-form">
         <button type="submit" name="delete-plant"  class="delete-plant" onclick="deleteConfirm(<?= $plant->getId() ?>)" id="deleteButton">DELETE PLANT</button>
         </form>
+
     </main>
 
 

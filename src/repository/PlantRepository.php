@@ -13,11 +13,12 @@ class PlantRepository extends Repository
         $statement->execute();
         $plant = $statement->fetch(PDO::FETCH_ASSOC);
         if ($plant == false) {
-            return null; //niewolno tak - exception szeba w security kontrolerze
+            return null;
         }
         $plantObj = new Plant($plant['name'], $plant['image']);
         $plantObj->setLastWatered($plant['last_watered']);
         $plantObj->setId($plant['id']);
+        $plantObj->setType($plant['plant_id']);
         return $plantObj;
     }
 
@@ -77,18 +78,8 @@ class PlantRepository extends Repository
 
     public function getTypeByUserPlantId($id): array
     {
-//        $statement = $this->database->connect()->prepare('
-//                            SELECT plant_id from public.plants_user WHERE id = :id');
-//        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-//        $statement->execute();
-//        $plant_id = $statement->fetch(PDO::FETCH_ASSOC);
-//        $statement2 = $this->database->connect()->prepare('
-//                            SELECT type from public.plants WHERE id = :id');
-//        $statement2->bindParam(':id', $plant_id['plant_id'], PDO::PARAM_INT);
-//        $statement2->execute();
-//        $type = $statement2->fetch(PDO::FETCH_ASSOC);
 
-        $statement = $this->database->connect()->prepare('SELECT type, water_description FROM public.users_plants_view WHERE id = :id');
+        $statement = $this->database->connect()->prepare('SELECT type,plant_id, water_description FROM public.users_plants_view WHERE id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         $type = $statement->fetch(PDO::FETCH_ASSOC);
@@ -138,14 +129,39 @@ class PlantRepository extends Repository
 
     public function getGeneralPlantsByString($string)
     {
-        $searchString = strtolower($string . '%');
+        $searchString = strtolower('%' . $string . '%');
         $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.plants WHERE lower(type) like :string
+        SELECT * FROM public.plants WHERE lower(type) like :string ORDER BY type
         ');
         $statement->bindParam(':string', $searchString, PDO::PARAM_STR);
         $statement->execute();
         $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $plantsList;
+
+    }
+
+    public function editPlant($id,$name, $image, $type ){
+        if($image!=null) {
+            $statement = $this->database->connect()->prepare('
+        UPDATE public.plants_user SET name = :name, image = :image, plant_id = :type WHERE id = :id
+        ');
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->bindParam(':type', $type, PDO::PARAM_INT);
+            $statement->bindParam(':name', $name, PDO::PARAM_STR);
+            $statement->bindParam(':image', $image, PDO::PARAM_STR);
+            $statement->execute();
+        }
+        else{
+            $statement = $this->database->connect()->prepare('
+        UPDATE public.plants_user SET name = :name, plant_id = :type WHERE id = :id
+        ');
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->bindParam(':type', $type, PDO::PARAM_INT);
+            $statement->bindParam(':name', $name, PDO::PARAM_STR);
+            $statement->execute();
+        }
+
+
 
     }
 

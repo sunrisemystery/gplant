@@ -87,4 +87,9 @@ if (mobileBack != null) {
         document.location.href = 'discover';
     });
 }
-
+let mobileBackPlants = document.getElementById('myplantsBack');
+if (mobileBackPlants != null) {
+    mobileBackPlants.addEventListener('click', function () {
+        document.location.href = 'myPlants';
+    });
+}
