@@ -170,7 +170,7 @@
     }
 
 
-    .main-container header > p {
+    .main-container header>p {
         display: none;
     }
 
@@ -195,6 +195,7 @@
         font: normal normal normal 2rem Bahnschrift;
         color: #000000;
     }
+
     .nav-mobile {
         display: flex;
         width: 100%;
@@ -204,7 +205,7 @@
     }
 
     .nav-mobile i {
-        font-size: 1.7em;
+        font-size: 1.9em;
         margin-left: 1.7em;
     }
 
@@ -241,7 +242,7 @@
         display: none;
     }
 
-    .main-container header > p {
+    .main-container header>p {
         display: none;
     }
 

@@ -19,10 +19,10 @@
                 <li><a id="home">home</a></li>
                 <li><a id="discover">discover</a></li>
                 <li><a id="myPlants">my plants</a></li>
-                <?php if($isSession){ ?>
-                <li><a id="signButton">sign out</a></li>
-                <?php }else{ ?>
-                <li><a id="signButton">sign in</a></li>
+                <?php if ($isSession) { ?>
+                    <li><a id="signButton">sign out</a></li>
+                <?php } else { ?>
+                    <li><a id="signButton">sign in</a></li>
                 <?php }; ?>
             </ul>
         </div>
@@ -36,11 +36,11 @@
     </header>
     <nav>
         <p class="my-plants-logo">gplant</p>
-        <?php if($isSession){ ?>
-        <a id="addNewPlant" class="add-plant">
-            <i class="fas fa-plus-circle"></i>
-            <p class="desc">Add New Plant</p>
-        </a>
+        <?php if ($isSession) { ?>
+            <a id="addNewPlant" class="add-plant">
+                <i class="fas fa-plus-circle"></i>
+                <p class="desc">Add New Plant</p>
+            </a>
         <?php }; ?>
         <a id="userSettings" class="settings">
             <i class="fas fa-cog"></i>
@@ -50,7 +50,7 @@
     <main>
         <div class="settings-back">
             <a id="mobileBack">
-            <i  class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left"></i>
             </a>
             <i class="fas fa-cog"></i>
         </div>
@@ -60,7 +60,7 @@
         <div class="general-plant-wrapper">
 
             <div class="plant-img">
-            <img class="img-wrapper" src="public/uploads/<?= $plant['image'] ?>">
+                <img class="img-wrapper" src="public/uploads/<?= $plant['image'] ?>">
             </div>
 
         </div>

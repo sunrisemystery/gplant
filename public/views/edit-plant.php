@@ -22,7 +22,7 @@
                     <li><a id="home">home</a></li>
                     <li><a id="discover">discover</a></li>
                     <li><a href="#">contact</a></li>
-                    <li><a id="signButton"">sign out</a></li>
+                    <li><a id="signButton">sign out</a></li>
                 </ul>
             </div>
         </nav>
@@ -46,23 +46,23 @@
 
                 </div>
                 <div class="form-text">
-                    <?php if(isset($messages)){
+                    <?php if (isset($messages)) {
                         foreach ($messages as $message)
                             echo $message;
                     }
                     ?>
                     <input type="text" name="name" value="<?= $plant->getName() ?>">
-                    <select name="selectType" class="select-class" >
+                    <select name="selectType" class="select-class">
                         <option value="<?= $plantType["plant_id"] ?>">
                             <?php echo $plantType["type"]; ?>
                         </option>
                         <?php
-                        foreach($rowList as $val){
+                        foreach ($rowList as $val) {
 
                         ?>
-                        <option value="<?= $val["id"] ?>">
-                            <?php echo $val["type"]; ?>
-                        </option>
+                            <option value="<?= $val["id"] ?>">
+                                <?php echo $val["type"]; ?>
+                            </option>
                         <?php
                         }
                         ?>

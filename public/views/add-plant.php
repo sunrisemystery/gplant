@@ -26,13 +26,13 @@
                 </ul>
             </div>
         </nav>
-        <div class="nav-bottom-mobile">
+        <div class=" nav-bottom-mobile">
 
-            <a id="myPlants"><i class="fas fa-seedling"></i>My Plants</a>
-            <a><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
+                            <a id="myPlants"><i class="fas fa-seedling"></i>My Plants</a>
+                            <a><i class="fas fa-plus-circle"></i>Add Plant</a>
+                            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
-        </div>
+            </div>
     </header>
     <main class="add-plant-main">
         <section class="form-section">
@@ -46,21 +46,21 @@
 
                 </div>
                 <div class="form-text">
-                    <?php if(isset($messages)){
+                    <?php if (isset($messages)) {
                         foreach ($messages as $message)
                             echo $message;
                     }
                     ?>
                     <input type="text" name="name" placeholder="name">
-                    <select name="selectType" class="select-class" >
+                    <select name="selectType" class="select-class">
                         <option value=""> select </option>
                         <?php
-                        foreach($rowList as $val){
+                        foreach ($rowList as $val) {
 
                         ?>
-                        <option value=<?php echo $val["id"]; ?>>
-                            <?php echo $val["type"]; ?>
-                        </option>
+                            <option value=<?php echo $val["id"]; ?>>
+                                <?php echo $val["type"]; ?>
+                            </option>
                         <?php
                         }
                         ?>

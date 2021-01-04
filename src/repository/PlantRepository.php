@@ -105,7 +105,6 @@ class PlantRepository extends Repository
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':date', $date, PDO::PARAM_STR);
         $statement->execute();
-
     }
 
     public function deletePlantById($id)
@@ -140,8 +139,9 @@ class PlantRepository extends Repository
 
     }
 
-    public function editPlant($id,$name, $image, $type ){
-        if($image!=null) {
+    public function editPlant($id, $name, $image, $type)
+    {
+        if ($image != null) {
             $statement = $this->database->connect()->prepare('
         UPDATE public.plants_user SET name = :name, image = :image, plant_id = :type WHERE id = :id
         ');
@@ -150,8 +150,7 @@ class PlantRepository extends Repository
             $statement->bindParam(':name', $name, PDO::PARAM_STR);
             $statement->bindParam(':image', $image, PDO::PARAM_STR);
             $statement->execute();
-        }
-        else{
+        } else {
             $statement = $this->database->connect()->prepare('
         UPDATE public.plants_user SET name = :name, plant_id = :type WHERE id = :id
         ');
@@ -160,7 +159,6 @@ class PlantRepository extends Repository
             $statement->bindParam(':name', $name, PDO::PARAM_STR);
             $statement->execute();
         }
-
 
 
     }

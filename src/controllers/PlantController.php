@@ -26,12 +26,7 @@ class PlantController extends AppController
         $id = null;
 
         if ($this->isPost()) {
-            if (isset($_POST['water-now-button'])) {
-                $id = $_POST['water-now-button'];
-                $this->plantRepository->changeLastWatered($id, date("Y-m-d"));
-                return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
-
-            } elseif (isset($_POST['delete-plant'])) {
+            if (isset($_POST['delete-plant'])) {
                 $id = $_POST['delete-plant'];
                 $this->plantRepository->deletePlantById($id);
                 return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
@@ -52,19 +47,19 @@ class PlantController extends AppController
         return $this->render('my-plants', ['plants' => $plants]);
     }
 
+    public function waterNow($id)
+    {
+        $realId = base64_decode($id);
+        if(is_int($realId)) {
+            $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
+            http_response_code(200);
+        }
+    }
 
     public function plant()
     {
         session_start();
         if ($this->isPost()) {
-
-            if (isset($_POST['water-now-button'])) {
-                $id = $_POST['water-now-button'];
-                $this->plantRepository->changeLastWatered($id, date("Y-m-d"));
-                $plant = $this->plantRepository->getPlantById($id);
-                $data = $this->plantRepository->getTypeByUserPlantId($id);
-                return $this->render('plant', ['plant' => $plant, 'data' => $data]);
-            }
 
             if (isset($_POST['plant-id'])) {
                 $id = $_POST['plant-id'];
@@ -78,16 +73,17 @@ class PlantController extends AppController
                 $id = $_POST['update-button'];
                 $type = intval($_POST['selectType']);
                 $name = $_POST['name'];
-                if(empty($name) || empty($type) ){
+                if (empty($name) || empty($type)) {
                     $this->messages[] = "All fields are required.";
-                    return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id),'plant' => $this->plantRepository->getPlantById($id), 'messages' =>$this->messages]);
-
+                    return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
                 }
 
                 if (is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
 
-                    move_uploaded_file($_FILES['file']['tmp_name'],
-                        dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']);
+                    move_uploaded_file(
+                        $_FILES['file']['tmp_name'],
+                        dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
+                    );
                     $image = $_FILES['file']['name'];
                     $this->plantRepository->editPlant($id, $name, $image, $type);
                     $plant = $this->plantRepository->getPlantById($id);
@@ -121,8 +117,10 @@ class PlantController extends AppController
     public function addPlant()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
-            move_uploaded_file($_FILES['file']['tmp_name'],
-                dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']);
+            move_uploaded_file(
+                $_FILES['file']['tmp_name'],
+                dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
+            );
 
             $plant = new Plant($_POST['name'], $_FILES['file']['name']);
             $plant->setType(intval($_POST['selectType']));
@@ -169,7 +167,6 @@ class PlantController extends AppController
             http_response_code(200);
             echo json_encode($this->plantRepository->getGeneralPlantsByString($decoded['search']));
         }
-
     }
 
     private function validate(array $file): bool
@@ -184,5 +181,4 @@ class PlantController extends AppController
         }
         return true;
     }
-
 }

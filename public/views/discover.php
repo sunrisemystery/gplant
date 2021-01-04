@@ -21,11 +21,12 @@
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
-                    <li><a id="discover">discover</a></li>
                     <li><a href="#">contact</a></li>
-                    <?php if($isSession){ ?>
+                    <?php if ($isSession) { ?>
+                        <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>
-                    <?php }else{ ?>
+                    <?php } else { ?>
+                        <li><a id="discover">discover</a></li>
                         <li><a id="signButton">sign in</a></li>
                     <?php }; ?>
                 </ul>
@@ -33,7 +34,7 @@
         </nav>
         <div class="nav-bottom-mobile">
 
-            <a id="myPlants"><i class="fas fa-seedling"></i>My Plants</a>
+            <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
             <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
             <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
@@ -49,24 +50,24 @@
         </div>
         <div class="search-bar">
             <i class="fas fa-search"></i>
-            <input  class="search-input" type="text" name="search" placeholder="SEARCH">
+            <input class="search-input" type="text" name="search" placeholder="SEARCH">
         </div>
         <div class="discover-list">
-            <?php foreach ($plantsList as $plant): ?>
-            <form method="post" action="generalPlant" class="inline">
-                <button type="submit" name="general-plant-id" value="<?= $plant['id'] ?>" class="link-button">
-        <div class="plant-record">
-            <div class="record-img">
-            <img class="plant-img" alt="<?= $plant['image'] ?>" src="public/uploads/<?= $plant['image'] ?>">
-            </div>
-            <div class="record-text">
-                <strong><?= $plant['type']; ?></strong>
-                <p><?= substr($plant['main_description'],0,100).'...'; ?></p>
-            </div>
-        </div>
-                </button>
-            </form>
-            <?php endforeach;?>
+            <?php foreach ($plantsList as $plant) : ?>
+                <form method="post" action="generalPlant" class="inline">
+                    <button type="submit" name="general-plant-id" value="<?= $plant['id'] ?>" class="link-button">
+                        <div class="plant-record">
+                            <div class="record-img">
+                                <img class="plant-img" alt="<?= $plant['image'] ?>" src="public/uploads/<?= $plant['image'] ?>">
+                            </div>
+                            <div class="record-text">
+                                <strong><?= $plant['type']; ?></strong>
+                                <p><?= substr($plant['main_description'], 0, 100) . '...'; ?></p>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            <?php endforeach; ?>
 
         </div>
 

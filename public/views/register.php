@@ -17,7 +17,7 @@
     <div class="login-container">
         <p class="logo">gplant</p>
         <p class="login-text">You can add additional information to your account later</p>
-        <?php if(isset($messages)){
+        <?php if (isset($messages)) {
             foreach ($messages as $message)
                 echo $message;
         }

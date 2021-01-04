@@ -172,10 +172,12 @@ button:hover {
         flex-direction: column;
         justify-content: center;
     }
-    .nav-bottom-mobile a:nth-child(1){
+
+    .nav-bottom-mobile a:nth-child(1) {
         color: #9b9898;
     }
-    .nav-bottom-mobile a:nth-child(3){
+
+    .nav-bottom-mobile a:nth-child(3) {
         color: #9b9898;
     }
 
