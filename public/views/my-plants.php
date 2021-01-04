@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/my-plants.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/waterNow.js" defer></script>
 </head>
 
 <body class="my-plants-container">
@@ -48,45 +49,43 @@
         </div>
         <div class="grid-wrapper">
             <?php
-            if(isset($plants) && count($plants)>0){
-            foreach ($plants as $plant): ?>
-            <div class="square">
-<!--                <a href="#" class="click-plant" id="--><?//= $plant->getId(); ?><!--">-->
-                <form method="post" action="plant" class="inline">
-                    <button type="submit" name="plant-id" value="<?= $plant->getId(); ?>" class="link-button">
-                    <div class="plant-square">
+            if (isset($plants) && count($plants) > 0) {
+                foreach ($plants as $plant) : ?>
+                    <div class="square">
+                        <!--                <a href="#" class="click-plant" id="-->
+                        <?//= $plant->getId(); ?>
+                        <!--">-->
+                        <form method="post" action="plant" class="inline">
+                            <button type="submit" name="plant-id" value="<?= $plant->getId(); ?>" class="link-button">
+                                <div class="plant-square">
 
-                        <img class="img-plant" src="public/uploads/<?= $plant->getImage() ?>">
-                        <div class="water-info">
-                            <i class="fas fa-tint"></i>
-                            <p><?= $plant->countDays() ?></p>
-                        </div>
+                                    <img class="img-plant" src="public/uploads/<?= $plant->getImage() ?>">
+                                    <div class="water-info">
+                                        <i class="fas fa-tint"></i>
+                                        <p class="<?= $plant->getId(); ?>"><?= $plant->countDays() ?></p>
+                                    </div>
+
+                                </div>
+                                <p class="plant-name"><?= $plant->getName() ?></p>
+                            </button>
+                        </form>
+
+                        <p class="watering">Last watered <small><i class="fas fa-clock" id="<?= $plant->getId(); ?>"> <?= $plant->countDays() ?></i></small></p>
+
+
+                        <button type="submit" name="water-now-button" class="button" value="<?= $plant->getId(); ?>">WATER NOW</button>
+
 
                     </div>
-                    <p class="plant-name"><?= $plant->getName() ?></p>
-                    </button>
-                </form>
-
-                <p class="watering">Last watered <small><i class="fas fa-clock"> <?= $plant->countDays() ?></i></small></p>
-
-
-                <form method="post" action="myPlants" >
-                    <button type="submit" name="water-now-button" class="button" value="<?= $plant->getId(); ?>">WATER NOW</button>
-                </form>
-
-            </div>
-            <?php endforeach;
-            }
-            elseif(isset($messages) || count($plants)===0)
-                {
-                    ?>
-            <p class="message">
+                <?php endforeach;
+            } elseif (isset($messages) || count($plants) === 0) {
+                ?>
+                <p class="message">
                 <?php
-                    foreach ($messages as $message)
-                        echo $message;
-
-            }?>
-            </p>
+                foreach ($messages as $message)
+                    echo $message;
+            } ?>
+                </p>
 
 
         </div>
