@@ -50,10 +50,9 @@ class PlantController extends AppController
     public function waterNow($id)
     {
         $realId = base64_decode($id);
-        if(is_int($realId)) {
-            $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
-            http_response_code(200);
-        }
+        $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
+        http_response_code(200);
+
     }
 
     public function plant()
