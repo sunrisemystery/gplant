@@ -67,6 +67,13 @@ if (userSettings != null) {
     });
 }
 
+let userSettingsMobile = document.getElementById('settingsMobile');
+if (userSettingsMobile != null) {
+    userSettingsMobile.addEventListener('click', function () {
+        document.location.href = 'updateProfile';
+    });
+}
+
 function deleteConfirm(id) {
     let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
     let val = document.getElementById('deleteButton');

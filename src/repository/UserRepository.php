@@ -50,7 +50,7 @@ class UserRepository extends Repository
 
         $statement = $this->database->connect()->prepare('
         INSERT INTO public.users(email, password, users_details_id) VALUES (?,?,?)');
-        $statement->execute([$user->getEmail(), $user->getPassword(), $foundId['id']]);
+        $statement->execute([$user->getEmail(), password_hash($user->getPassword(),PASSWORD_DEFAULT), $foundId['id']]);
     }
 
     public function checkIfEmailExists($email): bool
@@ -85,7 +85,8 @@ class UserRepository extends Repository
             $statement = $this->database->connect()->prepare('
         UPDATE public.users SET  password = :password WHERE id = :id
         ');
-            $statement->bindParam(':password', $password, PDO::PARAM_STR);
+            $passwordHash = password_hash($password,PASSWORD_DEFAULT);
+            $statement->bindParam(':password', $passwordHash, PDO::PARAM_STR);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
 

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant</title>
+    <title><?= $plant['type'] ?></title>
+    <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
@@ -26,11 +27,11 @@
                 <?php }; ?>
             </ul>
         </div>
-        <div class="nav-bottom-mobile">
+        <div class="nav-bottom-mobile ">
 
             <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
             <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discover"><i class="fas fa-university"></i>Discover</a>
+            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
 
         </div>
     </header>
@@ -60,15 +61,15 @@
         <div class="general-plant-wrapper">
 
             <div class="plant-img">
-                <img class="img-wrapper" src="public/uploads/<?= $plant['image'] ?>">
+                <img class="img-wrapper" src="public/img/discover/<?= $plant['image'] ?>">
             </div>
 
         </div>
         <section class="plant-section">
             <h1>Description</h1>
-            <p><?= $plant['main_description'] ?></p>
+            <?= $plant['main_description'] ?>
             <h1 class="water">Water</h1>
-            <p><?= $plant['water_description'] ?></p>
+            <?= $plant['water_description'] ?>
         </section>
 
     </main>

@@ -137,6 +137,7 @@ class PlantController extends AppController
 
             $image = $this->plantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
             $plant = new Plant($_POST['name'], $image);
+            copy('public/img/discover/'.$image, 'public/uploads/'.$image);
             $plant->setType(intval($_POST['selectType']));
             $this->plantRepository->addPlant($plant);
             return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);

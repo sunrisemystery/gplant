@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Plants</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
@@ -45,16 +46,13 @@
     <main>
         <div class="info">
             <p class="my-plants">My Plants</p>
-            <i class="fas fa-cog"></i>
+            <i id="settingsMobile" class="fas fa-cog"></i>
         </div>
         <div class="grid-wrapper">
             <?php
             if (isset($plants) && count($plants) > 0) {
                 foreach ($plants as $plant) : ?>
                     <div class="square">
-                        <!--                <a href="#" class="click-plant" id="-->
-                        <?//= $plant->getId(); ?>
-                        <!--">-->
                         <form method="post" action="plant" class="inline">
                             <button type="submit" name="plant-id" value="<?= $plant->getId(); ?>" class="link-button">
                                 <div class="plant-square">
@@ -62,7 +60,7 @@
                                     <img class="img-plant" src="public/uploads/<?= $plant->getImage() ?>">
                                     <div class="water-info">
                                         <i class="fas fa-tint"></i>
-                                        <p class="<?= $plant->getId(); ?>"><?= $plant->countDays() ?></p>
+                                        <p class="<?= $plant->getId(); ?>"><?= $plant->countDays(); ?></p>
                                     </div>
 
                                 </div>

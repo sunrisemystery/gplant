@@ -130,6 +130,7 @@
     .square {
         width: 48vh;
         height: 48vh;
+        margin-bottom: 2em;
     }
 
     .plant-square {

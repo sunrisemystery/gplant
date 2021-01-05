@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant</title>
+    <title><?= $plant->getName() ?></title>
+    <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
@@ -64,7 +65,7 @@
         </div>
         <section class="plant-section">
             <h1>Water</h1>
-            <p><?= $data['water_description'] ?></p>
+            <?= $data['water_description'] ?>
         </section>
         <form method="post" action="editPlant" class="update-form">
             <button type="submit" name="update-plant" value="<?= $plant->getId(); ?>" class="update-plant" id="updateButton">EDIT PLANT</button>
