@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="public/css/my-plants.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/waterNow.js" defer></script>
+    <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
 
 <body class="my-plants-container">
@@ -20,7 +21,7 @@
             <ul>
                 <li><a id="home">home</a></li>
                 <li><a id="discover">discover</a></li>
-                <li><a href="#">contact</a></li>
+                <li><a id="contact">contact</a></li>
                 <li><a id="signButton">sign out</a></li>
             </ul>
         </div>
@@ -44,6 +45,7 @@
         </a>
     </nav>
     <main>
+        <? include ("pop-up-window.php")?>
         <div class="info">
             <p class="my-plants">My Plants</p>
             <i id="settingsMobile" class="fas fa-cog"></i>

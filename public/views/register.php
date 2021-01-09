@@ -18,11 +18,12 @@
     <div class="login-container">
         <p class="logo">gplant</p>
         <p class="login-text">You can add additional information to your account later</p>
-        <?php if (isset($messages)) {
+       <p> <?php if (isset($messages)) {
             foreach ($messages as $message)
                 echo $message;
         }
         ?>
+       </p>
         <div class="input-rectangle">
             <form action="register" method="POST">
                 <input type="text" name="email" placeholder="email">

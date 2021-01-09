@@ -19,11 +19,12 @@
         <p class="logo">gplant</p>
         <p class="login-text">Taking care of plants is our priority. Join us today to give your plants better life.</p>
         <div class="messages">
-            <?php if (isset($messages)) {
+           <p> <?php if (isset($messages)) {
                 foreach ($messages as $message)
                     echo $message;
             }
             ?>
+           </p>
         </div>
         <div class="input-rectangle">
             <form action="login" method="post">

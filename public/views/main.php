@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/main-page.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/hamburgerMenu.js" defer></script>
+    <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 
 </head>
 
@@ -19,11 +21,24 @@
         <p class="logo-main">gplant</p>
         <nav>
             <div class="nav-mobile">
-                <i class="fas fa-bars"></i>
+                <div class="hamburger-menu">
+                    <a  class="active"></a>
+                    <div id="options" >
+                        <?php if ($isSession) { ?>
+                            <a id="myPlantsMobile">My Plants</a>
+                        <?php } else { ?>
+                            <a id="contact-mobile">Contact</a>
+                        <?php }; ?>
+                        <a id="discoverMobile">Discover</a>
+                    </div>
+                    <a class="icon" onclick="openMenu()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
                 <?php if ($isSession) { ?>
-                    <a id="signButtonMobile">SIGN OUT</a>
+                    <a class="sign" id="signButtonMobile">SIGN OUT</a>
                 <?php } else { ?>
-                    <a id="signButtonMobile">SIGN IN</a>
+                    <a class="sign" id="signButtonMobile">SIGN IN</a>
                 <?php }; ?>
 
             </div>
@@ -35,7 +50,7 @@
                         <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>
                     <?php } else { ?>
-                        <li><a href="#">contact</a></li>
+                        <li><a id="contact">contact</a></li>
                         <li><a id="signButton">sign in</a></li>
                     <?php }; ?>
                 </ul>
@@ -43,6 +58,7 @@
         </nav>
     </header>
     <main>
+        <? include ("pop-up-window.php")?>
         <div class="img-main-container">
             <p class="logo-mobile">gplant</p>
             <div class="main-img"></div>

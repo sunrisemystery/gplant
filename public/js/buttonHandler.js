@@ -87,13 +87,19 @@ function deleteConfirm(id) {
     }
 
 }
-
+let cancel = document.getElementById('cancel');
+if (cancel != null) {
+    cancel.addEventListener('click', function () {
+        window.history.back();
+    });
+}
 let mobileBack = document.getElementById('mobileBack');
 if (mobileBack != null) {
     mobileBack.addEventListener('click', function () {
-        document.location.href = 'discover';
+        window.history.back();
     });
 }
+
 let mobileBackPlants = document.getElementById('myplantsBack');
 if (mobileBackPlants != null) {
     mobileBackPlants.addEventListener('click', function () {

@@ -4,11 +4,15 @@
     align-items: center;
     height: 100vh;
 }
+.login-register{
+    overflow: hidden;
+}
 
 .logo {
     font: normal normal normal 4rem/10rem Bahnschrift;
     color: white;
 }
+
 
 .login-text {
     font-weight: 600;
@@ -132,7 +136,7 @@
     }
     .messages{
         color: #FFFFFF;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     .login-container {
@@ -144,7 +148,7 @@
     .login-text {
         color: white;
         font-size: 1.2rem;
-        margin-bottom: 12vh;
+        margin-bottom: 6vh;
     }
 
 
@@ -216,12 +220,21 @@
 
     .login-register p {
         color: white;
-        margin-top: 4vh;
+        margin-top: 2vh;
     }
 
     .sign-in {
         margin-top: 3vh;
     }
 
+}
+
+@media screen and (max-width: 354px) {
+    .login-register p{
+        margin-top: 0;
+    }
+    .messages{
+        margin: 0;
+    }
 }
 

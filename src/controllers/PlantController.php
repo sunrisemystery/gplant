@@ -64,7 +64,7 @@ class PlantController extends AppController
                 $id = $_POST['plant-id'];
                 $plant = $this->plantRepository->getPlantById($id);
                 $data = $this->plantRepository->getTypeByUserPlantId($id);
-                return $this->render('plant', ['plant' => $plant, 'data' => $data]);
+                return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
             }
 
             if (isset($_POST['update-button'])) {
@@ -87,13 +87,13 @@ class PlantController extends AppController
                     $this->plantRepository->editPlant($id, $name, $image, $type);
                     $plant = $this->plantRepository->getPlantById($id);
                     $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data]);
+                    return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
                 } else {
 
                     $this->plantRepository->editPlant($id, $name, null, $type);
                     $plant = $this->plantRepository->getPlantById($id);
                     $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data]);
+                    return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
                 }
             }
         }

@@ -31,7 +31,7 @@ function createPlant(plant) {
 
     const clone = template.content.cloneNode(true);
     const image = clone.querySelector("img");
-    const href = 'public/uploads/';
+    const href = 'public/img/discover/';
 
     image.src = href.concat(plant.image);
     image.alt = plant.image;

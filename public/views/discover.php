@@ -12,17 +12,23 @@
     <link rel="stylesheet" href="public/css/discover.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
 
 <body class="display-container">
     <header>
         <p class="logo-main">gplant</p>
+        <?php if ($isSession) { ?>
+            <a class="sign" id="signButton">sign out</a>
+        <?php } else { ?>
+            <a class="sign" id="signButton">sign in</a>
+        <?php }; ?>
         <nav>
 
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
-                    <li><a href="#">contact</a></li>
+                    <li><a id="contact">contact</a></li>
                     <?php if ($isSession) { ?>
                         <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>
@@ -42,6 +48,15 @@
         </div>
     </header>
     <main>
+        <div id="popup">
+            <div class="popup-content">
+                <span class="close">x</span>
+                <div class="popup-text">
+                <h1>Bibliography</h1>
+                <a target="_blank" href="https://www.apartmenttherapy.com/features/houseplant-guide-encyclopedia">apartment therapy</a>
+                </div>
+            </div>
+        </div>
         <div class="img-discover-container">
             <p class="logo-mobile">gplant</p>
             <div class="main-img-discover"></div>
