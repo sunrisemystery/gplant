@@ -34,10 +34,7 @@ class PlantController extends AppController
             }
         }
 
-        if (!isset($_SESSION['id'])) {
-            $this->messages[] = "You are not logged in. Please log in.";
-            return $this->render('login', ['messages' => $this->messages]);
-        }
+        Utility::LoginVerify();
 
         $plants = $this->plantRepository->getPlants();
         if (count($plants) === 0) {
@@ -66,10 +63,7 @@ class PlantController extends AppController
         session_cache_limiter('private, must-revalidate');
         session_cache_expire(5);
         session_start();
-        if (!isset($_SESSION['id'])) {
-            $this->messages[] = "You are not logged in. Please log in.";
-            return $this->render('login', ['messages' => $this->messages]);
-        }
+        Utility::LoginVerify();
         if ($this->isPost()) {
 
             if (isset($_POST['plant-id'])) {
@@ -159,20 +153,14 @@ class PlantController extends AppController
         }
 
         session_start();
-        if (!isset($_SESSION['id'])) {
-            $this->messages[] = "You are not logged in. Please log in.";
-            return $this->render('login', ['messages' => $this->messages]);
-        }
+        Utility::LoginVerify();
         return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
     }
 
     public function editPlant()
     {
         session_start();
-        if (!isset($_SESSION['id'])) {
-            $this->messages[] = "You are not logged in. Please log in.";
-            return $this->render('login', ['messages' => $this->messages]);
-        }
+        Utility::LoginVerify();
         if ($this->isPost() && isset($_POST['update-plant'])) {
             return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
         }

@@ -24,6 +24,7 @@ class UserController extends AppController
             'login',
         ];
         $error = false;
+        Utility::LoginVerify();
         if ($this->isPost()) {
             foreach ($array as $value) {
                 if (empty($_POST[$value])) {

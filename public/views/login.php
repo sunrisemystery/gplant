@@ -23,6 +23,9 @@
                 foreach ($messages as $message)
                     echo $message;
             }
+                    if(isset($_GET['message'])){
+                        echo $_GET['message'];
+            }
             ?>
            </p>
         </div>
