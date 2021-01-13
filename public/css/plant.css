@@ -103,6 +103,11 @@
     align-items: center;
     text-align: center;
 }
+.days{
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-left: 0.4em;
+}
 
 .delete-form {
     justify-self: center;

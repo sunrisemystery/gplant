@@ -27,7 +27,7 @@
             <i class="fas fa-plus-circle"></i>
             <p class="desc">Add New Plant</p>
         </a>
-        <a id="userSettings" class="settings">
+        <a id="settings" class="settings">
             <i class="fas fa-cog"></i>
             <p class="desc">Settings</p>
         </a>

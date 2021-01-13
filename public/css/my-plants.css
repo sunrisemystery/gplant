@@ -386,7 +386,7 @@
         color: #295F42;
         font-weight: 700;
         margin-left: 1.5vw;
-        font-size: 0.9em;
+        font-size: 0.7em;
     }
 
     .fa-tint {
@@ -396,7 +396,7 @@
 }
 @media screen and (max-width: 321px) {
     .water-info p{
-        font-size: 0.7em;
+        font-size: 0.6em;
     }
 
 }

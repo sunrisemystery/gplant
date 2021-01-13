@@ -7,7 +7,7 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
-Router::get('register', 'UserController');
+Router::get('register', 'SecurityController');
 Router::get('updateProfile', 'UserController');
 Router::get('myPlants', 'PlantController');
 Router::get('waterNow', 'PlantController');
@@ -20,7 +20,7 @@ Router::post('generalPlant', 'PlantController');
 Router::post('editPlant', 'PlantController');
 Router::post('search', 'PlantController');
 Router::post('login', 'SecurityController');
-Router::post('register', 'UserController');
+Router::post('register', 'SecurityController');
 Router::post('updateProfile', 'UserController');
 
 Router::run($path);

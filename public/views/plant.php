@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $plant->getName() ?></title>
-    <?php include('plant-head.php') ?>
+    <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/plant.css">
+    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/waterNow.js" defer></script>
+
 </head>
 <?php include('plant-header-nav.php') ?>
 
@@ -20,7 +26,8 @@
                 <img class="img-wrapper" src="public/uploads/<?= $plant->getImage() ?>">
             </div>
             <p class="watering-plant">Last watered </p>
-            <div class="timer"><i id="<?= $plant->getId(); ?>" class="fas fa-clock"> <?= $plant->countDays() ?></i></div>
+<!--            <div class="timer"><i id="--><?//= $plant->getId(); ?><!--" class="fas fa-clock"> --><?//= $plant->countDays() ?><!--</i></div>-->
+            <div class="timer"><i id="<?= $plant->getId(); ?>" class="fas fa-clock"></i><p class="days"><?= $plant->countDays() ?></p></div>
             <div class="water-form">
                 <button name="water-now-button" class="button-plant button-specify" value="<?= $plant->getId(); ?>">WATER NOW</button>
             </div>

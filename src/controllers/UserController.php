@@ -15,72 +15,44 @@ class UserController extends AppController
     }
 
 
-    public function register()
+    public function updateProfile()
     {
-        $error = false;
-        $array = ['email',
+
+        session_start();
+        $array = [
+            'name',
             'login',
-            'password',
-            'password-confirm'];
+        ];
+        $error = false;
         if ($this->isPost()) {
             foreach ($array as $value) {
                 if (empty($_POST[$value])) {
                     $error = true;
                 }
-
             }
-            if ($error) {
-                $this->messages[] = "All fields are required.";
-            } elseif ($this->userRepository->checkIfEmailExists($_POST['email'])) {
-                $this->messages[] = "User with this email already exists!";
-                return $this->render('register', ['messages' => $this->messages]);
-            } elseif ($this->userRepository->checkIfLoginExists($_POST['login'])) {
-                $this->messages[] = "User with this login already exists!";
-                return $this->render('register', ['messages' => $this->messages]);
-            } else {
-
-                $user = new User($_POST['email'], $_POST['login'], $_POST['password']);
-                $this->userRepository->addUser($user);
-                session_start();
-                $_SESSION['email'] = $user->getEmail();
-                $_SESSION['login'] = $user->getLogin();
-                $id = $this->userRepository->getIdByEmail($user->getEmail());
-                $_SESSION['id'] = $id['id'];
-                $this->messages[] = "Add your first plant here!";
-                return $this->render('my-plants', ['messages' => $this->messages]);
-            }
-            return $this->render('register', ['messages' => $this->messages]);
-
-        }
-        return $this->render('register');
-    }
-
-    public function updateProfile()
-    {
-        session_start();
-        $array = ['email',
-            'login',
-            'password',
-            'password-confirm'];
-        $error = false;
-        if ($this->isPost()) {
             if ($_SESSION['login'] != $_POST['login']) {
+
                 if ($this->userRepository->checkIfLoginExists($_POST['login'])) {
-                    $this->messages[] = "User with this login already exists!";
-                    $error = true;
-                    $user = new User($_SESSION['email'], $_SESSION['login'], null);
-                    $user->setId($_SESSION['id']);
-                    $user->setName($_SESSION['name']);
-                    return $this->render('user-settings', ['messages' => $this->messages, 'user' => $user]);
+
+                    return $this->detectedError("User with this login already exists!");
+                }
+            }
+            if (!empty($_POST['password'])) {
+                if ($_POST['password'] != $_POST['password-confirm']) {
+                    return $this->detectedError("Provided two different passwords");
+
                 }
             }
 
             if (!$error) {
-
                 $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
                 $_SESSION['login'] = $_POST['login'];
+                $_SESSION['name'] = $_POST['name'];
                 return $this->render('main', ['isSession' => Utility::checkSession()]);
 
+            } else if ($error) {
+
+                return $this->detectedError("name and login inputs cant be empty");
             }
 
         } else {
@@ -89,6 +61,17 @@ class UserController extends AppController
             $user->setName($_SESSION['name']);
             return $this->render('user-settings', ['user' => $user]);
         }
+
+
     }
 
+    private function detectedError(string $message)
+    {
+        session_start();
+        $this->messages[] = $message;
+        $user = new User($_SESSION['email'], $_SESSION['login'], null);
+        $user->setId($_SESSION['id']);
+        $user->setName($_SESSION['name']);
+        return $this->render('user-settings', ['messages' => $this->messages, 'user' => $user]);
+    }
 }

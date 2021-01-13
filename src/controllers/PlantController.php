@@ -22,6 +22,7 @@ class PlantController extends AppController
 
     public function myPlants()
     {
+
         session_start();
         $id = null;
 
@@ -49,6 +50,10 @@ class PlantController extends AppController
 
     public function waterNow($id)
     {
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            return 0;
+        }
         $realId = base64_decode($id);
         $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
         http_response_code(200);
@@ -57,14 +62,21 @@ class PlantController extends AppController
 
     public function plant()
     {
+
+        session_cache_limiter('private, must-revalidate');
+        session_cache_expire(5);
         session_start();
+        if (!isset($_SESSION['id'])) {
+            $this->messages[] = "You are not logged in. Please log in.";
+            return $this->render('login', ['messages' => $this->messages]);
+        }
         if ($this->isPost()) {
 
             if (isset($_POST['plant-id'])) {
                 $id = $_POST['plant-id'];
                 $plant = $this->plantRepository->getPlantById($id);
                 $data = $this->plantRepository->getTypeByUserPlantId($id);
-                return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
+                return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
             }
 
             if (isset($_POST['update-button'])) {
@@ -87,13 +99,13 @@ class PlantController extends AppController
                     $this->plantRepository->editPlant($id, $name, $image, $type);
                     $plant = $this->plantRepository->getPlantById($id);
                     $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
+                    return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
                 } else {
 
                     $this->plantRepository->editPlant($id, $name, null, $type);
                     $plant = $this->plantRepository->getPlantById($id);
                     $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data,'isSession' => Utility::checkSession()]);
+                    return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
                 }
             }
         }
@@ -101,6 +113,8 @@ class PlantController extends AppController
 
     public function generalPlant()
     {
+        session_cache_limiter('private, must-revalidate');
+        session_cache_expire(5);
         if ($this->isPost()) {
             $id = $_POST['general-plant-id'];
             $plant = $this->plantRepository->getGeneralPlantById($id);
@@ -115,6 +129,7 @@ class PlantController extends AppController
 
     public function addPlant()
     {
+
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
@@ -137,11 +152,12 @@ class PlantController extends AppController
 
             $image = $this->plantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
             $plant = new Plant($_POST['name'], $image);
-            copy('public/img/discover/'.$image, 'public/uploads/'.$image);
+            copy('public/img/discover/' . $image, 'public/uploads/' . $image);
             $plant->setType(intval($_POST['selectType']));
             $this->plantRepository->addPlant($plant);
             return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
         }
+
         session_start();
         if (!isset($_SESSION['id'])) {
             $this->messages[] = "You are not logged in. Please log in.";
@@ -152,6 +168,11 @@ class PlantController extends AppController
 
     public function editPlant()
     {
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            $this->messages[] = "You are not logged in. Please log in.";
+            return $this->render('login', ['messages' => $this->messages]);
+        }
         if ($this->isPost() && isset($_POST['update-plant'])) {
             return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
         }
