@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/Plant.php';
 require_once __DIR__ . '/../repository/PlantRepository.php';
+require_once __DIR__ . '/../repository/GeneralPlantRepository.php';
 require_once __DIR__ . '/../utilities/Utility.php';
 
 class PlantController extends AppController
@@ -12,12 +13,14 @@ class PlantController extends AppController
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private $messages = [];
     private $plantRepository;
+    private $generalPlantRepository;
 
 
     public function __construct()
     {
         parent::__construct();
         $this->plantRepository = new PlantRepository();
+        $this->generalPlantRepository = new GeneralPlantRepository();
     }
 
     public function myPlants()
@@ -80,7 +83,7 @@ class PlantController extends AppController
                 $name = $_POST['name'];
                 if (empty($name) || empty($type)) {
                     $this->messages[] = "All fields are required.";
-                    return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
+                    return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
                 }
 
                 if (is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
@@ -105,21 +108,6 @@ class PlantController extends AppController
         }
     }
 
-    public function generalPlant()
-    {
-        session_cache_limiter('private, must-revalidate');
-        session_cache_expire(5);
-        if ($this->isPost()) {
-            $id = $_POST['general-plant-id'];
-            $plant = $this->plantRepository->getGeneralPlantById($id);
-            return $this->render('general-plant', ['plant' => $plant, 'isSession' => Utility::checkSession()]);
-        }
-    }
-
-    public function discover()
-    {
-        return $this->render('discover', ['plantsList' => $this->plantRepository->discoverPlants(), 'isSession' => Utility::checkSession()]);
-    }
 
     public function addPlant()
     {
@@ -137,14 +125,14 @@ class PlantController extends AppController
         } elseif ($this->isPost() && strlen($_POST['name']) === 0) {
 
             $this->messages[] = 'Please fill the name field';
-            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
+            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
         } elseif ($this->isPost() && strlen($_POST['selectType']) === 0) {
 
             $this->messages[] = 'Please select type of plant';
-            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
+            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
         } elseif ($this->isPost() && strlen($_POST['name']) != 0 && strlen($_POST['selectType']) != 0 && is_uploaded_file($_FILES['file']['tmp_name']) == false) {
 
-            $image = $this->plantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
+            $image = $this->generalPlantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
             $plant = new Plant($_POST['name'], $image);
             copy('public/img/discover/' . $image, 'public/uploads/' . $image);
             $plant->setType(intval($_POST['selectType']));
@@ -154,7 +142,7 @@ class PlantController extends AppController
 
         session_start();
         Utility::LoginVerify();
-        return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->plantRepository->getTypes()]);
+        return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
     }
 
     public function editPlant()
@@ -162,21 +150,10 @@ class PlantController extends AppController
         session_start();
         Utility::LoginVerify();
         if ($this->isPost() && isset($_POST['update-plant'])) {
-            return $this->render('edit-plant', ['rowList' => $this->plantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
+            return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
         }
     }
 
-    public function search()
-    {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo json_encode($this->plantRepository->getGeneralPlantsByString($decoded['search']));
-        }
-    }
 
     private function validate(array $file): bool
     {

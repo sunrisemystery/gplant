@@ -182,9 +182,11 @@
 
 @media screen and (max-width: 850px) and (min-width: 536px) {
     .inline {
-        display: flex;
-        height: 30vh;
-        width: 16vw;
+        /*display: flex;*/
+        /*height: 30vh;*/
+        /*width: 16vw;*/
+        width: 30vw;
+        height: 35vh;
     }
     .nav-desktop{
         display: none;
@@ -282,9 +284,11 @@
 
 @media screen and (max-width: 536px) {
     .inline {
-        display: flex;
-        height: 30vh;
-        width: 16vw;
+        /*display: flex;*/
+        /*height: 30vh;*/
+        /*width: 16vw;*/
+        width: 34vw;
+        height: 28vh;
 
     }
     .grid-wrapper{

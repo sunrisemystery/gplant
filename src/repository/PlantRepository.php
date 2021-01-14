@@ -22,18 +22,6 @@ class PlantRepository extends Repository
         return $plantObj;
     }
 
-    public function getGeneralPlantById(int $id): ?array
-    {
-        $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.plants WHERE id = :id');
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-        $plant = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($plant == false) {
-            return null; //niewolno tak - exception szeba w security kontrolerze
-        }
-        return $plant;
-    }
 
     public function addPlant(Plant $plant): void
     {
@@ -67,14 +55,6 @@ class PlantRepository extends Repository
         return $result;
     }
 
-    public function getTypes(): array
-    {
-        $statement = $this->database->connect()->prepare('
-                            SELECT id, type FROM public.plants ORDER BY type');
-        $statement->execute();
-        $row_list = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $row_list;
-    }
 
     public function getTypeByUserPlantId($id): array
     {
@@ -86,16 +66,6 @@ class PlantRepository extends Repository
         return $type;
     }
 
-    public function getImageFromGeneralPlants($id)
-    {
-        $statement = $this->database->connect()->prepare('
-        SELECT image FROM public.plants WHERE id = :id
-        ');
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-        $image = $statement->fetch(PDO::PARAM_STR);
-        return $image["image"];
-    }
 
     public function changeLastWatered($id, $date)
     {
@@ -114,29 +84,6 @@ class PlantRepository extends Repository
         ');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-    }
-
-    public function discoverPlants()
-    {
-        $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.plants ORDER BY type
-        ');
-        $statement->execute();
-        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $plantsList;
-    }
-
-    public function getGeneralPlantsByString($string)
-    {
-        $searchString = strtolower('%' . $string . '%');
-        $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.plants WHERE lower(type) like :string ORDER BY type
-        ');
-        $statement->bindParam(':string', $searchString, PDO::PARAM_STR);
-        $statement->execute();
-        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $plantsList;
-
     }
 
     public function editPlant($id, $name, $image, $type)

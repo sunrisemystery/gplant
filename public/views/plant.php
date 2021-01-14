@@ -26,8 +26,7 @@
                 <img class="img-wrapper" src="public/uploads/<?= $plant->getImage() ?>">
             </div>
             <p class="watering-plant">Last watered </p>
-<!--            <div class="timer"><i id="--><?//= $plant->getId(); ?><!--" class="fas fa-clock"> --><?//= $plant->countDays() ?><!--</i></div>-->
-            <div class="timer"><i id="<?= $plant->getId(); ?>" class="fas fa-clock"></i><p class="days"><?= $plant->countDays() ?></p></div>
+            <div class="timer"><i  class="fas fa-clock"></i><p id="<?= $plant->getId(); ?>" class="days"><?= $plant->countDays() ?></p></div>
             <div class="water-form">
                 <button name="water-now-button" class="button-plant button-specify" value="<?= $plant->getId(); ?>">WATER NOW</button>
             </div>

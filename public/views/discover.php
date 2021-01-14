@@ -28,7 +28,7 @@
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
-                    <li><a id="contact">contact</a></li>
+                    <li><a id="contact">info</a></li>
                     <?php if ($isSession) { ?>
                         <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>

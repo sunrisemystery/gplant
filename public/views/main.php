@@ -27,7 +27,7 @@
                         <?php if ($isSession) { ?>
                             <a id="myPlantsMobile">My Plants</a>
                         <?php } else { ?>
-                            <a id="contact-mobile">Contact</a>
+                            <a id="contact-mobile">Info</a>
                         <?php }; ?>
                         <a id="discoverMobile">Discover</a>
                     </div>
@@ -50,7 +50,7 @@
                         <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>
                     <?php } else { ?>
-                        <li><a id="contact">contact</a></li>
+                        <li><a id="contact">info</a></li>
                         <li><a id="signButton">sign in</a></li>
                     <?php }; ?>
                 </ul>
