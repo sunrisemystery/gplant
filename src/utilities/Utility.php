@@ -3,6 +3,8 @@
 
 class Utility
 {
+    const USER = "authenticated_user";
+    const ADMIN = "admin";
 
     public static function checkSession(): bool
     {
@@ -13,7 +15,7 @@ class Utility
         return false;
     }
 
-    public static function LoginVerify()
+    public static function LoginVerify(): void
     {
         session_start();
         if (!isset($_SESSION['id'])) {

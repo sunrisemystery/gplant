@@ -44,12 +44,17 @@ class SecurityController extends AppController
         if (!password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Incorrect password']]);
         }
+        if ($user->getRole() == Utility::ADMIN) {
+            $_SESSION['role'] = $user->getRole();
+            $_SESSION['id'] = $user->getId();
+            return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+        }
 
         $_SESSION['email'] = $user->getEmail();
         $_SESSION['login'] = $user->getLogin();
         $_SESSION['name'] = $user->getName();
-        $id = $this->userRepository->getIdByEmail($user->getEmail());
-        $_SESSION['id'] = $id['id'];
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['id'] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/myPlants");
@@ -96,5 +101,36 @@ class SecurityController extends AppController
 
         }
         return $this->render('register');
+    }
+
+    public function adminView()
+    {
+        session_start();
+        if ($_SESSION['role'] == Utility::ADMIN) {
+            if ($this->isPost()) {
+                if (isset($_POST['delete-user'])) {
+                    $id = $_POST['delete-user'];
+                    $this->userRepository->deleteUserById($id);
+                }
+            }
+            return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+        } else {
+            $this->render('main', ['isSession' => Utility::checkSession()]);
+        }
+    }
+
+    public function searchUser()
+    {
+        session_start();
+        if ($_SESSION['role'] == Utility::ADMIN) {
+            $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+            if ($contentType === "application/json") {
+                $content = trim(file_get_contents("php://input"));
+                $decoded = json_decode($content, true);
+                header('Content-type: application/json');
+                http_response_code(200);
+                echo json_encode($this->userRepository->getLoginByString($decoded['search']));
+            }
+        }
     }
 }

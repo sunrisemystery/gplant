@@ -16,7 +16,6 @@
 
 }
 
-
 .search-bar p {
     opacity: 0.4;
     font-weight: 700;
@@ -31,7 +30,8 @@
 
 
 }
-.search-input{
+
+.search-input {
     margin-left: 1em;
     appearance: none;
     font-size: 1.1em;
@@ -47,6 +47,36 @@
     cursor: pointer;
     font-size: 1em;
 }
+
+.add {
+    display: inline-block;
+    cursor: default;
+}
+
+.delete-form {
+    height: 5vh;
+    width: 10vw;
+
+}
+
+.delete-user {
+    background: #690a1d 0 0 no-repeat padding-box;
+    box-shadow: 0 8px 8px #00000029;
+    margin-top: 0.5em;
+    border: none;
+    border-radius: 3em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    height: 5vh;
+    width: 10vw;
+}
+
+.delete-user:hover {
+    cursor: pointer;
+}
+
 
 .link-button:focus {
     outline: none;
@@ -84,6 +114,15 @@
     margin-top: 1em;
 }
 
+.user-record {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 15vh;
+    margin-top: 1em;
+}
+
 .record-img {
     display: inline-block;
     margin: 0.5em 0 0.5em 0;
@@ -94,9 +133,10 @@
     height: 12vh;
     overflow: hidden;
 }
-.plant-img{
+
+.plant-img {
     max-width: 14vh;
-    transform: translate(0,-20%);
+    transform: translate(0, -20%);
 }
 
 .record-text {
@@ -107,6 +147,7 @@
     text-align: left;
 
 }
+
 
 @media screen and (min-width: 750px) {
 
@@ -120,9 +161,11 @@
         height: 10vh;
         z-index: 5;
     }
-    .sign{
+
+    .sign {
         display: none;
     }
+
 
     .main-img-discover {
 
@@ -177,16 +220,21 @@
         width: 70%;
         height: 100%;
     }
+
+    .inline-height {
+        height: 18vh;
+    }
 }
 
 @media screen and (max-width: 750px) {
-    header{
+    header {
         height: 10vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .sign{
+
+    .sign {
         margin-right: 1.7em;
         background: #295F42 0 0 no-repeat padding-box;
         box-shadow: 0 8px 8px #00000029;
@@ -199,15 +247,22 @@
         padding: 0.6em 0.9em;
     }
 
+    .delete-user {
+        width: 19vw;
+    }
+
+
     .display-container {
         display: grid;
         grid-template-rows: 10vh 1fr;
         justify-items: stretch;
     }
-    .nav-bottom-mobile a:nth-child(1){
+
+    .nav-bottom-mobile a:nth-child(1) {
         color: #9b9898;
     }
-    .nav-bottom-mobile a:nth-child(2){
+
+    .nav-bottom-mobile a:nth-child(2) {
         color: #9b9898;
     }
 
@@ -242,16 +297,36 @@
         display: grid;
         margin-bottom: 7em;
     }
+
+    .user-list {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 7em;
+    }
 }
+
 @media screen and (max-width: 650px) {
-    .record-text{
+    .record-text {
         height: 90%;
     }
 }
 
 @media screen and (max-width: 421px) {
-    .inline{
+    .inline {
         overflow: hidden;
+    }
+
+    .inline-height {
+        height: 25vh;
+    }
+
+    .add {
+        height: 100%;
+    }
+
+    .user-record {
+        height: 100%;
     }
 }
 

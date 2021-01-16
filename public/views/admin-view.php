@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover</title>
+    <title>Admin Panel Users' List</title>
     <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/discover-and-admin-panel.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
-    <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/searchUser.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
 
@@ -28,23 +28,15 @@
                 <ul>
                     <li><a id="home">home</a></li>
                     <li><a id="contact">info</a></li>
+                    <li><a id="discover">discover</a></li>
                     <?php if ($isSession) { ?>
-                        <li><a id="myPlants">my plants</a></li>
                         <li><a id="signButton">sign out</a></li>
                     <?php } else { ?>
-                        <li><a id="discover">discover</a></li>
                         <li><a id="signButton">sign in</a></li>
-                    <?php }; ?>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
-        <div class="nav-bottom-mobile">
-
-            <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
-            <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
-
-        </div>
     </header>
     <main>
         <? include ('pop-up-window.php') ?>
@@ -52,49 +44,48 @@
             <p class="logo-mobile">gplant</p>
             <div class="main-img-discover"></div>
             <div class="img-text-d">
-                <p>Discover new plants, read more informations about your favourites. Everything at one place.</p>
+                <p>Welcome in Admin Panel. You can delete users' accounts there.</p>
             </div>
         </div>
         <div class="search-bar">
             <i class="fas fa-search"></i>
             <input class="search-input" type="text" name="search" placeholder="SEARCH">
         </div>
-        <div class="discover-list">
-            <?php foreach ($plantsList as $plant) : ?>
-                <form method="post" action="generalPlant" class="inline">
-                    <button type="submit" name="general-plant-id" value="<?= $plant['id'] ?>" class="link-button">
-                        <div class="plant-record">
-                            <div class="record-img">
-                                <img class="plant-img" alt="<?= $plant['image'] ?>" src="public/img/discover/<?= $plant['image'] ?>">
-                            </div>
+        <div class="discover-list user-list">
+            <?php foreach ($userList as $user) : ?>
+                <div  class="inline inline-height">
+                    <div class="link-button add">
+                        <div class="user-record">
                             <div class="record-text">
-                                <strong><?= $plant['type']; ?></strong>
-                                <p><?= substr($plant['main_description'], 0, 100) . '...'; ?></p>
+                                <strong><?= $user['login']; ?></strong>
+                                <p><?= $user['email']; ?></p>
+                                <p>Name: <?= $user['name']; ?></p>
+                                <form method="post" action="adminView" class="delete-form">
+                                    <button type="submit" class="delete-user" name="delete-user" id="<?= $user['id']; ?>" onclick="deleteUserConfirm(<?= $user['id']; ?> )">DELETE USER</button>
+                                </form>
                             </div>
                         </div>
-                    </button>
-                </form>
+                    </div>
+                </div>
             <?php endforeach; ?>
-
         </div>
-
     </main>
 </body>
 
-<template id="plant-template">
-    <form method="post" action="generalPlant" class="inline">
-        <button type="submit" name="general-plant-id" value="" class="link-button">
-            <div class="plant-record">
-                <div class="record-img">
-                    <img class="plant-img" alt="" src="">
-                </div>
+<template id="user-template">
+    <div  class="inline inline-height">
+        <div class="link-button add">
+            <div class="user-record">
                 <div class="record-text">
-                    <strong>type</strong>
-                    <p>description</p>
+                    <strong>login</strong>
+                    <p class="p-email">email</p>
+                    <p class="p-name">name</p>
+                    <form method="post" action="adminView" class="delete-form">
+                        <button type="submit" class="delete-user" name="delete-user" id="" onclick="">DELETE USER</button>
+                    </form>
                 </div>
             </div>
-        </button>
-    </form>
+        </div>
+    </div>
 </template>
-
 </html>

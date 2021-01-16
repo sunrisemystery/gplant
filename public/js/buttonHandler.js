@@ -1,11 +1,11 @@
-let signButton = document.getElementById('signButton');
+const signButton = document.getElementById('signButton');
 if (signButton != null) {
     signButton.addEventListener('click', function () {
         document.location.href = 'login';
     });
 }
 
-let signButtonMobile = document.getElementById('signButtonMobile');
+const signButtonMobile = document.getElementById('signButtonMobile');
 if (signButtonMobile != null) {
     signButtonMobile.addEventListener('click', function () {
         document.location.href = 'login';
@@ -13,41 +13,41 @@ if (signButtonMobile != null) {
 }
 
 
-let discover = document.getElementById('discover');
+const discover = document.getElementById('discover');
 if (discover != null) {
     discover.addEventListener('click', function () {
         document.location.href = 'discover';
     });
 }
-let discoverMobile = document.getElementById('discoverMobile');
+const discoverMobile = document.getElementById('discoverMobile');
 if (discoverMobile != null) {
     discoverMobile.addEventListener('click', function () {
         document.location.href = 'discover';
     });
 }
 
-let home = document.getElementById('home');
+const home = document.getElementById('home');
 if (home != null) {
     home.addEventListener('click', function () {
         document.location.href = '/';
     });
 }
 
-let addPlant = document.getElementById('addPlant');
+const addPlant = document.getElementById('addPlant');
 if (addPlant != null) {
     addPlant.addEventListener('click', function () {
         document.location.href = 'addPlant';
     });
 }
 
-let addNewPlant = document.getElementById('addNewPlant');
+const addNewPlant = document.getElementById('addNewPlant');
 if (addNewPlant != null) {
     addNewPlant.addEventListener('click', function () {
         document.location.href = 'addPlant';
     });
 }
 
-let myPlants = document.getElementById('myPlants');
+const myPlants = document.getElementById('myPlants');
 if (myPlants != null) {
     myPlants.addEventListener('click', function () {
         document.location.href = 'myPlants';
@@ -60,23 +60,43 @@ if (myPlantsMobile != null) {
         document.location.href = 'myPlants';
     });
 }
-let userSettings = document.getElementById('settings');
+const userSettings = document.getElementById('settings');
 if (userSettings != null) {
     userSettings.addEventListener('click', function () {
         document.location.href = 'updateProfile';
     });
 }
 
-let userSettingsMobile = document.getElementById('settingsMobile');
+const userSettingsMobile = document.getElementById('settingsMobile');
 if (userSettingsMobile != null) {
     userSettingsMobile.addEventListener('click', function () {
         document.location.href = 'updateProfile';
     });
 }
 
+const cancel = document.getElementById('cancel');
+if (cancel != null) {
+    cancel.addEventListener('click', function () {
+        window.history.back();
+    });
+}
+const mobileBack = document.getElementById('mobileBack');
+if (mobileBack != null) {
+    mobileBack.addEventListener('click', function () {
+        window.history.back();
+    });
+}
+
+const mobileBackPlants = document.getElementById('myplantsBack');
+if (mobileBackPlants != null) {
+    mobileBackPlants.addEventListener('click', function () {
+        document.location.href = 'myPlants';
+    });
+}
+
 function deleteConfirm(id) {
     let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
-    let val = document.getElementById('deleteButton');
+    const val = document.getElementById('deleteButton');
     if (bool) {
 
         val.setAttribute("value", id);
@@ -87,22 +107,17 @@ function deleteConfirm(id) {
     }
 
 }
-let cancel = document.getElementById('cancel');
-if (cancel != null) {
-    cancel.addEventListener('click', function () {
-        window.history.back();
-    });
-}
-let mobileBack = document.getElementById('mobileBack');
-if (mobileBack != null) {
-    mobileBack.addEventListener('click', function () {
-        window.history.back();
-    });
-}
 
-let mobileBackPlants = document.getElementById('myplantsBack');
-if (mobileBackPlants != null) {
-    mobileBackPlants.addEventListener('click', function () {
-        document.location.href = 'myPlants';
-    });
+function deleteUserConfirm(id) {
+    let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
+    const val = document.getElementById(id);
+    if (bool) {
+
+        val.setAttribute("value", id);
+
+    } else {
+        val.setAttribute("value", "-1");
+
+    }
+
 }

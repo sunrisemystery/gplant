@@ -1,4 +1,4 @@
-let signUpButton = document.getElementById('signUpButton');
+const signUpButton = document.getElementById('signUpButton');
 signUpButton.addEventListener('click', function () {
     document.location.href = 'register';
 });

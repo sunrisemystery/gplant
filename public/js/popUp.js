@@ -1,15 +1,15 @@
-let popUpWindow = document.getElementById("popup");
-let contactButton = document.getElementById("contact");
-let contactButtonMobile = document.getElementById("contact-mobile");
-let closePopUp = document.getElementsByClassName("close")[0];
-if(contactButton!=null) {
-    contactButton.onclick = function () {
+const popUpWindow = document.getElementById("popup");
+const infoButton = document.getElementById("contact");
+const infoButtonMobile = document.getElementById("contact-mobile");
+const closePopUp = document.getElementsByClassName("close")[0];
+if (infoButton != null) {
+    infoButton.onclick = function () {
         popUpWindow.style.display = "block";
 
     }
 }
-if (contactButtonMobile != null) {
-    contactButtonMobile.onclick = function () {
+if (infoButtonMobile != null) {
+    infoButtonMobile.onclick = function () {
         popUpWindow.style.display = "block";
 
     }

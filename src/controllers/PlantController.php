@@ -86,17 +86,20 @@ class PlantController extends AppController
                     return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
                 }
 
-                if (is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
-
-                    move_uploaded_file(
-                        $_FILES['file']['tmp_name'],
-                        dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
-                    );
-                    $image = $_FILES['file']['name'];
-                    $this->plantRepository->editPlant($id, $name, $image, $type);
-                    $plant = $this->plantRepository->getPlantById($id);
-                    $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
+                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                    if ($this->validate($_FILES['file'])) {
+                        move_uploaded_file(
+                            $_FILES['file']['tmp_name'],
+                            dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
+                        );
+                        $image = $_FILES['file']['name'];
+                        $this->plantRepository->editPlant($id, $name, $image, $type);
+                        $plant = $this->plantRepository->getPlantById($id);
+                        $data = $this->plantRepository->getTypeByUserPlantId($id);
+                        return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
+                    } else {
+                        return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
+                    }
                 } else {
 
                     $this->plantRepository->editPlant($id, $name, null, $type);
