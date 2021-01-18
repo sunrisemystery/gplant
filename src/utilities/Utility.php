@@ -25,5 +25,11 @@ class Utility
             die;
         }
     }
-
+    public static function isAdmin():bool{
+        session_start();
+        if($_SESSION['role']===self::ADMIN){
+            return true;
+        }
+        return false;
+    }
 }

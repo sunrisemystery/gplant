@@ -22,7 +22,6 @@ class Plant
         $current = date_create($currentString);
         if ($this->last_watered != null) {
             $last = date_create($this->last_watered);
-            $seconds = $current - $last;
             $days = date_diff($last, $current);
             $number = intval($days->format('%a'));
 

@@ -6,7 +6,7 @@
                 <li><a id="home">home</a></li>
                 <li><a id="discover">discover</a></li>
                 <li><a id="contact">info</a></li>
-                <li><a id="signButton"">sign out</a></li>
+                <li><a id="signButton">sign out</a></li>
             </ul>
         </div>
     </nav>

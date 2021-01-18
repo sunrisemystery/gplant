@@ -39,7 +39,5 @@
             <button id="signUpButton" class="sign-up">SIGN UP</button>
         </div>
     </div>
-
 </body>
-
 </html>

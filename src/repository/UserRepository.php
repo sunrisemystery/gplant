@@ -145,7 +145,5 @@ class UserRepository extends Repository
         $statement2->bindParam(':name', $name, PDO::PARAM_STR);
         $statement2->bindParam(':id', $foundId['users_details_id'], PDO::PARAM_INT);
         $statement2->execute();
-
-
     }
 }

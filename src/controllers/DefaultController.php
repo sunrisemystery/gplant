@@ -8,7 +8,7 @@ class DefaultController extends AppController
     public function index()
     {
 
-        $this->render('main', ['isSession' => Utility::checkSession()]);
+        $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
     }
 
     public function login()

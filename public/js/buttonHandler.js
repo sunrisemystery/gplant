@@ -12,7 +12,6 @@ if (signButtonMobile != null) {
     });
 }
 
-
 const discover = document.getElementById('discover');
 if (discover != null) {
     discover.addEventListener('click', function () {
@@ -93,6 +92,18 @@ if (mobileBackPlants != null) {
         document.location.href = 'myPlants';
     });
 }
+const adminPanel = document.getElementById('adminPanel');
+if (adminPanel != null) {
+    adminPanel.addEventListener('click', function () {
+        document.location.href = 'adminView';
+    });
+}
+const adminPanelMobile = document.getElementById('adminPanelMobile');
+if (adminPanelMobile != null) {
+    adminPanelMobile.addEventListener('click', function () {
+        document.location.href = 'adminView';
+    });
+}
 
 function deleteConfirm(id) {
     let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
@@ -105,7 +116,6 @@ function deleteConfirm(id) {
         val.setAttribute("value", "-1");
 
     }
-
 }
 
 function deleteUserConfirm(id) {
@@ -119,5 +129,4 @@ function deleteUserConfirm(id) {
         val.setAttribute("value", "-1");
 
     }
-
 }

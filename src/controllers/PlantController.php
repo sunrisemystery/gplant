@@ -25,34 +25,36 @@ class PlantController extends AppController
 
     public function myPlants()
     {
-
         session_start();
+        Utility::LoginVerify();
         $id = null;
 
+        if(Utility::isAdmin()){
+            $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        }
         if ($this->isPost()) {
             if (isset($_POST['delete-plant'])) {
                 $id = $_POST['delete-plant'];
                 $this->plantRepository->deletePlantById($id);
                 return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
             }
+        } else {
+
+            $plants = $this->plantRepository->getPlants();
+            if (count($plants) === 0) {
+                $this->messages[] = "Add your first plant here!";
+                return $this->render('my-plants', ['plants' => $plants, 'messages' => $this->messages]);
+            } else {
+                return $this->render('my-plants', ['plants' => $plants]);
+            }
         }
-
-        Utility::LoginVerify();
-
-        $plants = $this->plantRepository->getPlants();
-        if (count($plants) === 0) {
-            $this->messages[] = "Add your first plant here!";
-            return $this->render('my-plants', ['plants' => $plants, 'messages' => $this->messages]);
-        }
-
-        return $this->render('my-plants', ['plants' => $plants]);
     }
 
     public function waterNow($id)
     {
         session_start();
         if (!isset($_SESSION['id'])) {
-            return 0;
+            return false;
         }
         $realId = base64_decode($id);
         $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
@@ -114,6 +116,11 @@ class PlantController extends AppController
 
     public function addPlant()
     {
+        session_start();
+        Utility::LoginVerify();
+        if(Utility::isAdmin()){
+             return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        }
 
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
@@ -143,8 +150,6 @@ class PlantController extends AppController
             return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
         }
 
-        session_start();
-        Utility::LoginVerify();
         return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
     }
 
@@ -152,10 +157,14 @@ class PlantController extends AppController
     {
         session_start();
         Utility::LoginVerify();
+        if(Utility::isAdmin()){
+            return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        }
         if ($this->isPost() && isset($_POST['update-plant'])) {
-            return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
+            $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
         }
     }
+
 
 
     private function validate(array $file): bool

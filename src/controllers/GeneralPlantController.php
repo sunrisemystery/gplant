@@ -2,12 +2,12 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/GeneralPlant.php';
 require_once __DIR__ . '/../repository/GeneralPlantRepository.php';
-require_once __DIR__ . '/../utilities/Utility.php';
 
 class GeneralPlantController extends AppController
 {
 
     private $generalPlantRepository;
+
     public function __construct()
     {
         parent::__construct();
@@ -22,13 +22,14 @@ class GeneralPlantController extends AppController
         if ($this->isPost()) {
             $id = $_POST['general-plant-id'];
             $plant = $this->generalPlantRepository->getGeneralPlantById($id);
-            $generalPlant = new GeneralPlant($plant['type'],$plant['image'],$plant['main_description'],$plant['water_description']);
-            return $this->render('general-plant', ['plant' => $generalPlant, 'isSession' => Utility::checkSession()]);
+            $generalPlant = new GeneralPlant($plant['type'], $plant['image'], $plant['main_description'], $plant['water_description']);
+            $this->render('general-plant', ['plant' => $generalPlant, 'isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
         }
     }
+
     public function discover()
     {
-        return $this->render('discover', ['plantsList' => $this->generalPlantRepository->discoverPlants(), 'isSession' => Utility::checkSession()]);
+        $this->render('discover', ['plantsList' => $this->generalPlantRepository->discoverPlants(), 'isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
     }
 
     public function search()

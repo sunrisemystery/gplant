@@ -31,6 +31,6 @@ class AppController
             include $templatePath;
             $output = ob_get_clean();
         }
-        print $output;
+         print $output;
     }
 }

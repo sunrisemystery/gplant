@@ -19,12 +19,13 @@ class UserController extends AppController
     {
 
         session_start();
+        Utility::LoginVerify();
+
         $array = [
             'name',
             'login',
         ];
         $error = false;
-        Utility::LoginVerify();
         if ($this->isPost()) {
             foreach ($array as $value) {
                 if (empty($_POST[$value])) {
@@ -49,9 +50,9 @@ class UserController extends AppController
                 $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
                 $_SESSION['login'] = $_POST['login'];
                 $_SESSION['name'] = $_POST['name'];
-                return $this->render('main', ['isSession' => Utility::checkSession()]);
+                return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
 
-            } else if ($error) {
+            } else {
 
                 return $this->detectedError("name and login inputs cant be empty");
             }

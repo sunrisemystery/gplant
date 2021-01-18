@@ -17,15 +17,12 @@ class SecurityController extends AppController
 
     public function login()
     {
-
         session_start();
         if (!$this->isPost()) {
 
-            session_start();
             if (isset($_SESSION['id'])) {
                 unset($_SESSION['id']);
                 session_destroy();
-
             }
             return $this->render('login');
         }
@@ -113,16 +110,16 @@ class SecurityController extends AppController
                     $this->userRepository->deleteUserById($id);
                 }
             }
-            return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+             $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
         } else {
-            $this->render('main', ['isSession' => Utility::checkSession()]);
+            $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
         }
     }
 
     public function searchUser()
     {
         session_start();
-        if ($_SESSION['role'] == Utility::ADMIN) {
+        if (Utility::isAdmin()) {
             $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
             if ($contentType === "application/json") {
                 $content = trim(file_get_contents("php://input"));

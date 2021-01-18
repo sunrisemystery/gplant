@@ -62,8 +62,7 @@ class PlantRepository extends Repository
         $statement = $this->database->connect()->prepare('SELECT type,plant_id, water_description FROM public.users_plants_view WHERE id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        $type = $statement->fetch(PDO::FETCH_ASSOC);
-        return $type;
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
 
@@ -106,8 +105,5 @@ class PlantRepository extends Repository
             $statement->bindParam(':name', $name, PDO::PARAM_STR);
             $statement->execute();
         }
-
-
     }
-
 }

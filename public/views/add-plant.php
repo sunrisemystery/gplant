@@ -48,7 +48,6 @@
                     <a id="cancel" class="cancel">CANCEL</a>
                 </div>
             </form>
-
         </section>
     </main>
 </body>

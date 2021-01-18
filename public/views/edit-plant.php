@@ -24,7 +24,6 @@
                         <p>PRESS TO CHANGE A FILE</p>
                     </label>
                     <input id="file-input" name="file" type="file">
-
                 </div>
                 <div class="form-text">
                     <?php if (isset($messages)) {
@@ -39,7 +38,6 @@
                         </option>
                         <?php
                         foreach ($rowList as $val) {
-
                         ?>
                             <option value="<?= $val["id"] ?>">
                                 <?php echo $val["type"]; ?>
@@ -48,15 +46,11 @@
                         }
                         ?>
                     </select>
-
                     <button name="update-button" value="<?= $plant->getId() ?>" type="submit">UPDATE</button>
                     <a id="cancel" class="cancel">CANCEL</a>
                 </div>
-
             </form>
         </section>
-
     </main>
 </body>
-
 </html>

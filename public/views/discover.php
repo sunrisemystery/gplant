@@ -22,28 +22,32 @@
             <a class="sign" id="signButtonMobile">sign out</a>
         <?php } else { ?>
             <a class="sign" id="signButtonMobile">sign in</a>
-        <?php }; ?>
+        <?php } ?>
         <nav>
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
                     <li><a id="contact">info</a></li>
-                    <?php if ($isSession) { ?>
+                    <?php if ($isSession) {
+                        if(!$isAdmin){?>
                         <li><a id="myPlants">my plants</a></li>
+                        <?php }else{ ?>
+                        <li><a id="discover">discover</a></li>
+                        <?php } ?>
                         <li><a id="signButton">sign out</a></li>
                     <?php } else { ?>
                         <li><a id="discover">discover</a></li>
                         <li><a id="signButton">sign in</a></li>
-                    <?php }; ?>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
+        <?php if (!$isAdmin) { ?>
         <div class="nav-bottom-mobile">
-
             <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
             <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
             <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
-
+            <?php } ?>
         </div>
     </header>
     <main>
@@ -52,7 +56,7 @@
             <p class="logo-mobile">gplant</p>
             <div class="main-img-discover"></div>
             <div class="img-text-d">
-                <p>Discover new plants, read more informations about your favourites. Everything at one place.</p>
+                <p>Discover new plants, read more information about your favourites. Everything at one place.</p>
             </div>
         </div>
         <div class="search-bar">
@@ -68,16 +72,14 @@
                                 <img class="plant-img" alt="<?= $plant['image'] ?>" src="public/img/discover/<?= $plant['image'] ?>">
                             </div>
                             <div class="record-text">
-                                <strong><?= $plant['type']; ?></strong>
+                                <strong><?= $plant['type'] ?></strong>
                                 <p><?= substr($plant['main_description'], 0, 100) . '...'; ?></p>
                             </div>
                         </div>
                     </button>
                 </form>
             <?php endforeach; ?>
-
         </div>
-
     </main>
 </body>
 
@@ -96,5 +98,4 @@
         </button>
     </form>
 </template>
-
 </html>

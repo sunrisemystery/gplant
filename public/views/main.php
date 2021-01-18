@@ -15,7 +15,6 @@
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 
 </head>
-
 <body class="main-container">
     <header>
         <p class="logo-main">gplant</p>
@@ -25,10 +24,14 @@
                     <a  class="active"></a>
                     <div id="options" >
                         <?php if ($isSession) { ?>
+                        <?php if ($isAdmin) { ?>
+                                <a id="adminPanelMobile">Admin Panel</a>
+                            <?php } else{ ?>
                             <a id="myPlantsMobile">My Plants</a>
+                            <?php } ?>
                         <?php } else { ?>
                             <a id="contact-mobile">Info</a>
-                        <?php }; ?>
+                        <?php } ?>
                         <a id="discoverMobile">Discover</a>
                     </div>
                     <a class="icon" onclick="openMenu()">
@@ -39,20 +42,23 @@
                     <a class="sign" id="signButtonMobile">SIGN OUT</a>
                 <?php } else { ?>
                     <a class="sign" id="signButtonMobile">SIGN IN</a>
-                <?php }; ?>
-
+                <?php } ?>
             </div>
             <div class="nav-desktop">
                 <ul>
                     <li><a id="home">home</a></li>
                     <li><a id="discover">discover</a></li>
                     <?php if ($isSession) { ?>
-                        <li><a id="myPlants">my plants</a></li>
+                        <?php if ($isAdmin) { ?>
+                            <li><a id="adminPanel">Admin Panel</a></li>
+                        <?php } else{ ?>
+                            <li><a id="myPlants">My Plants</a></li>
+                        <?php } ?>
                         <li><a id="signButton">sign out</a></li>
                     <?php } else { ?>
                         <li><a id="contact">info</a></li>
                         <li><a id="signButton">sign in</a></li>
-                    <?php }; ?>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
@@ -66,7 +72,6 @@
                 <p>Taking care of plants is our priority. Join us today to give your plants better life.</p>
             </div>
         </div>
-
         <section>
             <p><strong>Lorem ipsum dolor</strong> sit amet consectetur adipisicing elit. Rerum eos adipisci sunt non,
                 quidem beatae. Et ex incidunt ut. Exercitationem, odit sapiente. Illum consequatur quibusdam veritatis
@@ -86,5 +91,4 @@
         </section>
     </main>
 </body>
-
 </html>

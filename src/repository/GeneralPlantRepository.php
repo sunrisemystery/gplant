@@ -23,8 +23,7 @@ class GeneralPlantRepository extends Repository
         SELECT * FROM public.plants ORDER BY type
         ');
         $statement->execute();
-        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $plantsList;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getGeneralPlantsByString($string)
@@ -35,8 +34,7 @@ class GeneralPlantRepository extends Repository
         ');
         $statement->bindParam(':string', $searchString, PDO::PARAM_STR);
         $statement->execute();
-        $plantsList = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $plantsList;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
 

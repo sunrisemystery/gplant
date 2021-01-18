@@ -42,7 +42,26 @@ function createPlant(plant) {
     const description = clone.querySelector("p");
     const str = plant.main_description;
     description.innerHTML = str.substr(0, 100).concat('...');
+    window.onresize = function () {
+        if (screen.width < 429) {
+            description.innerHTML = str.substr(0, 50).concat('...');
+        } else {
+            description.innerHTML = str.substr(0, 100).concat('...');
+        }
+    }
+
     plantsContainer.appendChild(clone);
 
 
 }
+
+// const text = document.querySelector(".record-text");
+// let inside = text.innerHTML;
+// window.onresize = function () {
+//     if (screen.width < 429) {
+//         inside = inside.substr(0, 50).concat('...');
+//     } else {
+//         inside = inside.substr(0, 100).concat('...');
+//     }
+// }
+
