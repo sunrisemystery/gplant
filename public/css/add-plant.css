@@ -159,6 +159,29 @@ button:hover {
         background-size: cover;
     }
 
+    @media screen and (min-height: 1020px) {
+        input[type="text"] {
+            width: 25vw;
+            height: 3vh;
+            padding: 2vh;
+        }
+
+        .select-class {
+            width: 25vw;
+            height: 4vh;
+        }
+        button{
+            width: 14vw;
+            height: 5vh;
+        }
+        .form-img{
+            height: 40%;
+        }
+        .popup-content{
+            height: 50%;
+        }
+    }
+
 
 }
 

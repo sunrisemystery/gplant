@@ -203,6 +203,11 @@
     .desc:hover {
         font-weight: 600;
     }
+    @media screen and (min-height: 1020px) {
+        .plant-img{
+            height: 27vh;
+        }
+    }
 
 }
 

@@ -82,6 +82,11 @@ body {
     text-decoration: black;
 
 }
+@media screen and (max-width: 800px){
+    .popup-content{
+        width: 90%;
+    }
+}
 
 @media screen and (min-width: 750px) {
 

@@ -121,6 +121,21 @@
         height: 5vh;
         width: 7vw;
     }
+    @media screen and (min-height: 1020px) {
+        .input-rectangle{
+            width: 90%;
+            height: 35%;
+        }
+        .login-register input {
+            height: 3vh;
+            width: 25vw;
+            padding: 1.5vh;
+        }
+        .login-register button{
+            height: 3vh;
+            width: 8vw;
+        }
+    }
 }
 
 @media screen and (max-width: 850px) and (min-width: 415px) {

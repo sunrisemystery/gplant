@@ -150,6 +150,14 @@
         color: #295F42;
         cursor: pointer;
     }
+    @media screen and (min-height: 1020px){
+        .img-main-container {
+            grid-template-columns: 10% 40vh 1fr;
+            grid-template-rows: 8% 7% 30% 1fr;
+
+
+        }
+    }
 
 }
 

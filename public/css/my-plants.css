@@ -176,6 +176,16 @@
     .desc:hover {
         font-weight: 600;
     }
+    @media screen and (min-height: 1020px) {
+        .square {
+            width: 35vw;
+            height: 35vw;
+        }
+        .inline{
+            height: 20vw;
+        }
+
+    }
 
 
 }
@@ -248,7 +258,8 @@
     }
 
     .square {
-        width: 30vw;
+        /*width: 30vw;*/
+        width: 35vw;
         height: 35vh;
     }
 

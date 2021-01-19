@@ -224,6 +224,17 @@
     .inline-height {
         height: 18vh;
     }
+    @media screen and (min-height: 1020px) {
+        .img-discover-container {
+            grid-template-columns: 10% 40vh 1fr;
+            grid-template-rows: 8% 7% 40% 1fr;
+
+        }
+        .search-bar{
+            width: 35vw;
+            min-height: 5vh;
+        }
+    }
 }
 
 @media screen and (max-width: 750px) {
