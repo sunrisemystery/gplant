@@ -2,11 +2,12 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/GeneralPlant.php';
 require_once __DIR__ . '/../repository/GeneralPlantRepository.php';
+require_once __DIR__ . '/../utilities/Utility.php';
 
 class GeneralPlantController extends AppController
 {
 
-    private $generalPlantRepository;
+    private GeneralPlantRepository $generalPlantRepository;
 
     public function __construct()
     {
@@ -16,20 +17,22 @@ class GeneralPlantController extends AppController
 
     public function generalPlant()
     {
-        session_cache_limiter('private, must-revalidate');
-        session_cache_expire(5);
-        session_start();
+        Utility::setSessionCache();
         if ($this->isPost()) {
-            $id = $_POST['general-plant-id'];
-            $plant = $this->generalPlantRepository->getGeneralPlantById($id);
+            try {
+                $plant = $this->generalPlantRepository->getGeneralPlantById($_POST['general-plant-id']);
+            } catch (UnexpectedValueException $e) {
+                return $this->discover();
+            }
             $generalPlant = new GeneralPlant($plant['type'], $plant['image'], $plant['main_description'], $plant['water_description']);
-            $this->render('general-plant', ['plant' => $generalPlant, 'isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+            $this->render('general-plant', ['plant' => $generalPlant, 'isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
     }
 
     public function discover()
     {
-        $this->render('discover', ['plantsList' => $this->generalPlantRepository->discoverPlants(), 'isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        $this->render('discover', ['plantsList' => $this->generalPlantRepository->discoverPlants(),
+            'isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
     }
 
     public function search()

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/Plant.php';
 
 class PlantRepository extends Repository
 {
-    public function getPlantById(int $id): ?Plant
+    public function getPlantById(int $id): Plant
     {
         $statement = $this->database->connect()->prepare('
         SELECT * FROM public.plants_user WHERE id = :id');
@@ -13,7 +13,7 @@ class PlantRepository extends Repository
         $statement->execute();
         $plant = $statement->fetch(PDO::FETCH_ASSOC);
         if ($plant == false) {
-            return null;
+            throw new UnexpectedValueException('Plant not found');
         }
         $plantObj = new Plant($plant['name'], $plant['image']);
         $plantObj->setLastWatered($plant['last_watered']);
@@ -22,7 +22,6 @@ class PlantRepository extends Repository
         return $plantObj;
     }
 
-
     public function addPlant(Plant $plant): void
     {
         session_start();
@@ -30,9 +29,7 @@ class PlantRepository extends Repository
         INSERT INTO public.plants_user( user_id, plant_id, name, image)
         VALUES (?, ?, ?, ?) ');
         $statement->execute([$_SESSION['id'], $plant->getType(), $plant->getName(), $plant->getImage()]);
-
     }
-
 
     public function getPlants(): array
     {
@@ -58,8 +55,8 @@ class PlantRepository extends Repository
 
     public function getTypeByUserPlantId($id): array
     {
-
-        $statement = $this->database->connect()->prepare('SELECT type,plant_id, water_description FROM public.users_plants_view WHERE id = :id');
+        $statement = $this->database->connect()->prepare('SELECT type,plant_id, water_description
+        FROM public.users_plants_view WHERE id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
@@ -72,7 +69,7 @@ class PlantRepository extends Repository
         UPDATE public.plants_user SET last_watered = :date WHERE id = :id
         ');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date);
         $statement->execute();
     }
 
@@ -93,8 +90,8 @@ class PlantRepository extends Repository
         ');
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->bindParam(':type', $type, PDO::PARAM_INT);
-            $statement->bindParam(':name', $name, PDO::PARAM_STR);
-            $statement->bindParam(':image', $image, PDO::PARAM_STR);
+            $statement->bindParam(':name', $name);
+            $statement->bindParam(':image', $image);
             $statement->execute();
         } else {
             $statement = $this->database->connect()->prepare('
@@ -102,7 +99,7 @@ class PlantRepository extends Repository
         ');
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->bindParam(':type', $type, PDO::PARAM_INT);
-            $statement->bindParam(':name', $name, PDO::PARAM_STR);
+            $statement->bindParam(':name', $name);
             $statement->execute();
         }
     }

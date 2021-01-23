@@ -11,9 +11,9 @@ class PlantController extends AppController
     const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
-    private $messages = [];
-    private $plantRepository;
-    private $generalPlantRepository;
+    private array $messages = [];
+    private PlantRepository $plantRepository;
+    private GeneralPlantRepository $generalPlantRepository;
 
 
     public function __construct()
@@ -59,10 +59,13 @@ class PlantController extends AppController
         Utility::LoginVerify();
         if ($this->isPost()) {
             if (isset($_POST['plant-id'])) {
-
-                return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($_POST['plant-id']),
-                    'data' => $this->plantRepository->getTypeByUserPlantId($_POST['plant-id']),
-                    'isSession' => Utility::checkSession()]);
+                try {
+                    return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($_POST['plant-id']),
+                        'data' => $this->plantRepository->getTypeByUserPlantId($_POST['plant-id']),
+                        'isSession' => Utility::checkSession()]);
+                } catch (UnexpectedValueException $e) {
+                    return $this->addPlantCriticalFieldMessage($e->getMessage() . '. You can add it here');
+                }
             }
             if (isset($_POST['update-button'])) {
                 return $this->plantAfterUpdate();
@@ -95,13 +98,17 @@ class PlantController extends AppController
             return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
         if ($this->isPost() && isset($_POST['update-plant'])) {
-            $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
-                'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']),
-                'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
+            try {
+                return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
+                    'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']),
+                    'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
+            } catch (UnexpectedValueException $e) {
+                return $this->addPlantCriticalFieldMessage($e->getMessage() . '. You can add it here');
+            }
         }
     }
 
-    private function addPlantEmptyFieldMessage($message)
+    private function addPlantCriticalFieldMessage($message)
     {
         $this->messages[] = $message;
         return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
@@ -110,18 +117,21 @@ class PlantController extends AppController
     private function editPlantEmptyFieldMessage($message, $id)
     {
         $this->messages[] = $message;
-        return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
-            'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id),
-            'messages' => $this->messages]);
+        try {
+            return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
+                'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id),
+                'messages' => $this->messages]);
+        } catch (UnexpectedValueException $e) {
+            return $this->addPlantCriticalFieldMessage($e->getMessage() . '. You can add it here');
+        }
     }
 
     private function checkEmptyField($name, $type)
     {
         if (strlen($name) === 0) {
-            return $this->addPlantEmptyFieldMessage('Please fill the name field');
-        }
-        if (strlen($type) === 0) {
-            return $this->addPlantEmptyFieldMessage('Please select type of plant');
+            return $this->addPlantCriticalFieldMessage('Please fill the name field');
+        } elseif (strlen($type) === 0) {
+            return $this->addPlantCriticalFieldMessage('Please select type of plant');
         }
     }
 
@@ -152,8 +162,12 @@ class PlantController extends AppController
 
     private function getPlant($id)
     {
-        return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($id),
-            'data' => $this->plantRepository->getTypeByUserPlantId($id), 'isSession' => Utility::checkSession()]);
+        try {
+            return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($id),
+                'data' => $this->plantRepository->getTypeByUserPlantId($id), 'isSession' => Utility::checkSession()]);
+        } catch (UnexpectedValueException $e) {
+            return $this->addPlantCriticalFieldMessage($e->getMessage() . '. You can add it here');
+        }
     }
 
     private function deletePlant()

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../models/Plant.php';
 
 class GeneralPlantRepository extends Repository
 {
-    public function getGeneralPlantById(int $id): ?array
+    public function getGeneralPlantById(int $id): array
     {
         $statement = $this->database->connect()->prepare('
         SELECT * FROM public.plants WHERE id = :id');
@@ -12,12 +12,12 @@ class GeneralPlantRepository extends Repository
         $statement->execute();
         $plant = $statement->fetch(PDO::FETCH_ASSOC);
         if ($plant == false) {
-            return null;
+            throw new UnexpectedValueException('Plant not found');
         }
         return $plant;
     }
 
-    public function discoverPlants()
+    public function discoverPlants(): array
     {
         $statement = $this->database->connect()->prepare('
         SELECT * FROM public.plants ORDER BY type
@@ -26,13 +26,13 @@ class GeneralPlantRepository extends Repository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getGeneralPlantsByString($string)
+    public function getGeneralPlantsByString($string): array
     {
         $searchString = strtolower('%' . $string . '%');
         $statement = $this->database->connect()->prepare('
         SELECT * FROM public.plants WHERE lower(type) like :string ORDER BY type
         ');
-        $statement->bindParam(':string', $searchString, PDO::PARAM_STR);
+        $statement->bindParam(':string', $searchString);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 

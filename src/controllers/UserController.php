@@ -5,7 +5,7 @@ require_once __DIR__ . '/../repository/UserRepository.php';
 
 class UserController extends AppController
 {
-    private $userRepository;
+    private UserRepository $userRepository;
     private $messages = [];
 
     public function __construct()
@@ -14,13 +14,10 @@ class UserController extends AppController
         $this->userRepository = new UserRepository();
     }
 
-
     public function updateProfile()
     {
-
         session_start();
         Utility::LoginVerify();
-
         $array = [
             'name',
             'login',
@@ -32,48 +29,45 @@ class UserController extends AppController
                     $error = true;
                 }
             }
-            if ($_SESSION['login'] != $_POST['login']) {
-
-                if ($this->userRepository->checkIfLoginExists($_POST['login'])) {
-
-                    return $this->detectedError("User with this login already exists!");
-                }
-            }
-            if (!empty($_POST['password'])) {
-                if ($_POST['password'] != $_POST['password-confirm']) {
-                    return $this->detectedError("Provided two different passwords");
-
-                }
+            if ($error || $_SESSION['login'] != $_POST['login'] || !empty($_POST['password'])) {
+                return $this->validateUpdate();
             }
 
-            if (!$error) {
-                $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
-                $_SESSION['login'] = $_POST['login'];
-                $_SESSION['name'] = $_POST['name'];
-                return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
-
-            } else {
-
-                return $this->detectedError("name and login inputs cant be empty");
-            }
+            $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['name'] = $_POST['name'];
+            return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
 
         } else {
-            $user = new User($_SESSION['email'], $_SESSION['login'], null);
-            $user->setId($_SESSION['id']);
-            $user->setName($_SESSION['name']);
-            return $this->render('user-settings', ['user' => $user]);
+            return $this->userSettings();
         }
-
-
     }
 
-    private function detectedError(string $message)
+    private function userSettings(string $message = null)
     {
-        session_start();
-        $this->messages[] = $message;
         $user = new User($_SESSION['email'], $_SESSION['login'], null);
         $user->setId($_SESSION['id']);
         $user->setName($_SESSION['name']);
-        return $this->render('user-settings', ['messages' => $this->messages, 'user' => $user]);
+        if (isset($message)) {
+            return $this->render('user-settings', ['messages' => [$message], 'user' => $user]);
+        }
+        return $this->render('user-settings', ['user' => $user]);
+
     }
+
+    private function validateUpdate()
+    {
+        if ($_SESSION['login'] != $_POST['login'] && !empty($_POST['login'])) {
+            if ($this->userRepository->checkIfLoginExists($_POST['login'])) {
+                return $this->userSettings("User with this login already exists!");
+            }
+        } elseif (!empty($_POST['password'])) {
+            if ($_POST['password'] != $_POST['password-confirm']) {
+                return $this->userSettings("Provided two different passwords");
+            }
+        } else {
+            return $this->userSettings("name and login inputs can't be empty");
+        }
+    }
+
 }

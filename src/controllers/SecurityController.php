@@ -3,10 +3,11 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../repository/UserRepository.php';
+require_once __DIR__ . '/../utilities/Utility.php';
 
 class SecurityController extends AppController
 {
-    private $userRepository;
+    private UserRepository $userRepository;
     private $messages = [];
 
     public function __construct()
@@ -19,44 +20,31 @@ class SecurityController extends AppController
     {
         session_start();
         if (!$this->isPost()) {
-
-            if (isset($_SESSION['id'])) {
-                unset($_SESSION['id']);
-                session_destroy();
-            }
+            $this->destroySession();
             return $this->render('login');
         }
 
         $email = $_POST["email"];
-        $password = $_POST["password"];
-
-        $user = $this->userRepository->getUser($email);
-        if (!$user) {
-            return $this->render('login', ['messages' => ['User with this email doesnt exist!']]);
+        try {
+            $user = $this->userRepository->getUser($email);
+        } catch (UnexpectedValueException $e) {
+            return $this->pageMessage('login', $e->getMessage());
         }
 
-        if ($user->getEmail() !== $email) {
-            return $this->render('login', ['messages' => ['User with this email doesnt exist!']]);
+        if ($user->getEmail() !== $email || !password_verify($_POST["password"], $user->getPassword())) {
+            return $this->validateUser($user);
         }
-        if (!password_verify($password, $user->getPassword())) {
-            return $this->render('login', ['messages' => ['Incorrect password']]);
-        }
+
         if ($user->getRole() == Utility::ADMIN) {
             $_SESSION['role'] = $user->getRole();
             $_SESSION['id'] = $user->getId();
-            return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+            return $this->render('admin-view', ['isSession' => Utility::checkSession(),
+                'userList' => $this->userRepository->getAllUsers()]);
         }
-
-        $_SESSION['email'] = $user->getEmail();
-        $_SESSION['login'] = $user->getLogin();
-        $_SESSION['name'] = $user->getName();
-        $_SESSION['role'] = $user->getRole();
-        $_SESSION['id'] = $user->getId();
+        $this->setSessionFields($user);
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/myPlants");
-//        return $this->render('my-plants');
-
 
     }
 
@@ -72,30 +60,26 @@ class SecurityController extends AppController
                 if (empty($_POST[$value])) {
                     $error = true;
                 }
-
             }
-            if ($error) {
-                $this->messages[] = "All fields are required.";
-            } elseif ($this->userRepository->checkIfEmailExists($_POST['email'])) {
-                $this->messages[] = "User with this email already exists!";
-                return $this->render('register', ['messages' => $this->messages]);
-            } elseif ($this->userRepository->checkIfLoginExists($_POST['login'])) {
-                $this->messages[] = "User with this login already exists!";
-                return $this->render('register', ['messages' => $this->messages]);
-            } else {
+            if ($error || $this->userRepository->checkIfEmailExists($_POST['email']) ||
+                $this->userRepository->checkIfLoginExists($_POST['login']) ||
+                $_POST["password"] != $_POST["password-confirm"]) {
 
-                $user = new User($_POST['email'], $_POST['login'], $_POST['password']);
-                $this->userRepository->addUser($user);
-                session_start();
-                $_SESSION['email'] = $user->getEmail();
-                $_SESSION['login'] = $user->getLogin();
+                return $this->validateRegistration();
+            }
+
+            $user = new User($_POST['email'], $_POST['login'], $_POST['password']);
+            $this->userRepository->addUser($user);
+            session_start();
+            try {
                 $id = $this->userRepository->getIdByEmail($user->getEmail());
-                $_SESSION['id'] = $id['id'];
-                $this->messages[] = "Add your first plant here!";
-                return $this->render('my-plants', ['messages' => $this->messages]);
+            } catch (UnexpectedValueException $e) {
+                return $this->pageMessage('register', $e->getMessage());
             }
-            return $this->render('register', ['messages' => $this->messages]);
-
+            $user->setId($id['id']);
+            $user->setRole(Utility::USER);
+            $this->setSessionFields($user);
+            return $this->pageMessage('my-plants', "Add your first plant here!");
         }
         return $this->render('register');
     }
@@ -106,13 +90,16 @@ class SecurityController extends AppController
         if ($_SESSION['role'] == Utility::ADMIN) {
             if ($this->isPost()) {
                 if (isset($_POST['delete-user'])) {
-                    $id = $_POST['delete-user'];
-                    $this->userRepository->deleteUserById($id);
+                    try {
+                        $this->userRepository->deleteUserById($_POST['delete-user']);
+                    } catch (UnexpectedValueException $e) {
+                        return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+                    }
                 }
             }
-             $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
+            return $this->render('admin-view', ['isSession' => Utility::checkSession(), 'userList' => $this->userRepository->getAllUsers()]);
         } else {
-            $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+            $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
     }
 
@@ -129,5 +116,55 @@ class SecurityController extends AppController
                 echo json_encode($this->userRepository->getLoginByString($decoded['search']));
             }
         }
+    }
+
+    private function destroySession()
+    {
+        if (isset($_SESSION['id'])) {
+            unset($_SESSION['id']);
+            session_destroy();
+        }
+    }
+
+    private function validateRegistration()
+    {
+        if ($_POST["password"] != $_POST["password-confirm"]) {
+            return $this->pageMessage('register', "Provided two different passwords");
+        } elseif ($this->userRepository->checkIfEmailExists($_POST['email'])) {
+            return $this->pageMessage('register', "User with this email already exists!");
+        } elseif ($this->userRepository->checkIfLoginExists($_POST['login'])) {
+            return $this->pageMessage('register', "User with this login already exists!");
+        }
+
+        return $this->pageMessage('register', 'All fields are required');
+    }
+
+    private function pageMessage($pageName, $message)
+    {
+        return $this->render($pageName, ['messages' => [$message]]);
+    }
+
+
+    private function validateUser($user)
+    {
+
+        if ($user->getEmail() !== $_POST["email"]) {
+
+            return $this->pageMessage('login', 'User with this email doesnt exist!');
+        }
+        if (!password_verify($_POST["password"], $user->getPassword())) {
+            return $this->pageMessage('login', 'Incorrect password!');
+        }
+    }
+
+
+    private function setSessionFields($user)
+    {
+        $_SESSION['email'] = $user->getEmail();
+        $_SESSION['login'] = $user->getLogin();
+        $_SESSION['name'] = $user->getName();
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['id'] = $user->getId();
+
     }
 }
