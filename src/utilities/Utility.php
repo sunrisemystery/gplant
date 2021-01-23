@@ -32,4 +32,9 @@ class Utility
         }
         return false;
     }
+    public static function setSessionCache(){
+        session_cache_limiter('private, must-revalidate');
+        session_cache_expire(5);
+        session_start();
+    }
 }

@@ -27,35 +27,26 @@ class PlantController extends AppController
     {
         session_start();
         Utility::LoginVerify();
-        $id = null;
-
-        if(Utility::isAdmin()){
-            $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        if (Utility::isAdmin()) {
+            return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
         if ($this->isPost()) {
             if (isset($_POST['delete-plant'])) {
-                $id = $_POST['delete-plant'];
-                $this->plantRepository->deletePlantById($id);
-                return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+                return $this->deletePlant();
             }
         } else {
-
             $plants = $this->plantRepository->getPlants();
             if (count($plants) === 0) {
                 $this->messages[] = "Add your first plant here!";
-                return $this->render('my-plants', ['plants' => $plants, 'messages' => $this->messages]);
-            } else {
-                return $this->render('my-plants', ['plants' => $plants]);
             }
+            return $this->render('my-plants', ['plants' => $plants, 'messages' => $this->messages]);
         }
     }
 
     public function waterNow($id)
     {
         session_start();
-        if (!isset($_SESSION['id'])) {
-            return false;
-        }
+        Utility::LoginVerify();
         $realId = base64_decode($id);
         $this->plantRepository->changeLastWatered($realId, date("Y-m-d"));
         http_response_code(200);
@@ -64,51 +55,17 @@ class PlantController extends AppController
 
     public function plant()
     {
-
-        session_cache_limiter('private, must-revalidate');
-        session_cache_expire(5);
-        session_start();
+        Utility::setSessionCache();
         Utility::LoginVerify();
         if ($this->isPost()) {
-
             if (isset($_POST['plant-id'])) {
-                $id = $_POST['plant-id'];
-                $plant = $this->plantRepository->getPlantById($id);
-                $data = $this->plantRepository->getTypeByUserPlantId($id);
-                return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
+
+                return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($_POST['plant-id']),
+                    'data' => $this->plantRepository->getTypeByUserPlantId($_POST['plant-id']),
+                    'isSession' => Utility::checkSession()]);
             }
-
             if (isset($_POST['update-button'])) {
-
-                $id = $_POST['update-button'];
-                $type = intval($_POST['selectType']);
-                $name = $_POST['name'];
-                if (empty($name) || empty($type)) {
-                    $this->messages[] = "All fields are required.";
-                    return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
-                }
-
-                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                    if ($this->validate($_FILES['file'])) {
-                        move_uploaded_file(
-                            $_FILES['file']['tmp_name'],
-                            dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
-                        );
-                        $image = $_FILES['file']['name'];
-                        $this->plantRepository->editPlant($id, $name, $image, $type);
-                        $plant = $this->plantRepository->getPlantById($id);
-                        $data = $this->plantRepository->getTypeByUserPlantId($id);
-                        return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
-                    } else {
-                        return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id), 'messages' => $this->messages]);
-                    }
-                } else {
-
-                    $this->plantRepository->editPlant($id, $name, null, $type);
-                    $plant = $this->plantRepository->getPlantById($id);
-                    $data = $this->plantRepository->getTypeByUserPlantId($id);
-                    return $this->render('plant', ['plant' => $plant, 'data' => $data, 'isSession' => Utility::checkSession()]);
-                }
+                return $this->plantAfterUpdate();
             }
         }
     }
@@ -118,53 +75,122 @@ class PlantController extends AppController
     {
         session_start();
         Utility::LoginVerify();
-        if(Utility::isAdmin()){
-             return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        if (Utility::isAdmin()) {
+            return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
-
-        if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
-            move_uploaded_file(
-                $_FILES['file']['tmp_name'],
-                dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
-            );
-
-            $plant = new Plant($_POST['name'], $_FILES['file']['name']);
-            $plant->setType(intval($_POST['selectType']));
-            $this->plantRepository->addPlant($plant);
-            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
-        } elseif ($this->isPost() && strlen($_POST['name']) === 0) {
-
-            $this->messages[] = 'Please fill the name field';
-            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
-        } elseif ($this->isPost() && strlen($_POST['selectType']) === 0) {
-
-            $this->messages[] = 'Please select type of plant';
-            return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
-        } elseif ($this->isPost() && strlen($_POST['name']) != 0 && strlen($_POST['selectType']) != 0 && is_uploaded_file($_FILES['file']['tmp_name']) == false) {
-
-            $image = $this->generalPlantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
-            $plant = new Plant($_POST['name'], $image);
-            copy('public/img/discover/' . $image, 'public/uploads/' . $image);
-            $plant->setType(intval($_POST['selectType']));
-            $this->plantRepository->addPlant($plant);
-            return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+        if ($this->isPost()) {
+            if (strlen($_POST['name']) === 0 || strlen($_POST['selectType']) === 0) {
+                return $this->checkEmptyField($_POST['name'], $_POST['selectType']);
+            }
+            return $this->checkImage();
         }
-
-        return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
+        return $this->render('add-plant', ['rowList' => $this->generalPlantRepository->getTypes()]);
     }
 
     public function editPlant()
     {
-        session_start();
+        Utility::setSessionCache();
         Utility::LoginVerify();
-        if(Utility::isAdmin()){
-            return $this->render('main', ['isSession' => Utility::checkSession(),'isAdmin'=>Utility::isAdmin()]);
+        if (Utility::isAdmin()) {
+            return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
         if ($this->isPost() && isset($_POST['update-plant'])) {
-            $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(), 'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']), 'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
+            $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
+                'plantType' => $this->plantRepository->getTypeByUserPlantId($_POST['update-plant']),
+                'plant' => $this->plantRepository->getPlantById($_POST['update-plant'])]);
         }
     }
 
+    private function addPlantEmptyFieldMessage($message)
+    {
+        $this->messages[] = $message;
+        return $this->render('add-plant', ['messages' => $this->messages, 'rowList' => $this->generalPlantRepository->getTypes()]);
+    }
+
+    private function editPlantEmptyFieldMessage($message, $id)
+    {
+        $this->messages[] = $message;
+        return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
+            'plantType' => $this->plantRepository->getTypeByUserPlantId($id), 'plant' => $this->plantRepository->getPlantById($id),
+            'messages' => $this->messages]);
+    }
+
+    private function checkEmptyField($name, $type)
+    {
+        if (strlen($name) === 0) {
+            return $this->addPlantEmptyFieldMessage('Please fill the name field');
+        }
+        if (strlen($type) === 0) {
+            return $this->addPlantEmptyFieldMessage('Please select type of plant');
+        }
+    }
+
+    private function plantAfterUpdate()
+    {
+
+        $id = $_POST['update-button'];
+        $type = intval($_POST['selectType']);
+        $name = $_POST['name'];
+        if (empty($name) || empty($type)) {
+            return $this->editPlantEmptyFieldMessage("All fields are required.", $id);
+        }
+
+        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+            if ($this->validate($_FILES['file'])) {
+                $this->moveUploadedFile();
+                $this->plantRepository->editPlant($id, $name, $_FILES['file']['name'], $type);
+                return $this->getPlant($id);
+            }
+            return $this->editPlantEmptyFieldMessage("File is too large.", $id);
+
+        } else {
+            $this->plantRepository->editPlant($id, $name, null, $type);
+            return $this->getPlant($id);
+
+        }
+    }
+
+    private function getPlant($id)
+    {
+        return $this->render('plant', ['plant' => $this->plantRepository->getPlantById($id),
+            'data' => $this->plantRepository->getTypeByUserPlantId($id), 'isSession' => Utility::checkSession()]);
+    }
+
+    private function deletePlant()
+    {
+        $this->plantRepository->deletePlantById($_POST['delete-plant']);
+        return $this->render('my-plants', ['plants' => $this->plantRepository->getPlants()]);
+    }
+
+    private function checkImage()
+    {
+        if (is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+
+            $this->moveUploadedFile();
+            return $this->addPlantWithImage(new Plant($_POST['name'], $_FILES['file']['name']));
+        }
+        if (is_uploaded_file($_FILES['file']['tmp_name']) == false) {
+
+            $image = $this->generalPlantRepository->getImageFromGeneralPlants(intval($_POST['selectType']));
+            copy('public/img/discover/' . $image, 'public/uploads/' . $image);
+            return $this->addPlantWithImage(new Plant($_POST['name'], $image));
+        }
+    }
+
+    private function addPlantWithImage($plant)
+    {
+        $plant->setType(intval($_POST['selectType']));
+        $this->plantRepository->addPlant($plant);
+        return $this->render('my-plants', ['messages' => $this->messages, 'plants' => $this->plantRepository->getPlants()]);
+    }
+
+    private function moveUploadedFile()
+    {
+        move_uploaded_file(
+            $_FILES['file']['tmp_name'],
+            dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
+        );
+    }
 
 
     private function validate(array $file): bool
