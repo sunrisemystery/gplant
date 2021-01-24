@@ -13,7 +13,7 @@ class UserRepository extends Repository
         $statement->bindParam(':email', $email);
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($user == false) {
+        if (!$user) {
             throw new UnexpectedValueException("User with this email doesn't exist");
         }
         $userObj = new User($user['email'], $user['login'], $user['password']);
@@ -40,7 +40,7 @@ class UserRepository extends Repository
         $statement->bindParam(':email', $email);
         $statement->execute();
         $id = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($id == false) {
+        if (!$id) {
             throw new UnexpectedValueException('id not found');
         }
         return $id;
@@ -48,19 +48,8 @@ class UserRepository extends Repository
 
     public function addUser(User $user): void
     {
-        $login = $user->getLogin();
-
-        $statement2 = $this->database->connect()->prepare('
-        INSERT INTO public.users_details(login) VALUES (?)');
-        $statement2->execute([$user->getLogin()]);
-
-        $statement3 = $this->database->connect()->prepare('
-        SELECT id FROM public.users_details WHERE login = :login
-        ');
-        $statement3->bindParam(':login', $login);
-        $statement3->execute();
-        $foundId = $statement3->fetch(PDO::FETCH_ASSOC);
-
+        $this->addUserDetails($user->getLogin());
+        $foundId = $this->findUserIdByLogin($user->getLogin());
         $statement = $this->database->connect()->prepare('
         INSERT INTO public.users(email, password, users_details_id) VALUES (?,?,?)');
         $statement->execute([$user->getEmail(), password_hash($user->getPassword(), PASSWORD_DEFAULT), $foundId['id']]);
@@ -68,19 +57,14 @@ class UserRepository extends Repository
 
     public function deleteUserById($id): void
     {
-        $statement = $this->database->connect()->prepare('
-        SELECT users_details_id FROM public.users WHERE id = :id
-        ');
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-        $foundId = $statement->fetch(PDO::FETCH_ASSOC);
+        $foundId = $this->findUserDetailsIdByUserId($id);
         if ($foundId == false) {
             throw new UnexpectedValueException('User not found');
         }
-        $statement2 = $this->database->connect()->prepare('
+        $statement = $this->database->connect()->prepare('
         DELETE FROM public.users_details WHERE id = :id');
-        $statement2->bindParam(':id', $foundId['users_details_id'], PDO::PARAM_INT);
-        $statement2->execute();
+        $statement->bindParam(':id', $foundId['users_details_id'], PDO::PARAM_INT);
+        $statement->execute();
     }
 
     public function getLoginByString(string $string): array
@@ -94,7 +78,6 @@ class UserRepository extends Repository
         $statement->bindParam(':role', $role);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
-
     }
 
     public function checkIfEmailExists(string $email): bool
@@ -126,28 +109,64 @@ class UserRepository extends Repository
     public function updateUser($id, $email, $login, $password, $name)
     {
         if ($password != null) {
-            $statement = $this->database->connect()->prepare('
-        UPDATE public.users SET  password = :password WHERE id = :id
-        ');
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $statement->bindParam(':password', $passwordHash);
-            $statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $statement->execute();
+            $this->setUserPassword($id, $password);
         }
-
-        $statement3 = $this->database->connect()->prepare('
-        SELECT users_details_id FROM public.users WHERE email = :email
-        ');
-        $statement3->bindParam(':email', $email);
-        $statement3->execute();
-        $foundId = $statement3->fetch(PDO::FETCH_ASSOC);
-
-        $statement2 = $this->database->connect()->prepare('
+        $foundId = $this->findUserDetailsIdByEmail($email);
+        $statement = $this->database->connect()->prepare('
         UPDATE public.users_details SET login = :login, name = :name WHERE  id = :id
         ');
-        $statement2->bindParam(':login', $login);
-        $statement2->bindParam(':name', $name);
-        $statement2->bindParam(':id', $foundId['users_details_id'], PDO::PARAM_INT);
-        $statement2->execute();
+        $statement->bindParam(':login', $login);
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':id', $foundId['users_details_id'], PDO::PARAM_INT);
+        $statement->execute();
     }
+
+    private function findUserIdByLogin($login)
+    {
+        $statement = $this->database->connect()->prepare('
+        SELECT id FROM public.users_details WHERE login = :login
+        ');
+        $statement->bindParam(':login', $login);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function findUserDetailsIdByUserId($id)
+    {
+        $statement = $this->database->connect()->prepare('
+        SELECT users_details_id FROM public.users WHERE id = :id
+        ');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function findUserDetailsIdByEmail($email)
+    {
+        $statement = $this->database->connect()->prepare('
+        SELECT users_details_id FROM public.users WHERE email = :email
+        ');
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function setUserPassword($id, $password)
+    {
+        $statement = $this->database->connect()->prepare('
+        UPDATE public.users SET  password = :password WHERE id = :id
+        ');
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $statement->bindParam(':password', $passwordHash);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    private function addUserDetails($login)
+    {
+        $statement = $this->database->connect()->prepare('
+        INSERT INTO public.users_details(login) VALUES (?)');
+        $statement->execute([$login]);
+    }
+
 }

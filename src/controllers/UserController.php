@@ -6,7 +6,7 @@ require_once __DIR__ . '/../repository/UserRepository.php';
 class UserController extends AppController
 {
     private UserRepository $userRepository;
-    private $messages = [];
+    private array $messages = [];
 
     public function __construct()
     {
@@ -18,21 +18,11 @@ class UserController extends AppController
     {
         session_start();
         Utility::LoginVerify();
-        $array = [
-            'name',
-            'login',
-        ];
-        $error = false;
         if ($this->isPost()) {
-            foreach ($array as $value) {
-                if (empty($_POST[$value])) {
-                    $error = true;
-                }
-            }
+            $error = $this->checkEmptyFields();
             if ($error || $_SESSION['login'] != $_POST['login'] || !empty($_POST['password'])) {
                 return $this->validateUpdate();
             }
-
             $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
             $_SESSION['login'] = $_POST['login'];
             $_SESSION['name'] = $_POST['name'];
@@ -52,7 +42,6 @@ class UserController extends AppController
             return $this->render('user-settings', ['messages' => [$message], 'user' => $user]);
         }
         return $this->render('user-settings', ['user' => $user]);
-
     }
 
     private function validateUpdate()
@@ -70,4 +59,18 @@ class UserController extends AppController
         }
     }
 
+    private function checkEmptyFields(): bool
+    {
+        $array = [
+            'name',
+            'login',
+        ];
+        $error = false;
+        foreach ($array as $value) {
+            if (empty($_POST[$value])) {
+                $error = true;
+            }
+        }
+        return $error;
+    }
 }

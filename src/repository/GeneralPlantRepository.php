@@ -11,7 +11,7 @@ class GeneralPlantRepository extends Repository
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         $plant = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($plant == false) {
+        if (!$plant) {
             throw new UnexpectedValueException('Plant not found');
         }
         return $plant;
@@ -46,7 +46,7 @@ class GeneralPlantRepository extends Repository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getImageFromGeneralPlants($id)
+    public function getImageFromGeneralPlants($id): string
     {
         $statement = $this->database->connect()->prepare('
         SELECT image FROM public.plants WHERE id = :id

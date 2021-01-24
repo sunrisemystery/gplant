@@ -12,7 +12,7 @@ class PlantRepository extends Repository
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         $plant = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($plant == false) {
+        if (!$plant) {
             throw new UnexpectedValueException('Plant not found');
         }
         $plantObj = new Plant($plant['name'], $plant['image']);
@@ -24,7 +24,6 @@ class PlantRepository extends Repository
 
     public function addPlant(Plant $plant): void
     {
-        session_start();
         $statement = $this->database->connect()->prepare('
         INSERT INTO public.plants_user( user_id, plant_id, name, image)
         VALUES (?, ?, ?, ?) ');
@@ -33,9 +32,6 @@ class PlantRepository extends Repository
 
     public function getPlants(): array
     {
-        if (session_status() != PHP_SESSION_ACTIVE) {
-            session_start();
-        }
         $result = [];
         $statement = $this->database->connect()->prepare('
         SELECT * FROM public.plants_user WHERE user_id = :user_id ORDER BY name');
@@ -48,7 +44,6 @@ class PlantRepository extends Repository
             $plantObj->setLastWatered($plant['last_watered']);
             $result[] = $plantObj;
         }
-
         return $result;
     }
 
@@ -62,8 +57,7 @@ class PlantRepository extends Repository
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-
-    public function changeLastWatered($id, $date)
+    public function changeLastWatered($id, $date): void
     {
         $statement = $this->database->connect()->prepare('
         UPDATE public.plants_user SET last_watered = :date WHERE id = :id
@@ -73,7 +67,7 @@ class PlantRepository extends Repository
         $statement->execute();
     }
 
-    public function deletePlantById($id)
+    public function deletePlantById($id): void
     {
         $statement = $this->database->connect()->prepare('
         DELETE FROM public.plants_user WHERE id = :id
@@ -82,25 +76,21 @@ class PlantRepository extends Repository
         $statement->execute();
     }
 
-    public function editPlant($id, $name, $image, $type)
+    public function editPlant($id, $name, $type, $image = null): void
     {
         if ($image != null) {
             $statement = $this->database->connect()->prepare('
         UPDATE public.plants_user SET name = :name, image = :image, plant_id = :type WHERE id = :id
         ');
-            $statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $statement->bindParam(':type', $type, PDO::PARAM_INT);
-            $statement->bindParam(':name', $name);
             $statement->bindParam(':image', $image);
-            $statement->execute();
         } else {
             $statement = $this->database->connect()->prepare('
         UPDATE public.plants_user SET name = :name, plant_id = :type WHERE id = :id
         ');
-            $statement->bindParam(':id', $id, PDO::PARAM_INT);
-            $statement->bindParam(':type', $type, PDO::PARAM_INT);
-            $statement->bindParam(':name', $name);
-            $statement->execute();
         }
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':type', $type, PDO::PARAM_INT);
+        $statement->bindParam(':name', $name);
+        $statement->execute();
     }
 }

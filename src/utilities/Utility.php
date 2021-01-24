@@ -25,16 +25,32 @@ class Utility
             die;
         }
     }
-    public static function isAdmin():bool{
+
+    public static function isAdmin(): bool
+    {
         session_start();
-        if($_SESSION['role']===self::ADMIN){
+        if ($_SESSION['role'] === self::ADMIN) {
             return true;
         }
         return false;
     }
-    public static function setSessionCache(){
+
+    public static function setSessionCache()
+    {
         session_cache_limiter('private, must-revalidate');
-        session_cache_expire(5);
+        session_cache_expire(1);
         session_start();
+    }
+
+    public static function search()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+            header('Content-type: application/json');
+            http_response_code(200);
+            return $decoded;
+        }
     }
 }
