@@ -4,7 +4,8 @@
     align-items: center;
     height: 100vh;
 }
-.login-register{
+
+.login-register {
     overflow: hidden;
 }
 
@@ -12,7 +13,6 @@
     font: normal normal normal 4rem/10rem Bahnschrift;
     color: white;
 }
-
 
 .login-text {
     font-weight: 600;
@@ -29,7 +29,6 @@
     align-items: center;
     height: 40%;
     width: 50%;
-
 }
 
 .login-register form {
@@ -121,17 +120,20 @@
         height: 5vh;
         width: 7vw;
     }
+
     @media screen and (min-height: 1020px) {
-        .input-rectangle{
+        .input-rectangle {
             width: 90%;
             height: 35%;
         }
+
         .login-register input {
             height: 3vh;
             width: 25vw;
             padding: 1.5vh;
         }
-        .login-register button{
+
+        .login-register button {
             height: 3vh;
             width: 8vw;
         }
@@ -140,16 +142,19 @@
 
 @media screen and (max-width: 850px) and (min-width: 415px) {
 
-    p{
+    p {
         color: #FFFFFF;
     }
-    .input-rectangle{
+
+    .input-rectangle {
         height: 50%;
     }
+
     .img-container {
         display: none;
     }
-    .messages{
+
+    .messages {
         color: #FFFFFF;
         font-size: 1.2em;
     }
@@ -182,12 +187,12 @@
     .login-register form p {
         color: white;
         margin-top: 7vh;
-
     }
 
     .sign-in {
         margin-top: 3vh;
     }
+
     .sign-up {
         margin-top: 3vh;
     }
@@ -198,10 +203,12 @@
     .img-container {
         display: none;
     }
-    .input-rectangle{
+
+    .input-rectangle {
         height: 50%;
     }
-    .messages{
+
+    .messages {
         color: #FFFFFF;
         font-size: 1em;
         margin-bottom: 1em;
@@ -219,7 +226,6 @@
         font-size: 1.2rem;
         width: 75%;
     }
-
 
     .login-register input {
         height: 7vh;
@@ -241,14 +247,14 @@
     .sign-in {
         margin-top: 3vh;
     }
-
 }
 
 @media screen and (max-width: 354px) {
-    .login-register p{
+    .login-register p {
         margin-top: 0;
     }
-    .messages{
+
+    .messages {
         margin: 0;
     }
 }

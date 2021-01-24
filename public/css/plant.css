@@ -1,9 +1,7 @@
-
 .plant-desc {
     margin-left: 2em;
     width: 100%;
     height: 15vh;
-
 }
 
 .name-plant {
@@ -39,7 +37,6 @@
 }
 
 .plant-img {
-
     height: 40vh;
     border-radius: 1.2em;
     box-shadow: 0 3px 6px #00000029;
@@ -52,9 +49,7 @@
     font-weight: 700;
     align-self: center;
     justify-self: center;
-
 }
-
 
 .plant-wrapper .timer {
     display: flex;
@@ -69,9 +64,9 @@
     text-align: center;
     align-self: center;
     justify-self: center;
-
 }
-.button-specify{
+
+.button-specify {
     background: #295F42 0 0 no-repeat padding-box;
     box-shadow: 0 8px 8px #00000029;
     border: none;
@@ -83,9 +78,11 @@
     height: 6vh;
     width: 12vw;
 }
-.button-specify:hover{
+
+.button-specify:hover {
     cursor: pointer;
 }
+
 .button-plant {
     justify-self: center;
     align-self: center;
@@ -103,7 +100,8 @@
     align-items: center;
     text-align: center;
 }
-.days{
+
+.days {
     font-size: 0.7em;
     font-weight: bold;
     margin-left: 0.4em;
@@ -203,12 +201,12 @@
     .desc:hover {
         font-weight: 600;
     }
+
     @media screen and (min-height: 1020px) {
-        .plant-img{
+        .plant-img {
             height: 27vh;
         }
     }
-
 }
 
 @media screen and (max-width: 850px) and (min-width: 690px) {
@@ -254,14 +252,12 @@
     }
 
     .plant-wrapper {
-
         height: 40vh;
         grid-template-columns: 28vw auto 9vw;
         grid-template-rows: 5vh 6vh 6vh auto 12vh;
     }
 
     .general-plant-wrapper {
-
         height: 40vh;
         grid-template-columns: 10vw auto 9vw;
         grid-template-rows: 5vh 6vh 6vh auto 12vh;
@@ -287,7 +283,6 @@
         width: 100%;
     }
 
-
     .my-plants-container nav {
         display: none;
     }
@@ -300,9 +295,9 @@
         grid-row: 2/3;
         width: 100vw;
         height: 12vh;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        box-shadow: 0px -3px 3px #00000029;
-        border-radius: 4em 4em 0px 0px;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 -3px 3px #00000029;
+        border-radius: 4em 4em 0 0;
         position: fixed;
         overflow: hidden;
         bottom: 0;
@@ -321,7 +316,6 @@
     .nav-bottom-mobile a i {
         font-size: 1.9em;
     }
-
 }
 
 @media screen and (max-width: 690px) {
@@ -340,10 +334,10 @@
         margin-top: 6em;
         margin-bottom: 6em;
     }
-    .img-wrapper{
-        transform: translate(0,-20%);
-    }
 
+    .img-wrapper {
+        transform: translate(0, -20%);
+    }
 
     .settings-back .fa-chevron-left {
         font-size: 2.5em;
@@ -352,7 +346,6 @@
     .settings-back .fa-cog {
         font-size: 2.3em;
         margin-right: 2em;
-
     }
 
     .plant-wrapper {
@@ -377,7 +370,6 @@
     .watering-plant {
         grid-column: 2 /3;
         grid-row: 2/3;
-
     }
 
     .plant-wrapper .timer {
@@ -387,15 +379,12 @@
     }
 
     .button-plant {
-
-        width: 30%;
-
+        width: 35%;
     }
 
     .water-form {
         grid-column: 2 /3;
         grid-row: 4/5;
-
     }
 
     .delete-plant {
@@ -412,22 +401,6 @@
         display: none;
     }
 
-    /*.nav-bottom-mobile {*/
-    /*    display: flex;*/
-    /*    justify-content: space-evenly;*/
-    /*    flex-grow: 1;*/
-    /*    grid-column: 1/2;*/
-    /*    grid-row: 2/3;*/
-    /*    width: 100vw;*/
-    /*    height: 12vh;*/
-    /*    background: #FFFFFF 0 0 no-repeat padding-box;*/
-    /*    box-shadow: 0 -3px 3px #00000029;*/
-    /*    border-radius: 4em 4em 0 0;*/
-    /*    position: fixed;*/
-    /*    overflow: hidden;*/
-    /*    bottom: 0;*/
-    /*}*/
-
     .nav-bottom-mobile a {
         display: flex;
         text-align: center;
@@ -441,15 +414,14 @@
     .nav-bottom-mobile a i {
         font-size: 1.9em;
     }
-
-
-
 }
-@media screen and (max-width: 396px){
-    .img-wrapper{
-        transform: translate(0,-20%);
+
+@media screen and (max-width: 396px) {
+    .img-wrapper {
+        transform: translate(0, -20%);
     }
-    .plant-wrapper{
-        margin-top : 0.9em;
+
+    .plant-wrapper {
+        margin-top: 0.9em;
     }
 }

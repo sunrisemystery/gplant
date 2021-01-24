@@ -75,6 +75,8 @@ input[type="text"] {
     background: #FFFFFF 0 0 no-repeat padding-box;
     box-shadow: 0 8px 8px #00000029;
     opacity: 0.92;
+    appearance: none;
+    outline: none;
     height: 6vh;
     width: 17vw;
     border-radius: 9px;
@@ -98,9 +100,7 @@ input[type="text"] {
     width: 17vw;
     color: grey;
     outline: none;
-
 }
-
 
 button {
     margin-top: 7vh;
@@ -170,19 +170,20 @@ button:hover {
             width: 25vw;
             height: 4vh;
         }
-        button{
+
+        button {
             width: 14vw;
             height: 5vh;
         }
-        .form-img{
+
+        .form-img {
             height: 40%;
         }
-        .popup-content{
+
+        .popup-content {
             height: 50%;
         }
     }
-
-
 }
 
 @media screen and (max-width: 750px) {
@@ -194,6 +195,10 @@ button:hover {
     .add-plant-form {
         flex-direction: column;
         justify-content: center;
+    }
+
+    .form-text p {
+        color: white;
     }
 
     .nav-bottom-mobile a:nth-child(1) {
@@ -246,11 +251,9 @@ button:hover {
         width: 30vw;
         height: 8vh;
         margin-top: 1em;
-
     }
 
     .nav-bottom-mobile {
         opacity: 0.92;
     }
-
 }

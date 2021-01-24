@@ -13,7 +13,6 @@
     font-size: 1.5em;
     color: #295F42;
     opacity: 0.82;
-
 }
 
 .search-bar p {
@@ -27,8 +26,6 @@
     display: inline-block;
     height: 17vh;
     border-bottom: solid #295F42 0.1em;
-
-
 }
 
 .search-input {
@@ -56,7 +53,6 @@
 .delete-form {
     height: 5vh;
     width: 10vw;
-
 }
 
 .delete-user {
@@ -76,7 +72,6 @@
 .delete-user:hover {
     cursor: pointer;
 }
-
 
 .link-button:focus {
     outline: none;
@@ -145,7 +140,6 @@
     grid-column: 2/3;
     margin: 0.5em 0 0 1em;
     text-align: left;
-
 }
 
 
@@ -168,7 +162,6 @@
 
 
     .main-img-discover {
-
         grid-column: 1 / 4;
         grid-row: 2 /5;
         background: transparent url("../img/discover.jpg") no-repeat padding-box;
@@ -224,13 +217,15 @@
     .inline-height {
         height: 18vh;
     }
+
     @media screen and (min-height: 1020px) {
         .img-discover-container {
             grid-template-columns: 10% 40vh 1fr;
             grid-template-rows: 8% 7% 40% 1fr;
 
         }
-        .search-bar{
+
+        .search-bar {
             width: 35vw;
             min-height: 5vh;
         }
@@ -277,12 +272,10 @@
         color: #9b9898;
     }
 
-
     .display-container .logo-main {
         font: normal normal normal 2.3em Bahnschrift;
         color: #000000;
         margin-left: 1em;
-
     }
 
     .img-discover-container {
@@ -292,7 +285,6 @@
     .display-container main {
         margin: 0;
         height: 100%;
-
     }
 
     .display-container nav {
