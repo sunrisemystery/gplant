@@ -5,13 +5,11 @@ const closePopUp = document.getElementsByClassName("close")[0];
 if (infoButton != null) {
     infoButton.onclick = function () {
         popUpWindow.style.display = "block";
-
     }
 }
 if (infoButtonMobile != null) {
     infoButtonMobile.onclick = function () {
         popUpWindow.style.display = "block";
-
     }
 }
 closePopUp.onclick = function () {

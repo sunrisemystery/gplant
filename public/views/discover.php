@@ -10,7 +10,6 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/discover-and-admin-panel.css">
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/search.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
@@ -19,36 +18,36 @@
     <header>
         <p class="logo-main">gplant</p>
         <?php if ($isSession) { ?>
-            <a class="sign" id="signButtonMobile">sign out</a>
+            <a href="/login" class="sign">sign out</a>
         <?php } else { ?>
-            <a class="sign" id="signButtonMobile">sign in</a>
+            <a href="/login" class="sign">sign in</a>
         <?php } ?>
         <nav>
             <div class="nav-desktop">
                 <ul>
-                    <li><a id="home">home</a></li>
+                    <li><a href="/">home</a></li>
                     <li><a id="contact">info</a></li>
                     <?php if ($isSession) {
-                        if(!$isAdmin){?>
-                        <li><a id="myPlants">my plants</a></li>
-                        <?php }else{ ?>
-                        <li><a id="discover">discover</a></li>
+                        if (!$isAdmin) { ?>
+                            <li><a href="/myPlants">my plants</a></li>
+                        <?php } else { ?>
+                            <li><a>discover</a></li>
                         <?php } ?>
-                        <li><a id="signButton">sign out</a></li>
+                        <li><a href="/login">sign out</a></li>
                     <?php } else { ?>
-                        <li><a id="discover">discover</a></li>
-                        <li><a id="signButton">sign in</a></li>
+                        <li><a>discover</a></li>
+                        <li><a href="/login">sign in</a></li>
                     <?php } ?>
                 </ul>
             </div>
         </nav>
         <?php if (!$isAdmin) { ?>
-        <div class="nav-bottom-mobile">
-            <a id="myPlantsMobile"><i class="fas fa-seedling"></i>My Plants</a>
-            <a id="addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
-            <a id="discoverMobile"><i class="fas fa-university"></i>Discover</a>
+            <div class="nav-bottom-mobile">
+                <a href="/myPlants"><i class="fas fa-seedling"></i>My Plants</a>
+                <a href="/addPlant"><i class="fas fa-plus-circle"></i>Add Plant</a>
+                <a><i class="fas fa-university"></i>Discover</a>
             <?php } ?>
-        </div>
+            </div>
     </header>
     <main>
         <? include ('pop-up-window.php') ?>
@@ -98,4 +97,5 @@
         </button>
     </form>
 </template>
+
 </html>

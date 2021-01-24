@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,12 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/add-plant.css">
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/cancel.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
+
 <body class="add-plant-container">
-<? include ("edit-plant-header.php") ?>
+    <? include ("edit-plant-header.php") ?>
     <main class="add-plant-main">
         <? include ("pop-up-window.php") ?>
         <section class="form-section">
@@ -26,18 +28,20 @@
                     <input id="file-input" name="file" type="file">
                 </div>
                 <div class="form-text">
-                    <?php if (isset($messages)) {
-                        foreach ($messages as $message)
-                            echo $message;
-                    }
-                    ?>
+                    <p>
+                        <?php if (isset($messages)) {
+                            foreach ($messages as $message)
+                                echo $message;
+                        }
+                        ?>
+                    </p>
                     <input type="text" name="name" placeholder="name">
                     <select name="selectType" class="select-class">
                         <option value=""> select </option>
                         <?php
                         foreach ($rowList as $val) {
                         ?>
-                            <option value=<?=  $val["id"]; ?>>
+                            <option value=<?= $val["id"]; ?>>
                                 <?php echo $val["type"]; ?>
                             </option>
                         <?php
@@ -51,4 +55,5 @@
         </section>
     </main>
 </body>
+
 </html>

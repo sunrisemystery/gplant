@@ -12,17 +12,25 @@
     <link rel="stylesheet" href="public/css/plant.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
 </head>
-<?php include('plant-header-nav.php') ?>
 
+<body class="my-plants-container">
+    <?php include('plant-header-nav.php') ?>
+    <main>
+        <div class="settings-back">
+            <a id="mobileBack">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <?php if ($isSession && !$isAdmin) { ?>
+                <i id="settingsMobile" class="fas fa-cog"></i>
+            <?php } ?>
+        </div>
         <div class="plant-desc">
             <p class="name-plant"><?= $plant->getType() ?></p>
         </div>
         <div class="general-plant-wrapper">
-
             <div class="plant-img">
-                <img class="img-wrapper" src="public/img/discover/<?= $plant->getImage()?>">
+                <img class="img-wrapper" src="public/img/discover/<?= $plant->getImage() ?>">
             </div>
-
         </div>
         <section class="plant-section">
             <h1>Description</h1>
@@ -30,7 +38,6 @@
             <h1 class="water">Water</h1>
             <?= $plant->getWaterDescription() ?>
         </section>
-
     </main>
 </body>
 

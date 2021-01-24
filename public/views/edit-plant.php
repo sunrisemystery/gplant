@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Plant</title>
+    <title>Edit Plant</title>
     <link rel="icon" type="image/png" sizes="16x16" href="public/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/add-plant.css">
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/cancel.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
+
 <body class="add-plant-container">
-<? include ("edit-plant-header.php") ?>
+    <? include ("edit-plant-header.php") ?>
     <main class="add-plant-main">
         <? include ("pop-up-window.php")?>
         <section class="form-section">
@@ -26,11 +28,13 @@
                     <input id="file-input" name="file" type="file">
                 </div>
                 <div class="form-text">
-                    <?php if (isset($messages)) {
-                        foreach ($messages as $message)
-                            echo $message;
-                    }
-                    ?>
+                    <p>
+                        <?php if (isset($messages)) {
+                            foreach ($messages as $message)
+                                echo $message;
+                        }
+                        ?>
+                    </p>
                     <input type="text" name="name" value="<?= $plant->getName() ?>">
                     <select name="selectType" class="select-class">
                         <option value="<?= $plantType["plant_id"] ?>">
@@ -53,4 +57,5 @@
         </section>
     </main>
 </body>
+
 </html>

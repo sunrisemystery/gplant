@@ -10,8 +10,7 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/discover-and-admin-panel.css">
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
-    <script type="text/javascript" src="./public/js/searchUser.js" defer></script>
+    <script type="text/javascript" src="./public/js/adminPanel.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 </head>
 
@@ -19,20 +18,20 @@
     <header>
         <p class="logo-main">gplant</p>
         <?php if ($isSession) { ?>
-            <a class="sign" id="signButtonMobile">sign out</a>
+            <a href="/login" class="sign">sign out</a>
         <?php } else { ?>
-            <a class="sign" id="signButtonMobile">sign in</a>
-        <?php }; ?>
+            <a href="/login" class="sign">sign in</a>
+        <?php } ?>
         <nav>
             <div class="nav-desktop">
                 <ul>
-                    <li><a id="home">home</a></li>
+                    <li><a href="/">home</a></li>
                     <li><a id="contact">info</a></li>
-                    <li><a id="discover">discover</a></li>
+                    <li><a href="/discover">discover</a></li>
                     <?php if ($isSession) { ?>
-                        <li><a id="signButton">sign out</a></li>
+                        <li><a href="/login">sign out</a></li>
                     <?php } else { ?>
-                        <li><a id="signButton">sign in</a></li>
+                        <li><a href="/login">sign in</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -53,7 +52,7 @@
         </div>
         <div class="discover-list user-list">
             <?php foreach ($userList as $user) : ?>
-                <div  class="inline inline-height">
+                <div class="inline inline-height">
                     <div class="link-button add">
                         <div class="user-record">
                             <div class="record-text">
@@ -73,7 +72,7 @@
 </body>
 
 <template id="user-template">
-    <div  class="inline inline-height">
+    <div class="inline inline-height">
         <div class="link-button add">
             <div class="user-record">
                 <div class="record-text">
@@ -88,4 +87,5 @@
         </div>
     </div>
 </template>
+
 </html>

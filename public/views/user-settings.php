@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/login-and-register.css">
     <script type="text/javascript" src="./public/js/registerValidation.js" defer></script>
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
+    <script type="text/javascript" src="./public/js/cancel.js" defer></script>
 </head>
 
 <body class="login-register">
@@ -34,7 +35,6 @@
             <a id="cancel" class="cancel">CANCEL</a>
         </div>
     </div>
-
 </body>
 
 </html>

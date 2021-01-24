@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/login-and-register.css">
     <script type="text/javascript" src="./public/js/login.js" defer></script>
+
 </head>
 
 <body class="login-register">
@@ -19,15 +20,15 @@
         <p class="logo">gplant</p>
         <p class="login-text">Taking care of plants is our priority. Join us today to give your plants better life.</p>
         <div class="messages">
-           <p> <?php if (isset($messages)) {
-                foreach ($messages as $message)
-                    echo $message;
-            }
-                    if(isset($_GET['message'])){
-                        echo $_GET['message'];
-            }
-            ?>
-           </p>
+            <p> <?php if (isset($messages)) {
+                    foreach ($messages as $message)
+                        echo $message;
+                }
+                if (isset($_GET['message'])) {
+                    echo $_GET['message'];
+                }
+                ?>
+            </p>
         </div>
         <div class="input-rectangle">
             <form action="login" method="post">
@@ -40,4 +41,5 @@
         </div>
     </div>
 </body>
+
 </html>

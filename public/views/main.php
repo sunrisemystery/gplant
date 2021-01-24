@@ -10,54 +10,54 @@
     <script src="https://kit.fontawesome.com/eadaeebdec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/main-page.css">
-    <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
     <script type="text/javascript" src="./public/js/hamburgerMenu.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
 
 </head>
+
 <body class="main-container">
     <header>
         <p class="logo-main">gplant</p>
         <nav>
             <div class="nav-mobile">
                 <div class="hamburger-menu">
-                    <a  class="active"></a>
-                    <div id="options" >
+                    <a class="active"></a>
+                    <div id="options">
                         <?php if ($isSession) { ?>
-                        <?php if ($isAdmin) { ?>
-                                <a id="adminPanelMobile">Admin Panel</a>
-                            <?php } else{ ?>
-                            <a id="myPlantsMobile">My Plants</a>
+                            <?php if ($isAdmin) { ?>
+                                <a href="/adminView">Admin Panel</a>
+                            <?php } else { ?>
+                                <a href="/myPlants">My Plants</a>
                             <?php } ?>
                         <?php } else { ?>
                             <a id="contact-mobile">Info</a>
                         <?php } ?>
-                        <a id="discoverMobile">Discover</a>
+                        <a href="/discover">Discover</a>
                     </div>
                     <a class="icon" onclick="openMenu()">
                         <i class="fa fa-bars"></i>
                     </a>
                 </div>
                 <?php if ($isSession) { ?>
-                    <a class="sign" id="signButtonMobile">SIGN OUT</a>
+                    <a href="/login" class="sign">SIGN OUT</a>
                 <?php } else { ?>
-                    <a class="sign" id="signButtonMobile">SIGN IN</a>
+                    <a href="/login" class="sign">SIGN IN</a>
                 <?php } ?>
             </div>
             <div class="nav-desktop">
                 <ul>
-                    <li><a id="home">home</a></li>
-                    <li><a id="discover">discover</a></li>
+                    <li><a href="/">home</a></li>
+                    <li><a href="/discover">discover</a></li>
                     <?php if ($isSession) { ?>
                         <?php if ($isAdmin) { ?>
-                            <li><a id="adminPanel">Admin Panel</a></li>
-                        <?php } else{ ?>
-                            <li><a id="myPlants">My Plants</a></li>
+                            <li><a href="/adminView">Admin Panel</a></li>
+                        <?php } else { ?>
+                            <li><a href="/myPlants">My Plants</a></li>
                         <?php } ?>
-                        <li><a id="signButton">sign out</a></li>
+                        <li><a href="/login">sign out</a></li>
                     <?php } else { ?>
                         <li><a id="contact">info</a></li>
-                        <li><a id="signButton">sign in</a></li>
+                        <li><a href="/login">sign in</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -91,4 +91,5 @@
         </section>
     </main>
 </body>
+
 </html>

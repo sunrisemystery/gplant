@@ -11,22 +11,34 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/plant.css">
     <script type="text/javascript" src="./public/js/buttonHandler.js" defer></script>
-    <script type="text/javascript" src="./public/js/waterNow.js" defer></script>
+    <script type="text/javascript" src="./public/js/plant.js" defer></script>
+
 
 </head>
-<?php include('plant-header-nav.php') ?>
 
+<body class="my-plants-container">
+    <?php include('plant-header-nav.php') ?>
+    <main>
+        <div class="settings-back">
+            <a id="mobileBack">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <?php if ($isSession && !$isAdmin) { ?>
+                <i id="settingsMobile" class="fas fa-cog"></i>
+            <?php } ?>
+        </div>
         <div class="plant-desc">
             <p class="name-plant"><?= $plant->getName() ?></p>
             <p class="plant-type"><?= $data['type'] ?></p>
         </div>
         <div class="plant-wrapper">
-
             <div class="plant-img">
                 <img class="img-wrapper" src="public/uploads/<?= $plant->getImage() ?>">
             </div>
             <p class="watering-plant">Last watered </p>
-            <div class="timer"><i  class="fas fa-clock"></i><p id="<?= $plant->getId(); ?>" class="days"><?= $plant->countDays() ?></p></div>
+            <div class="timer"><i class="fas fa-clock"></i>
+                <p id="<?= $plant->getId(); ?>" class="days"><?= $plant->countDays() ?></p>
+            </div>
             <div class="water-form">
                 <button name="water-now-button" class="button-plant button-specify" value="<?= $plant->getId(); ?>">WATER NOW</button>
             </div>
@@ -41,9 +53,7 @@
         <form method="post" action="myPlants" class="delete-form">
             <button type="submit" name="delete-plant" class="delete-plant" onclick="deleteConfirm(<?= $plant->getId() ?>)" id="deleteButton">DELETE PLANT</button>
         </form>
-
     </main>
-
 </body>
 
 </html>
