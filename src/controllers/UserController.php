@@ -23,10 +23,7 @@ class UserController extends AppController
             if ($error || $_SESSION['login'] != $_POST['login'] || !empty($_POST['password'])) {
                 return $this->validateUpdate();
             }
-            $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
-            $_SESSION['login'] = $_POST['login'];
-            $_SESSION['name'] = $_POST['name'];
-            return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
+            return $this->updateUser();
 
         } else {
             return $this->userSettings();
@@ -38,10 +35,7 @@ class UserController extends AppController
         $user = new User($_SESSION['email'], $_SESSION['login'], null);
         $user->setId($_SESSION['id']);
         $user->setName($_SESSION['name']);
-        if (isset($message)) {
-            return $this->render('user-settings', ['messages' => [$message], 'user' => $user]);
-        }
-        return $this->render('user-settings', ['user' => $user]);
+        return $this->render('user-settings', ['messages' => [$message], 'user' => $user]);
     }
 
     private function validateUpdate()
@@ -50,6 +44,7 @@ class UserController extends AppController
             if ($this->userRepository->checkIfLoginExists($_POST['login'])) {
                 return $this->userSettings("User with this login already exists!");
             }
+
         } elseif (!empty($_POST['password'])) {
             if ($_POST['password'] != $_POST['password-confirm']) {
                 return $this->userSettings("Provided two different passwords");
@@ -57,6 +52,7 @@ class UserController extends AppController
         } else {
             return $this->userSettings("name and login inputs can't be empty");
         }
+        return $this->updateUser();
     }
 
     private function checkEmptyFields(): bool
@@ -72,5 +68,13 @@ class UserController extends AppController
             }
         }
         return $error;
+    }
+
+    private function updateUser()
+    {
+        $this->userRepository->updateUser($_SESSION['id'], $_SESSION['email'], $_POST['login'], $_POST['password'], $_POST['name']);
+        $_SESSION['login'] = $_POST['login'];
+        $_SESSION['name'] = $_POST['name'];
+        return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
     }
 }
