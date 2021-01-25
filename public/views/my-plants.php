@@ -43,7 +43,7 @@
         </a>
     </nav>
     <main>
-        <? include ("pop-up-window.php")?>
+        <? include("components/pop-up-window.php") ?>
         <div class="info">
             <p class="my-plants">My Plants</p>
             <i id="settingsMobile" class="fas fa-cog"></i>

@@ -44,7 +44,7 @@ function createUser(user) {
 }
 
 function deleteUserConfirm(id) {
-    let bool = confirm('Are you sure you want delete this plant? You cant undo this operation.');
+    let bool = confirm('Are you sure you want delete this user? You cant undo this operation.');
     const val = document.getElementById(id);
     if (bool) {
         val.setAttribute("value", id);

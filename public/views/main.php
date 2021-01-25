@@ -64,7 +64,7 @@
         </nav>
     </header>
     <main>
-        <? include ("pop-up-window.php")?>
+        <? include("components/pop-up-window.php") ?>
         <div class="img-main-container">
             <p class="logo-mobile">gplant</p>
             <div class="main-img"></div>

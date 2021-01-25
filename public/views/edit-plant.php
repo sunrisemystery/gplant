@@ -15,9 +15,9 @@
 </head>
 
 <body class="add-plant-container">
-    <? include ("edit-plant-header.php") ?>
+    <? include("components/edit-plant-header.php") ?>
     <main class="add-plant-main">
-        <? include ("pop-up-window.php")?>
+        <? include("components/pop-up-window.php") ?>
         <section class="form-section">
             <form class="add-plant-form" action="plant" method="POST" ENCTYPE="multipart/form-data">
                 <div class="form-img">

@@ -17,7 +17,7 @@
 </head>
 
 <body class="my-plants-container">
-    <?php include('plant-header-nav.php') ?>
+    <?php include('components/plant-header-nav.php') ?>
     <main>
         <div class="settings-back">
             <a id="mobileBack">
