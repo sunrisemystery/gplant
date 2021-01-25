@@ -24,21 +24,20 @@ class Plant
             $last = date_create($this->last_watered);
             $days = date_diff($last, $current);
             $number = intval($days->format('%a'));
-
-            if ($number === 0) {
-                $val = 'today';
-            } elseif ($number === 1) {
-                $val = 'yesterday';
-            } else {
-                $val = $days->format('%a days ago');
+            switch ($number) {
+                case 0:
+                    $val = 'today';
+                    break;
+                case 1:
+                    $val = 'yesterday';
+                    break;
+                default:
+                    $val = $days->format('%a days ago');
             }
         } else {
             $val = 'not provided';
         }
-
-
         return $val;
-
     }
 
 
@@ -97,6 +96,5 @@ class Plant
     {
         $this->type = $type;
     }
-
 
 }
