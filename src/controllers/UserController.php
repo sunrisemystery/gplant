@@ -16,7 +16,6 @@ class UserController extends AppController
 
     public function updateProfile()
     {
-        session_start();
         Utility::LoginVerify();
         if ($this->isPost()) {
             $error = $this->checkEmptyFields();

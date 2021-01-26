@@ -8,7 +8,7 @@ require_once __DIR__ . '/../utilities/Utility.php';
 class SecurityController extends AppController
 {
     private UserRepository $userRepository;
-    private $messages = [];
+    private array $messages = [];
 
     public function __construct()
     {
@@ -76,14 +76,12 @@ class SecurityController extends AppController
     {
         Utility::setSessionCache();
         if ($_SESSION['role'] == Utility::ADMIN) {
-            if ($this->isPost()) {
-                if (isset($_POST['delete-user'])) {
-                    try {
-                        $this->userRepository->deleteUserById($_POST['delete-user']);
-                    } catch (UnexpectedValueException $e) {
-                        return $this->render('admin-view', ['isSession' => Utility::checkSession(),
-                            'userList' => $this->userRepository->getAllUsers()]);
-                    }
+            if (isset($_POST['delete-user'])) {
+                try {
+                    $this->userRepository->deleteUserById($_POST['delete-user']);
+                } catch (UnexpectedValueException $e) {
+                    return $this->render('admin-view', ['isSession' => Utility::checkSession(),
+                        'userList' => $this->userRepository->getAllUsers()]);
                 }
             }
             return $this->render('admin-view', ['isSession' => Utility::checkSession(),
@@ -131,8 +129,7 @@ class SecurityController extends AppController
     private function validateUser($user)
     {
         if ($user->getEmail() !== $_POST["email"]) {
-
-            return $this->pageMessage('login', 'User with this email doesnt exist!');
+            return $this->pageMessage('login', "User with this email doesn't exist!");
         } elseif (!password_verify($_POST["password"], $user->getPassword())) {
             return $this->pageMessage('login', 'Incorrect password!');
         }

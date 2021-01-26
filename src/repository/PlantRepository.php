@@ -50,8 +50,15 @@ class PlantRepository extends Repository
 
     public function getTypeByUserPlantId($id): array
     {
-        $statement = $this->database->connect()->prepare('SELECT type,plant_id, water_description
-        FROM public.users_plants_view WHERE id = :id');
+        $statement = $this->database->connect()->prepare('
+        SELECT 
+               p.type, 
+               plants_user.plant_id, 
+               p.water_description
+        FROM public.plants_user 
+        LEFT JOIN plants p 
+            ON p.id = plants_user.plant_id 
+        WHERE plants_user.id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);

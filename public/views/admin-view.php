@@ -38,7 +38,7 @@
         </nav>
     </header>
     <main>
-        <? include('pop-up-window.php') ?>
+        <? include('components/pop-up-window.php') ?>
         <div class="img-discover-container">
             <p class="logo-mobile">gplant</p>
             <div class="main-img-discover"></div>
@@ -70,6 +70,6 @@
         </div>
     </main>
 </body>
-<? include ('templates/user-template.php ')?>
+<? include ('templates/user-template.php')?>
 
 </html>
