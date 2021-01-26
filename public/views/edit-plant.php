@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="public/css/add-plant.css">
     <script type="text/javascript" src="./public/js/cancel.js" defer></script>
     <script type="text/javascript" src="./public/js/popUp.js" defer></script>
+    <script type="text/javascript" src="./public/js/fileName.js" defer></script>
 </head>
 
 <body class="add-plant-container">
@@ -23,7 +24,7 @@
                 <div class="form-img">
                     <label class="label-img" for="file-input">
                         <i class="far fa-images"></i>
-                        <p>PRESS TO CHANGE A FILE</p>
+                        <p id="choose">PRESS TO CHANGE A FILE</p>
                     </label>
                     <input id="file-input" name="file" type="file">
                 </div>
