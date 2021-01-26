@@ -9,7 +9,7 @@ class UserRepository extends Repository
     public function getUser(string $email): User
     {
         $statement = $this->database->connect()->prepare('
-        SELECT * FROM public.users_details_view WHERE email = :email');
+        SELECT * FROM public.users_details_view WHERE email = lower(:email)');
         $statement->bindParam(':email', $email);
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class UserRepository extends Repository
     public function getIdByEmail(string $email): array
     {
         $statement = $this->database->connect()->prepare('
-        SELECT id FROM public.users WHERE email = :email');
+        SELECT id FROM public.users WHERE email = lower(:email)');
         $statement->bindParam(':email', $email);
         $statement->execute();
         $id = $statement->fetch(PDO::FETCH_ASSOC);
@@ -83,7 +83,7 @@ class UserRepository extends Repository
     public function checkIfEmailExists(string $email): bool
     {
         $statement = $this->database->connect()->prepare('
-        SELECT email FROM public.users_details_view WHERE email = :email');
+        SELECT email FROM public.users_details_view WHERE email = lower(:email)');
         $statement->bindParam(':email', $email);
         $statement->execute();
         $found = $statement->fetch(PDO::FETCH_ASSOC);
@@ -144,7 +144,7 @@ class UserRepository extends Repository
     private function findUserDetailsIdByEmail($email)
     {
         $statement = $this->database->connect()->prepare('
-        SELECT users_details_id FROM public.users WHERE email = :email
+        SELECT users_details_id FROM public.users WHERE email = lower(:email)
         ');
         $statement->bindParam(':email', $email);
         $statement->execute();

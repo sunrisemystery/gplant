@@ -24,7 +24,7 @@ class SecurityController extends AppController
             return $this->render('login');
         }
 
-        $email = $_POST["email"];
+        $email = strtolower($_POST["email"]);
         try {
             $user = $this->userRepository->getUser($email);
         } catch (UnexpectedValueException $e) {
