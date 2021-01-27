@@ -75,8 +75,8 @@ class PlantController extends AppController
             return $this->render('main', ['isSession' => Utility::checkSession(), 'isAdmin' => Utility::isAdmin()]);
         }
         if ($this->isPost()) {
-            if (strlen($_POST['name']) === 0 || strlen($_POST['selectType']) === 0) {
-                return $this->checkEmptyField($_POST['name'], $_POST['selectType']);
+            if (strlen($_POST['name']) === 0 || strlen($_POST['selectType']) === 0 || strlen($_POST['name']) > 50) {
+                return $this->checkFields($_POST['name'], $_POST['selectType']);
             }
             return $this->checkImage();
         }
@@ -106,7 +106,7 @@ class PlantController extends AppController
         return $this->render('add-plant', ['messages' => [$message], 'rowList' => $this->generalPlantRepository->getTypes()]);
     }
 
-    private function editPlantEmptyFieldMessage($message, $id)
+    private function editPlantFieldMessage($message, $id)
     {
         try {
             return $this->render('edit-plant', ['rowList' => $this->generalPlantRepository->getTypes(),
@@ -117,13 +117,14 @@ class PlantController extends AppController
         }
     }
 
-    private function checkEmptyField($name, $type)
+    private function checkFields($name, $type)
     {
         if (strlen($name) === 0) {
             return $this->addPlantCriticalMessage('Please fill the name field');
         } elseif (strlen($type) === 0) {
             return $this->addPlantCriticalMessage('Please select type of plant');
         }
+        return $this->addPlantCriticalMessage('Provided too long name. Use max 50 characters.');
     }
 
     private function plantAfterUpdate()
@@ -132,7 +133,10 @@ class PlantController extends AppController
         $type = intval($_POST['selectType']);
         $name = $_POST['name'];
         if (empty($name) || empty($type)) {
-            return $this->editPlantEmptyFieldMessage("All fields are required.", $id);
+            return $this->editPlantFieldMessage("All fields are required.", $id);
+        }
+        if (strlen($name) > 50) {
+            return $this->editPlantFieldMessage("Provided name is too long. Use max 50 characters", $id);
         }
         if (is_uploaded_file($_FILES['file']['tmp_name'])) {
             if ($this->validate($_FILES['file'])) {
@@ -140,7 +144,7 @@ class PlantController extends AppController
                 $this->plantRepository->editPlant($id, $name, $type, $_FILES['file']['name']);
                 return $this->getPlant($id);
             }
-            return $this->editPlantEmptyFieldMessage("File is too large.", $id);
+            return $this->editPlantFieldMessage("File is too large.", $id);
         } else {
             $this->plantRepository->editPlant($id, $name, $type);
             return $this->getPlant($id);
