@@ -169,10 +169,13 @@ class PlantController extends AppController
 
     private function checkImage()
     {
-        if (is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+            if ($this->validate($_FILES['file'])) {
 
-            $this->moveUploadedFile();
-            return $this->addPlantWithImage(new Plant($_POST['name'], $_FILES['file']['name']));
+                $this->moveUploadedFile();
+                return $this->addPlantWithImage(new Plant($_POST['name'], $_FILES['file']['name']));
+            }
+            return $this->addPlantCriticalMessage('File is too large');
         }
         if (is_uploaded_file($_FILES['file']['tmp_name']) == false) {
 
