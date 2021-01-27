@@ -19,11 +19,13 @@
     <div class="login-container">
         <p class="logo">gplant</p>
         <p class="login-text">Update your profile.</p>
+        <p>
         <?php if (isset($messages)) {
             foreach ($messages as $message)
                 echo $message;
         }
         ?>
+        </p>
         <div class="input-rectangle">
             <form action="updateProfile" method="POST">
                 <input type="text" name="name" value="<?= $user->getName() ?>">
